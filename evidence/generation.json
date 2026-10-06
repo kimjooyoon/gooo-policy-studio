@@ -1,0 +1,1181 @@
+{
+  "schema": "policy-studio/generation/v1",
+  "source_sha256": "sha256:938384a2a428beb07ec689065d9e0896c1a4da3a08f3cffd201cff2d70a6d070",
+  "generated_sha256": "sha256:97c08c0adb6c06127c24e60aff21d9a227f946fb63fda19b0722f5410f2fab18",
+  "adapter_sha256": "sha256:e4a69c326b96b9b07c607d726ad05813b018339511498d99af39c619668c84ea",
+  "compiler": {
+    "schema": "gooo/build-identity/v1",
+    "language": "gooo",
+    "version": "0.6.4-dev",
+    "status": "development",
+    "build_info_observed": true,
+    "go_version": "go1.27.1",
+    "module_version": "v0.6.4-dev.0.20261006230424-49f5a8c46507",
+    "compiler_source_sha": "49f5a8c46507bed813a1eae4f7b10e7436eeb3ba",
+    "source_status": "CLEAN_VCS",
+    "vcs_revision": "49f5a8c46507bed813a1eae4f7b10e7436eeb3ba",
+    "vcs_modified": "false",
+    "decision_runtime": {
+      "module_path": "github.com/kimjooyoon/gooo-decision-runtime",
+      "version": "v0.2.24-experimental",
+      "replaced": false
+    },
+    "native_go_required": "go1.27.1"
+  },
+  "activities": {
+    "Compare": {
+      "report": {
+        "schema": "gooo/body-codegen-report/v3",
+        "decision": "PASS",
+        "activity": "Compare",
+        "activity_id": "policy://activity/compare",
+        "input_type": "(Decision,Decision)",
+        "input_parameters": [
+          {
+            "name": "input0",
+            "type": "Decision"
+          },
+          {
+            "name": "input1",
+            "type": "Decision"
+          }
+        ],
+        "record_types": [
+          {
+            "name": "Change",
+            "id": "policy://change/v1",
+            "go_name": "GoooRecord76d615104097c6c65ad624c83a57ec0e780038903d8ee6b2bd7569a652e508f8",
+            "fields": [
+              {
+                "name": "changed",
+                "id": "policy://change/changed",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField03a7ba6e844ae3bcc3da9c275345e2996698c56846c1e5db2bca10a7ead991d2"
+              },
+              {
+                "name": "direction",
+                "id": "policy://change/direction",
+                "type_id": "urn:gooo:type:string",
+                "go_name": "GoooFieldb6a430b2debb72e5e85d2545386670053cf81b39b2486b9f9a368843b8a0b770"
+              },
+              {
+                "name": "reason_changed",
+                "id": "policy://change/reason-changed",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooFieldb3d03f15ccfb33124f454e9a9546f87694a2ea7ac60a76c6d8e77a5fee4ad847"
+              }
+            ]
+          },
+          {
+            "name": "Decision",
+            "id": "policy://decision/v1",
+            "go_name": "GoooRecord310f3795f70bb42930a8e3c9bccee22aa60fc9fe8c540f6e7155d6f3fbce373c",
+            "fields": [
+              {
+                "name": "approved",
+                "id": "policy://decision/approved",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooFieldde873cb3dddfcb3edae5441f6049a7912cb8875bedb3fd3aeae6b8724ba6e508"
+              },
+              {
+                "name": "reason",
+                "id": "policy://decision/reason",
+                "type_id": "urn:gooo:type:string",
+                "go_name": "GoooFielda476416bccd75dd2631bd2a791cb5e91ace0fed5474c00b3c96d2f92401628b4"
+              },
+              {
+                "name": "amount_ok",
+                "id": "policy://decision/amount-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooFieldfa971c8c460407f92dd6d4c0ca83f830e58fa43e2f43117627386c65d7024261"
+              },
+              {
+                "name": "team_ok",
+                "id": "policy://decision/team-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField590470b53a4308c466be316c9d56b503f45ffaa1caaa993cebdecdae51b0b908"
+              },
+              {
+                "name": "reviewer_ok",
+                "id": "policy://decision/reviewer-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField1e8065733202c275bf0bd40412c3bd94b7a055d138d78f8e0a8b012f40273c77"
+              },
+              {
+                "name": "self_ok",
+                "id": "policy://decision/self-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField9e1cd04bb13dc2144f4d9f78276a00a3a5e6ce55fffd2746ff4f2a0941804b00"
+              },
+              {
+                "name": "submitted_ok",
+                "id": "policy://decision/submitted-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField855809df0f3656ff5ce465c3d1bd7402fce1232a38e5eb3c9224ac4f9efecfe8"
+              }
+            ]
+          }
+        ],
+        "output_type": "Change",
+        "plan_sha256": "sha256:ce738df4379e72e9769ebccc0fe255fcca35bdb7aeb4073429f1649dc98a74cb",
+        "compiler_source_sha": "49f5a8c46507bed813a1eae4f7b10e7436eeb3ba",
+        "source_digest": "sha256:938384a2a428beb07ec689065d9e0896c1a4da3a08f3cffd201cff2d70a6d070",
+        "program_digest": "sha256:3d2040bd30e78ebbf5d69604f24c8d3d8e74e05eef2efc5008eee685c814ff09",
+        "generated_digest": "sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7",
+        "replay_digest": "sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7",
+        "route": "preserve",
+        "route_decision": {
+          "schema": "gooo/typed-decision-receipt/v1",
+          "mode": "deterministic_fallback",
+          "selected": "preserve",
+          "fallback_reason": "NO_ALTERNATIVE_ROUTE",
+          "provider": "deterministic",
+          "request_sha256": ""
+        },
+        "route_selection": {
+          "method": "single_eligible_route",
+          "proposed_route": "preserve",
+          "final_route": "preserve"
+        },
+        "route_decision_latency_ms": 0,
+        "candidate_routes": [
+          "preserve"
+        ],
+        "equivalence_rule": "source-shape-preserving-v1",
+        "source_constructs": 7,
+        "lowered_constructs": 7,
+        "source_semantic_units": 42,
+        "lowered_semantic_units": 42,
+        "completeness_percent": 100,
+        "route_equivalence": {
+          "schema": "gooo/body-codegen-route-equivalence/v1",
+          "decision": "PASS",
+          "method": "canonical_control_flow_form/v2",
+          "rule": "source-shape-preserving-v1",
+          "source_semantic_digest": "sha256:50b7f3b495fddc18539c11b908bc4c1f7f855c50c68d5b80e3056d3aaf47a10b",
+          "generated_semantic_digest": "sha256:50b7f3b495fddc18539c11b908bc4c1f7f855c50c68d5b80e3056d3aaf47a10b",
+          "equivalent": true,
+          "scope": "typechecked, terminating, side-effect-free body-codegen profile; not a proof of unstated user intent"
+        },
+        "typecheck_passed": true,
+        "deterministic_replay": true,
+        "repository_writes": 0,
+        "unsupported_constructs": "calls, loops, imports, external effects, optional or repeated record fields",
+        "completeness_receipt": {
+          "schema": "gooo/metaprogramming-completeness-receipt/v2",
+          "profile_id": "gooo/body-codegen-pure-v1",
+          "decision": "PASS_WITHIN_DECLARED_FIXTURE_SCOPE",
+          "decision_basis": "declaration, generation, source-unit coverage, route equivalence, typecheck, replay, route protocol, provenance, and zero repository writes define the scoped code-generation core; body-fill additionally requires declared-suite functional accuracy; UNKNOWN dimensions remain explicit and are never aggregated",
+          "scope": {
+            "allowed_investment": "compiler-controlled lowering and optional Laya selection only among prevalidated equivalent routes; no human approval or authorization is required",
+            "boundary": {
+              "excluded_effects": [
+                "generated code execution",
+                "repository mutation",
+                "external authority"
+              ],
+              "non_authorizing": true,
+              "non_executing": true
+            },
+            "compiler_source_sha": "49f5a8c46507bed813a1eae4f7b10e7436eeb3ba",
+            "decision_mode": "deterministic_fallback",
+            "decision_provider": "deterministic",
+            "domain_scope": "one pure typed Gooo activity body in the closed body-codegen profile, with one Integer, Boolean, or Text input and one supported scalar result",
+            "excluded_scope": [
+              "unstated natural-language intent",
+              "independently sourced production workflows",
+              "generated runtime behavior",
+              "unrestricted Gooo body syntax",
+              "route clarity or utility"
+            ],
+            "execution_environment": "darwin/arm64",
+            "input_type": "(Decision,Decision)",
+            "laya_mode": "deterministic_fallback",
+            "laya_provider": "deterministic",
+            "observed_system_cost": {
+              "human_actions": 0,
+              "repository_writes": 0
+            },
+            "output_type": "Change",
+            "plan_sha256": "sha256:ce738df4379e72e9769ebccc0fe255fcca35bdb7aeb4073429f1649dc98a74cb",
+            "receipt_declaration": {
+              "declaration_sha256": "c7059936a1fe6b98d6129e9a90a38d09779e8aaa5575868c703ff8a089d184ae",
+              "generated_declaration_sha256": "c7059936a1fe6b98d6129e9a90a38d09779e8aaa5575868c703ff8a089d184ae",
+              "projection_profile": "gooo/receipt-structure-projection/v1",
+              "schema": "gooo/metaprogramming-completeness-receipt/v2"
+            },
+            "system_budget": {
+              "maximum_human_actions": 0,
+              "maximum_repository_writes": 0
+            },
+            "toolchain": "go1.27.1"
+          },
+          "core_dimensions": [
+            "declaration_coverage",
+            "generation_coverage",
+            "internal_replay_coverage",
+            "provenance_integrity",
+            "receipt_schema_binding",
+            "repository_write_boundary",
+            "route_choice_protocol",
+            "route_semantic_equivalence",
+            "source_ast_coverage",
+            "typecheck_coverage"
+          ],
+          "dimensions": [
+            {
+              "id": "declaration_coverage",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "stable activity declarations",
+              "reason": "Counts the requested activity only when it resolves to a stable semantic ID.",
+              "evidence": [
+                "source_digest:sha256:938384a2a428beb07ec689065d9e0896c1a4da3a08f3cffd201cff2d70a6d070",
+                "activity_id:policy://activity/compare"
+              ]
+            },
+            {
+              "id": "generation_coverage",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "generated Go functions",
+              "reason": "Measures whether this accepted activity produced a digest-bound Go projection.",
+              "evidence": [
+                "generated_digest:sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7",
+                "report decision:PASS"
+              ]
+            },
+            {
+              "id": "source_ast_coverage",
+              "status": "PASS",
+              "numerator": 42,
+              "denominator": 42,
+              "unit": "source semantic units lowered",
+              "reason": "Counts supported source-body units represented in the selected Go lowering; it does not estimate unstated intent.",
+              "evidence": [
+                "source_semantic_units",
+                "lowered_semantic_units"
+              ]
+            },
+            {
+              "id": "route_semantic_equivalence",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "source/generated route pairs",
+              "reason": "Uses the compiler's closed structural equivalence witness for the selected route.",
+              "evidence": [
+                "route_equivalence.schema:gooo/body-codegen-route-equivalence/v1",
+                "route_equivalence.rule:source-shape-preserving-v1",
+                "source_semantic_digest:sha256:50b7f3b495fddc18539c11b908bc4c1f7f855c50c68d5b80e3056d3aaf47a10b",
+                "generated_semantic_digest:sha256:50b7f3b495fddc18539c11b908bc4c1f7f855c50c68d5b80e3056d3aaf47a10b"
+              ]
+            },
+            {
+              "id": "typecheck_coverage",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "generated functions accepted by Go type checking",
+              "reason": "Counts the generated function only after the compiler's type checker accepts it.",
+              "evidence": [
+                "typecheck_passed"
+              ]
+            },
+            {
+              "id": "internal_replay_coverage",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "deterministic compiler emission replays",
+              "reason": "Requires replayed generated bytes to match the selected output digest.",
+              "evidence": [
+                "generated_digest:sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7",
+                "replay_digest:sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7"
+              ]
+            },
+            {
+              "id": "route_choice_protocol",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "selected routes in the compiler-declared candidate set",
+              "reason": "The selected lowering must be a route the compiler declared eligible for this source shape.",
+              "evidence": [
+                "candidate_routes",
+                "selected_route:preserve"
+              ]
+            },
+            {
+              "id": "provenance_integrity",
+              "status": "PASS",
+              "numerator": 8,
+              "denominator": 8,
+              "unit": "source, body, output, replay, semantic-ID, and compiler-revision bindings",
+              "reason": "Binds the source, selected body, generated and replay digests, stable activity ID, route semantic digests, and an unmodified compiler revision when embedded in the binary.",
+              "evidence": [
+                "source_digest:sha256:938384a2a428beb07ec689065d9e0896c1a4da3a08f3cffd201cff2d70a6d070",
+                "program_digest:sha256:3d2040bd30e78ebbf5d69604f24c8d3d8e74e05eef2efc5008eee685c814ff09",
+                "generated_digest:sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7",
+                "replay_digest:sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7",
+                "activity_id:policy://activity/compare",
+                "compiler_source_sha:49f5a8c46507bed813a1eae4f7b10e7436eeb3ba",
+                "route_equivalence semantic digests"
+              ]
+            },
+            {
+              "id": "receipt_schema_binding",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "source-owned receipt schema and generated structure bindings",
+              "reason": "The receipt data structure is generated from the embedded Gooo declaration with stable entity and field IDs.",
+              "evidence": [
+                "receipt_declaration_sha256:c7059936a1fe6b98d6129e9a90a38d09779e8aaa5575868c703ff8a089d184ae",
+                "projection_profile:gooo/receipt-structure-projection/v1"
+              ]
+            },
+            {
+              "id": "repository_write_boundary",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "repository writes",
+              "reason": "The command emits generated source without mutating the repository.",
+              "evidence": [
+                "repository_writes:0"
+              ]
+            },
+            {
+              "id": "execution_boundary",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "generated package runtime executions",
+              "reason": "This command typechecks and replays generated source but does not execute the generated package.",
+              "evidence": [
+                "body-codegen does not run generated Go"
+              ]
+            },
+            {
+              "id": "permission_boundary",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "observed host permission profiles",
+              "reason": "The report does not capture the caller's operating-system permission profile.",
+              "evidence": [
+                "host permission profile is not observed"
+              ]
+            },
+            {
+              "id": "external_network_boundary",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "runs with no Laya provider request",
+              "reason": "A deterministic fallback caused by an unconfigured provider or ineligible alternative routes records no Laya decision request; other provider/network scope is not audited.",
+              "evidence": [
+                "decision.mode:deterministic_fallback",
+                "decision.provider:deterministic",
+                "decision.fallback_reason:NO_ALTERNATIVE_ROUTE"
+              ]
+            },
+            {
+              "id": "laya_decision_observation",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 0,
+              "unit": "eligible multi-route Laya decisions",
+              "reason": "Records a model choice only after Gooo has declared multiple typed candidates and the Laya provider supplied the decision.",
+              "evidence": [
+                "candidate_routes",
+                "route_decision.mode:deterministic_fallback",
+                "route_decision.request_sha256:",
+                "route_decision.model_revision:"
+              ]
+            },
+            {
+              "id": "use_case_coverage",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "independently sourced real workflows",
+              "reason": "A single source fixture is not evidence of independent real-world workflow coverage.",
+              "evidence": [
+                "no independent workflow corpus is bound"
+              ]
+            },
+            {
+              "id": "reverse_observation_coverage",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "generated runtime observations mapped back to source",
+              "reason": "No generated runtime is executed or reverse-mapped by this command.",
+              "evidence": [
+                "no source-bound reverse-observation trace"
+              ]
+            },
+            {
+              "id": "full_domain_semantics",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "complete input-domain behavior proofs",
+              "reason": "Typechecking and structural equivalence do not prove behavior over the input domain.",
+              "evidence": [
+                "generated package execution and an independent domain oracle are not part of this command"
+              ]
+            },
+            {
+              "id": "route_quality",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "independent route-clarity or utility criteria",
+              "reason": "Semantic equivalence does not rank readability, clarity, or downstream utility.",
+              "evidence": [
+                "no independent route-quality oracle"
+              ]
+            },
+            {
+              "id": "resource_observation",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "complete process resource profiles",
+              "reason": "The report records route-decision latency but not process CPU time or peak memory.",
+              "evidence": [
+                "route_decision_latency_ms is recorded",
+                "CPU and peak RSS are not captured"
+              ]
+            },
+            {
+              "id": "resource_baseline_comparison",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "compatible prior resource receipts",
+              "reason": "No same-profile, same-toolchain resource baseline is bound.",
+              "evidence": [
+                "no compatible prior resource receipt"
+              ]
+            },
+            {
+              "id": "semantic_profile_delta",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "compatible before/after semantic receipts",
+              "reason": "No same-plan, same-compiler semantic baseline is bound for regression deltas.",
+              "evidence": [
+                "no comparable prior semantic receipt"
+              ]
+            }
+          ],
+          "status_counts": {
+            "FAIL_CLOSED": 0,
+            "PASS": 11,
+            "PROGRESS": 0,
+            "UNKNOWN": 10
+          },
+          "aggregate_completeness_score": null,
+          "first_unresolved": {
+            "id": "execution_boundary",
+            "status": "UNKNOWN",
+            "reason": "This command typechecks and replays generated source but does not execute the generated package.",
+            "next_operation": "EXECUTE_GENERATED_CODE_IN_A_SEPARATE_BOUNDED_RUNNER"
+          },
+          "unresolved_claims": [
+            {
+              "id": "execution_boundary",
+              "status": "UNKNOWN",
+              "reason": "This command typechecks and replays generated source but does not execute the generated package.",
+              "next_operation": "EXECUTE_GENERATED_CODE_IN_A_SEPARATE_BOUNDED_RUNNER"
+            },
+            {
+              "id": "permission_boundary",
+              "status": "UNKNOWN",
+              "reason": "The report does not capture the caller's operating-system permission profile.",
+              "next_operation": "RECORD_THE_HOST_PERMISSION_PROFILE_WITHOUT_GRANTING_AUTHORITY"
+            },
+            {
+              "id": "laya_decision_observation",
+              "status": "UNKNOWN",
+              "reason": "Records a model choice only after Gooo has declared multiple typed candidates and the Laya provider supplied the decision.",
+              "next_operation": "RUN_AN_ELIGIBLE_CASE_WITH_A_PINNED_LAYA_REVISION"
+            },
+            {
+              "id": "use_case_coverage",
+              "status": "UNKNOWN",
+              "reason": "A single source fixture is not evidence of independent real-world workflow coverage.",
+              "next_operation": "BIND_INDEPENDENTLY_SOURCED_REAL_WORKFLOW_FIXTURES"
+            },
+            {
+              "id": "reverse_observation_coverage",
+              "status": "UNKNOWN",
+              "reason": "No generated runtime is executed or reverse-mapped by this command.",
+              "next_operation": "MAP_GENERATED_RUNTIME_OBSERVATIONS_BACK_TO_SOURCE_IDS"
+            },
+            {
+              "id": "full_domain_semantics",
+              "status": "UNKNOWN",
+              "reason": "Typechecking and structural equivalence do not prove behavior over the input domain.",
+              "next_operation": "EXECUTE_A_DOMAIN_PARTITION_OR_PROOF_FOR_THE_DECLARED_INPUT_TYPE"
+            },
+            {
+              "id": "route_quality",
+              "status": "UNKNOWN",
+              "reason": "Semantic equivalence does not rank readability, clarity, or downstream utility.",
+              "next_operation": "ADD_AN_INDEPENDENT_ROUTE_CLARITY_OR_UTILITY_ORACLE"
+            },
+            {
+              "id": "resource_observation",
+              "status": "UNKNOWN",
+              "reason": "The report records route-decision latency but not process CPU time or peak memory.",
+              "next_operation": "CAPTURE_WALL_CPU_AND_PEAK_RSS_FOR_THE_COMPILER_PROCESS"
+            },
+            {
+              "id": "resource_baseline_comparison",
+              "status": "UNKNOWN",
+              "reason": "No same-profile, same-toolchain resource baseline is bound.",
+              "next_operation": "BIND_A_COMPATIBLE_RESOURCE_BASELINE"
+            },
+            {
+              "id": "semantic_profile_delta",
+              "status": "UNKNOWN",
+              "reason": "No same-plan, same-compiler semantic baseline is bound for regression deltas.",
+              "next_operation": "BIND_A_COMPATIBLE_BASELINE_AND_REPORT_PER_DIMENSION_DELTAS"
+            }
+          ],
+          "not_claimed": [
+            "user-intent completeness",
+            "real-workflow coverage",
+            "generated runtime behavior",
+            "full-domain semantics",
+            "route quality",
+            "universal language completeness"
+          ],
+          "fail_closed_reason": null
+        }
+      },
+      "source": "package policy\n\n//gooo:generated:start id=\"policy://change/v1\" kind=\"entity\"\ntype GoooRecord76d615104097c6c65ad624c83a57ec0e780038903d8ee6b2bd7569a652e508f8 struct {\n\tGoooField03a7ba6e844ae3bcc3da9c275345e2996698c56846c1e5db2bca10a7ead991d2 bool   `json:\"changed\"`\n\tGoooFieldb6a430b2debb72e5e85d2545386670053cf81b39b2486b9f9a368843b8a0b770 string `json:\"direction\"`\n\tGoooFieldb3d03f15ccfb33124f454e9a9546f87694a2ea7ac60a76c6d8e77a5fee4ad847 bool   `json:\"reason_changed\"`\n}\n\n//gooo:generated:end id=\"policy://change/v1\" kind=\"entity\"\n//gooo:generated:start id=\"policy://decision/v1\" kind=\"entity\"\ntype GoooRecord310f3795f70bb42930a8e3c9bccee22aa60fc9fe8c540f6e7155d6f3fbce373c struct {\n\tGoooFieldde873cb3dddfcb3edae5441f6049a7912cb8875bedb3fd3aeae6b8724ba6e508 bool   `json:\"approved\"`\n\tGoooFielda476416bccd75dd2631bd2a791cb5e91ace0fed5474c00b3c96d2f92401628b4 string `json:\"reason\"`\n\tGoooFieldfa971c8c460407f92dd6d4c0ca83f830e58fa43e2f43117627386c65d7024261 bool   `json:\"amount_ok\"`\n\tGoooField590470b53a4308c466be316c9d56b503f45ffaa1caaa993cebdecdae51b0b908 bool   `json:\"team_ok\"`\n\tGoooField1e8065733202c275bf0bd40412c3bd94b7a055d138d78f8e0a8b012f40273c77 bool   `json:\"reviewer_ok\"`\n\tGoooField9e1cd04bb13dc2144f4d9f78276a00a3a5e6ce55fffd2746ff4f2a0941804b00 bool   `json:\"self_ok\"`\n\tGoooField855809df0f3656ff5ce465c3d1bd7402fce1232a38e5eb3c9224ac4f9efecfe8 bool   `json:\"submitted_ok\"`\n}\n\n//gooo:generated:end id=\"policy://decision/v1\" kind=\"entity\"\n//gooo:generated:start id=\"policy://activity/compare\" kind=\"activity\"\nfunc Compare(input0 GoooRecord310f3795f70bb42930a8e3c9bccee22aa60fc9fe8c540f6e7155d6f3fbce373c, input1 GoooRecord310f3795f70bb42930a8e3c9bccee22aa60fc9fe8c540f6e7155d6f3fbce373c) GoooRecord76d615104097c6c65ad624c83a57ec0e780038903d8ee6b2bd7569a652e508f8 {\n\n\tvar changed = input0.GoooFieldde873cb3dddfcb3edae5441f6049a7912cb8875bedb3fd3aeae6b8724ba6e508 != input1.GoooFieldde873cb3dddfcb3edae5441f6049a7912cb8875bedb3fd3aeae6b8724ba6e508\n\tvar direction = \"UNCHANGED\"\n\tif changed {\n\t\tif input1.GoooFieldde873cb3dddfcb3edae5441f6049a7912cb8875bedb3fd3aeae6b8724ba6e508 {\n\t\t\tdirection = \"NEWLY_APPROVED\"\n\t\t} else {\n\t\t\tdirection = \"NEWLY_DENIED\"\n\t\t}\n\t}\n\treturn GoooRecord76d615104097c6c65ad624c83a57ec0e780038903d8ee6b2bd7569a652e508f8{GoooField03a7ba6e844ae3bcc3da9c275345e2996698c56846c1e5db2bca10a7ead991d2: changed, GoooFieldb6a430b2debb72e5e85d2545386670053cf81b39b2486b9f9a368843b8a0b770: direction, GoooFieldb3d03f15ccfb33124f454e9a9546f87694a2ea7ac60a76c6d8e77a5fee4ad847: input0.GoooFielda476416bccd75dd2631bd2a791cb5e91ace0fed5474c00b3c96d2f92401628b4 != input1.GoooFielda476416bccd75dd2631bd2a791cb5e91ace0fed5474c00b3c96d2f92401628b4}\n\n}\n\n//gooo:generated:end id=\"policy://activity/compare\" kind=\"activity\"\n"
+    },
+    "Evaluate": {
+      "report": {
+        "schema": "gooo/body-codegen-report/v3",
+        "decision": "PASS",
+        "activity": "Evaluate",
+        "activity_id": "policy://activity/evaluate",
+        "input_type": "(Request,Reviewer,Policy)",
+        "input_parameters": [
+          {
+            "name": "input0",
+            "type": "Request"
+          },
+          {
+            "name": "input1",
+            "type": "Reviewer"
+          },
+          {
+            "name": "input2",
+            "type": "Policy"
+          }
+        ],
+        "record_types": [
+          {
+            "name": "Decision",
+            "id": "policy://decision/v1",
+            "go_name": "GoooRecord310f3795f70bb42930a8e3c9bccee22aa60fc9fe8c540f6e7155d6f3fbce373c",
+            "fields": [
+              {
+                "name": "approved",
+                "id": "policy://decision/approved",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooFieldde873cb3dddfcb3edae5441f6049a7912cb8875bedb3fd3aeae6b8724ba6e508"
+              },
+              {
+                "name": "reason",
+                "id": "policy://decision/reason",
+                "type_id": "urn:gooo:type:string",
+                "go_name": "GoooFielda476416bccd75dd2631bd2a791cb5e91ace0fed5474c00b3c96d2f92401628b4"
+              },
+              {
+                "name": "amount_ok",
+                "id": "policy://decision/amount-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooFieldfa971c8c460407f92dd6d4c0ca83f830e58fa43e2f43117627386c65d7024261"
+              },
+              {
+                "name": "team_ok",
+                "id": "policy://decision/team-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField590470b53a4308c466be316c9d56b503f45ffaa1caaa993cebdecdae51b0b908"
+              },
+              {
+                "name": "reviewer_ok",
+                "id": "policy://decision/reviewer-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField1e8065733202c275bf0bd40412c3bd94b7a055d138d78f8e0a8b012f40273c77"
+              },
+              {
+                "name": "self_ok",
+                "id": "policy://decision/self-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField9e1cd04bb13dc2144f4d9f78276a00a3a5e6ce55fffd2746ff4f2a0941804b00"
+              },
+              {
+                "name": "submitted_ok",
+                "id": "policy://decision/submitted-ok",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField855809df0f3656ff5ce465c3d1bd7402fce1232a38e5eb3c9224ac4f9efecfe8"
+              }
+            ]
+          },
+          {
+            "name": "Request",
+            "id": "policy://request/v1",
+            "go_name": "GoooRecord64b793f49a41ccb9c4c6d5e3046f49c6a91bacdb93a04fa32cb7bba9f2aa1d8f",
+            "fields": [
+              {
+                "name": "key",
+                "id": "policy://request/id",
+                "type_id": "urn:gooo:type:string",
+                "go_name": "GoooFieldbbde5eb8ecd4d79fbc52e2c8dcc96c65517bc3aca8a2df94b1e54056171d4a03"
+              },
+              {
+                "name": "requester",
+                "id": "policy://request/requester",
+                "type_id": "urn:gooo:type:string",
+                "go_name": "GoooField0cfd221dd40a9f2b1d16855879f8e038cd6b595a2bac8e125d8ec883f591bf89"
+              },
+              {
+                "name": "team",
+                "id": "policy://request/team",
+                "type_id": "urn:gooo:type:string",
+                "go_name": "GoooFielde1392d1c93459d29decdb95131776d1590400c8fcf4d1e39c1f8a320403b056e"
+              },
+              {
+                "name": "amount",
+                "id": "policy://request/amount",
+                "type_id": "urn:gooo:type:integer",
+                "go_name": "GoooFieldbed4498f53bef8107ce12afb9b244e4099a376516f54b04d3c650f09687120f6"
+              },
+              {
+                "name": "submitted",
+                "id": "policy://request/submitted",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooFielda668bb08290b39a6c2324df0fd50e5ebfb263673e526c9b4381c4a13927282e9"
+              }
+            ]
+          },
+          {
+            "name": "Reviewer",
+            "id": "policy://reviewer/v1",
+            "go_name": "GoooRecord88669270d5070ac80b1753a4fdaea64d003135b476b7981bc97226387ed99f1d",
+            "fields": [
+              {
+                "name": "key",
+                "id": "policy://reviewer/id",
+                "type_id": "urn:gooo:type:string",
+                "go_name": "GoooField31757449b8e2a9400080714eb99bc3abe03df81dc0c6194375f3def889c55e1e"
+              },
+              {
+                "name": "team",
+                "id": "policy://reviewer/team",
+                "type_id": "urn:gooo:type:string",
+                "go_name": "GoooField8a408d1f6b03be9cfdd26cb03236582604f99983c92eab738a5dcf83e1d38069"
+              },
+              {
+                "name": "active",
+                "id": "policy://reviewer/active",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField24c75c390f6a3d4c0dc03a6a19ca77368753b32f11fa9969fab0e68556e70a24"
+              }
+            ]
+          },
+          {
+            "name": "Policy",
+            "id": "policy://rules/v1",
+            "go_name": "GoooRecordc34a4931657b32ca064c033136702023ca8f3d1375e3378a3acfd4e3e7ca6003",
+            "fields": [
+              {
+                "name": "limit",
+                "id": "policy://rules/limit",
+                "type_id": "urn:gooo:type:integer",
+                "go_name": "GoooFieldda4f7ae5d193df488e7f5d75e3e8db111ec1a496f729ad43bc4896a00bb8a0d5"
+              },
+              {
+                "name": "same_team",
+                "id": "policy://rules/same-team",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField3bb89bec89657bf30afd4c7993baa1ba00752723dce07c8384dfe867d2ac10ca"
+              },
+              {
+                "name": "active_reviewer",
+                "id": "policy://rules/active-reviewer",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooField69a36ac1107c6d4443bb27df469e3cf4a56cc9e2e62bf923d83931a638709c5e"
+              },
+              {
+                "name": "prevent_self",
+                "id": "policy://rules/prevent-self",
+                "type_id": "urn:gooo:type:boolean",
+                "go_name": "GoooFieldd80b4eeb255aad366eaa83234dfbeffc6cb022a78990b09c504276dfc6439b3f"
+              }
+            ]
+          }
+        ],
+        "output_type": "Decision",
+        "plan_sha256": "sha256:c0f0f71679ea2f6aeeee7e7be1d0419e55b23e7c31b80ab9325d70e0bb02cb69",
+        "compiler_source_sha": "49f5a8c46507bed813a1eae4f7b10e7436eeb3ba",
+        "source_digest": "sha256:938384a2a428beb07ec689065d9e0896c1a4da3a08f3cffd201cff2d70a6d070",
+        "program_digest": "sha256:7a7fd1d1be060befd810405845f87a1a9c3d57a63ad61c7d3a764265dcf08415",
+        "generated_digest": "sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd",
+        "replay_digest": "sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd",
+        "route": "preserve",
+        "route_decision": {
+          "schema": "gooo/typed-decision-receipt/v1",
+          "mode": "deterministic_fallback",
+          "selected": "preserve",
+          "fallback_reason": "NO_ALTERNATIVE_ROUTE",
+          "provider": "deterministic",
+          "request_sha256": ""
+        },
+        "route_selection": {
+          "method": "single_eligible_route",
+          "proposed_route": "preserve",
+          "final_route": "preserve"
+        },
+        "route_decision_latency_ms": 0,
+        "candidate_routes": [
+          "preserve"
+        ],
+        "equivalence_rule": "source-shape-preserving-v1",
+        "source_constructs": 18,
+        "lowered_constructs": 18,
+        "source_semantic_units": 120,
+        "lowered_semantic_units": 120,
+        "completeness_percent": 100,
+        "route_equivalence": {
+          "schema": "gooo/body-codegen-route-equivalence/v1",
+          "decision": "PASS",
+          "method": "canonical_control_flow_form/v2",
+          "rule": "source-shape-preserving-v1",
+          "source_semantic_digest": "sha256:0fbbac07961d6ee4c207ad09744c2608dbe9e4edb04f787351b1a02812f4624e",
+          "generated_semantic_digest": "sha256:0fbbac07961d6ee4c207ad09744c2608dbe9e4edb04f787351b1a02812f4624e",
+          "equivalent": true,
+          "scope": "typechecked, terminating, side-effect-free body-codegen profile; not a proof of unstated user intent"
+        },
+        "typecheck_passed": true,
+        "deterministic_replay": true,
+        "repository_writes": 0,
+        "unsupported_constructs": "calls, loops, imports, external effects, optional or repeated record fields",
+        "completeness_receipt": {
+          "schema": "gooo/metaprogramming-completeness-receipt/v2",
+          "profile_id": "gooo/body-codegen-pure-v1",
+          "decision": "PASS_WITHIN_DECLARED_FIXTURE_SCOPE",
+          "decision_basis": "declaration, generation, source-unit coverage, route equivalence, typecheck, replay, route protocol, provenance, and zero repository writes define the scoped code-generation core; body-fill additionally requires declared-suite functional accuracy; UNKNOWN dimensions remain explicit and are never aggregated",
+          "scope": {
+            "allowed_investment": "compiler-controlled lowering and optional Laya selection only among prevalidated equivalent routes; no human approval or authorization is required",
+            "boundary": {
+              "excluded_effects": [
+                "generated code execution",
+                "repository mutation",
+                "external authority"
+              ],
+              "non_authorizing": true,
+              "non_executing": true
+            },
+            "compiler_source_sha": "49f5a8c46507bed813a1eae4f7b10e7436eeb3ba",
+            "decision_mode": "deterministic_fallback",
+            "decision_provider": "deterministic",
+            "domain_scope": "one pure typed Gooo activity body in the closed body-codegen profile, with one Integer, Boolean, or Text input and one supported scalar result",
+            "excluded_scope": [
+              "unstated natural-language intent",
+              "independently sourced production workflows",
+              "generated runtime behavior",
+              "unrestricted Gooo body syntax",
+              "route clarity or utility"
+            ],
+            "execution_environment": "darwin/arm64",
+            "input_type": "(Request,Reviewer,Policy)",
+            "laya_mode": "deterministic_fallback",
+            "laya_provider": "deterministic",
+            "observed_system_cost": {
+              "human_actions": 0,
+              "repository_writes": 0
+            },
+            "output_type": "Decision",
+            "plan_sha256": "sha256:c0f0f71679ea2f6aeeee7e7be1d0419e55b23e7c31b80ab9325d70e0bb02cb69",
+            "receipt_declaration": {
+              "declaration_sha256": "c7059936a1fe6b98d6129e9a90a38d09779e8aaa5575868c703ff8a089d184ae",
+              "generated_declaration_sha256": "c7059936a1fe6b98d6129e9a90a38d09779e8aaa5575868c703ff8a089d184ae",
+              "projection_profile": "gooo/receipt-structure-projection/v1",
+              "schema": "gooo/metaprogramming-completeness-receipt/v2"
+            },
+            "system_budget": {
+              "maximum_human_actions": 0,
+              "maximum_repository_writes": 0
+            },
+            "toolchain": "go1.27.1"
+          },
+          "core_dimensions": [
+            "declaration_coverage",
+            "generation_coverage",
+            "internal_replay_coverage",
+            "provenance_integrity",
+            "receipt_schema_binding",
+            "repository_write_boundary",
+            "route_choice_protocol",
+            "route_semantic_equivalence",
+            "source_ast_coverage",
+            "typecheck_coverage"
+          ],
+          "dimensions": [
+            {
+              "id": "declaration_coverage",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "stable activity declarations",
+              "reason": "Counts the requested activity only when it resolves to a stable semantic ID.",
+              "evidence": [
+                "source_digest:sha256:938384a2a428beb07ec689065d9e0896c1a4da3a08f3cffd201cff2d70a6d070",
+                "activity_id:policy://activity/evaluate"
+              ]
+            },
+            {
+              "id": "generation_coverage",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "generated Go functions",
+              "reason": "Measures whether this accepted activity produced a digest-bound Go projection.",
+              "evidence": [
+                "generated_digest:sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd",
+                "report decision:PASS"
+              ]
+            },
+            {
+              "id": "source_ast_coverage",
+              "status": "PASS",
+              "numerator": 120,
+              "denominator": 120,
+              "unit": "source semantic units lowered",
+              "reason": "Counts supported source-body units represented in the selected Go lowering; it does not estimate unstated intent.",
+              "evidence": [
+                "source_semantic_units",
+                "lowered_semantic_units"
+              ]
+            },
+            {
+              "id": "route_semantic_equivalence",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "source/generated route pairs",
+              "reason": "Uses the compiler's closed structural equivalence witness for the selected route.",
+              "evidence": [
+                "route_equivalence.schema:gooo/body-codegen-route-equivalence/v1",
+                "route_equivalence.rule:source-shape-preserving-v1",
+                "source_semantic_digest:sha256:0fbbac07961d6ee4c207ad09744c2608dbe9e4edb04f787351b1a02812f4624e",
+                "generated_semantic_digest:sha256:0fbbac07961d6ee4c207ad09744c2608dbe9e4edb04f787351b1a02812f4624e"
+              ]
+            },
+            {
+              "id": "typecheck_coverage",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "generated functions accepted by Go type checking",
+              "reason": "Counts the generated function only after the compiler's type checker accepts it.",
+              "evidence": [
+                "typecheck_passed"
+              ]
+            },
+            {
+              "id": "internal_replay_coverage",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "deterministic compiler emission replays",
+              "reason": "Requires replayed generated bytes to match the selected output digest.",
+              "evidence": [
+                "generated_digest:sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd",
+                "replay_digest:sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd"
+              ]
+            },
+            {
+              "id": "route_choice_protocol",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "selected routes in the compiler-declared candidate set",
+              "reason": "The selected lowering must be a route the compiler declared eligible for this source shape.",
+              "evidence": [
+                "candidate_routes",
+                "selected_route:preserve"
+              ]
+            },
+            {
+              "id": "provenance_integrity",
+              "status": "PASS",
+              "numerator": 8,
+              "denominator": 8,
+              "unit": "source, body, output, replay, semantic-ID, and compiler-revision bindings",
+              "reason": "Binds the source, selected body, generated and replay digests, stable activity ID, route semantic digests, and an unmodified compiler revision when embedded in the binary.",
+              "evidence": [
+                "source_digest:sha256:938384a2a428beb07ec689065d9e0896c1a4da3a08f3cffd201cff2d70a6d070",
+                "program_digest:sha256:7a7fd1d1be060befd810405845f87a1a9c3d57a63ad61c7d3a764265dcf08415",
+                "generated_digest:sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd",
+                "replay_digest:sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd",
+                "activity_id:policy://activity/evaluate",
+                "compiler_source_sha:49f5a8c46507bed813a1eae4f7b10e7436eeb3ba",
+                "route_equivalence semantic digests"
+              ]
+            },
+            {
+              "id": "receipt_schema_binding",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "source-owned receipt schema and generated structure bindings",
+              "reason": "The receipt data structure is generated from the embedded Gooo declaration with stable entity and field IDs.",
+              "evidence": [
+                "receipt_declaration_sha256:c7059936a1fe6b98d6129e9a90a38d09779e8aaa5575868c703ff8a089d184ae",
+                "projection_profile:gooo/receipt-structure-projection/v1"
+              ]
+            },
+            {
+              "id": "repository_write_boundary",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "repository writes",
+              "reason": "The command emits generated source without mutating the repository.",
+              "evidence": [
+                "repository_writes:0"
+              ]
+            },
+            {
+              "id": "execution_boundary",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "generated package runtime executions",
+              "reason": "This command typechecks and replays generated source but does not execute the generated package.",
+              "evidence": [
+                "body-codegen does not run generated Go"
+              ]
+            },
+            {
+              "id": "permission_boundary",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "observed host permission profiles",
+              "reason": "The report does not capture the caller's operating-system permission profile.",
+              "evidence": [
+                "host permission profile is not observed"
+              ]
+            },
+            {
+              "id": "external_network_boundary",
+              "status": "PASS",
+              "numerator": 1,
+              "denominator": 1,
+              "unit": "runs with no Laya provider request",
+              "reason": "A deterministic fallback caused by an unconfigured provider or ineligible alternative routes records no Laya decision request; other provider/network scope is not audited.",
+              "evidence": [
+                "decision.mode:deterministic_fallback",
+                "decision.provider:deterministic",
+                "decision.fallback_reason:NO_ALTERNATIVE_ROUTE"
+              ]
+            },
+            {
+              "id": "laya_decision_observation",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 0,
+              "unit": "eligible multi-route Laya decisions",
+              "reason": "Records a model choice only after Gooo has declared multiple typed candidates and the Laya provider supplied the decision.",
+              "evidence": [
+                "candidate_routes",
+                "route_decision.mode:deterministic_fallback",
+                "route_decision.request_sha256:",
+                "route_decision.model_revision:"
+              ]
+            },
+            {
+              "id": "use_case_coverage",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "independently sourced real workflows",
+              "reason": "A single source fixture is not evidence of independent real-world workflow coverage.",
+              "evidence": [
+                "no independent workflow corpus is bound"
+              ]
+            },
+            {
+              "id": "reverse_observation_coverage",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "generated runtime observations mapped back to source",
+              "reason": "No generated runtime is executed or reverse-mapped by this command.",
+              "evidence": [
+                "no source-bound reverse-observation trace"
+              ]
+            },
+            {
+              "id": "full_domain_semantics",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "complete input-domain behavior proofs",
+              "reason": "Typechecking and structural equivalence do not prove behavior over the input domain.",
+              "evidence": [
+                "generated package execution and an independent domain oracle are not part of this command"
+              ]
+            },
+            {
+              "id": "route_quality",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "independent route-clarity or utility criteria",
+              "reason": "Semantic equivalence does not rank readability, clarity, or downstream utility.",
+              "evidence": [
+                "no independent route-quality oracle"
+              ]
+            },
+            {
+              "id": "resource_observation",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "complete process resource profiles",
+              "reason": "The report records route-decision latency but not process CPU time or peak memory.",
+              "evidence": [
+                "route_decision_latency_ms is recorded",
+                "CPU and peak RSS are not captured"
+              ]
+            },
+            {
+              "id": "resource_baseline_comparison",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "compatible prior resource receipts",
+              "reason": "No same-profile, same-toolchain resource baseline is bound.",
+              "evidence": [
+                "no compatible prior resource receipt"
+              ]
+            },
+            {
+              "id": "semantic_profile_delta",
+              "status": "UNKNOWN",
+              "numerator": 0,
+              "denominator": 1,
+              "unit": "compatible before/after semantic receipts",
+              "reason": "No same-plan, same-compiler semantic baseline is bound for regression deltas.",
+              "evidence": [
+                "no comparable prior semantic receipt"
+              ]
+            }
+          ],
+          "status_counts": {
+            "FAIL_CLOSED": 0,
+            "PASS": 11,
+            "PROGRESS": 0,
+            "UNKNOWN": 10
+          },
+          "aggregate_completeness_score": null,
+          "first_unresolved": {
+            "id": "execution_boundary",
+            "status": "UNKNOWN",
+            "reason": "This command typechecks and replays generated source but does not execute the generated package.",
+            "next_operation": "EXECUTE_GENERATED_CODE_IN_A_SEPARATE_BOUNDED_RUNNER"
+          },
+          "unresolved_claims": [
+            {
+              "id": "execution_boundary",
+              "status": "UNKNOWN",
+              "reason": "This command typechecks and replays generated source but does not execute the generated package.",
+              "next_operation": "EXECUTE_GENERATED_CODE_IN_A_SEPARATE_BOUNDED_RUNNER"
+            },
+            {
+              "id": "permission_boundary",
+              "status": "UNKNOWN",
+              "reason": "The report does not capture the caller's operating-system permission profile.",
+              "next_operation": "RECORD_THE_HOST_PERMISSION_PROFILE_WITHOUT_GRANTING_AUTHORITY"
+            },
+            {
+              "id": "laya_decision_observation",
+              "status": "UNKNOWN",
+              "reason": "Records a model choice only after Gooo has declared multiple typed candidates and the Laya provider supplied the decision.",
+              "next_operation": "RUN_AN_ELIGIBLE_CASE_WITH_A_PINNED_LAYA_REVISION"
+            },
+            {
+              "id": "use_case_coverage",
+              "status": "UNKNOWN",
+              "reason": "A single source fixture is not evidence of independent real-world workflow coverage.",
+              "next_operation": "BIND_INDEPENDENTLY_SOURCED_REAL_WORKFLOW_FIXTURES"
+            },
+            {
+              "id": "reverse_observation_coverage",
+              "status": "UNKNOWN",
+              "reason": "No generated runtime is executed or reverse-mapped by this command.",
+              "next_operation": "MAP_GENERATED_RUNTIME_OBSERVATIONS_BACK_TO_SOURCE_IDS"
+            },
+            {
+              "id": "full_domain_semantics",
+              "status": "UNKNOWN",
+              "reason": "Typechecking and structural equivalence do not prove behavior over the input domain.",
+              "next_operation": "EXECUTE_A_DOMAIN_PARTITION_OR_PROOF_FOR_THE_DECLARED_INPUT_TYPE"
+            },
+            {
+              "id": "route_quality",
+              "status": "UNKNOWN",
+              "reason": "Semantic equivalence does not rank readability, clarity, or downstream utility.",
+              "next_operation": "ADD_AN_INDEPENDENT_ROUTE_CLARITY_OR_UTILITY_ORACLE"
+            },
+            {
+              "id": "resource_observation",
+              "status": "UNKNOWN",
+              "reason": "The report records route-decision latency but not process CPU time or peak memory.",
+              "next_operation": "CAPTURE_WALL_CPU_AND_PEAK_RSS_FOR_THE_COMPILER_PROCESS"
+            },
+            {
+              "id": "resource_baseline_comparison",
+              "status": "UNKNOWN",
+              "reason": "No same-profile, same-toolchain resource baseline is bound.",
+              "next_operation": "BIND_A_COMPATIBLE_RESOURCE_BASELINE"
+            },
+            {
+              "id": "semantic_profile_delta",
+              "status": "UNKNOWN",
+              "reason": "No same-plan, same-compiler semantic baseline is bound for regression deltas.",
+              "next_operation": "BIND_A_COMPATIBLE_BASELINE_AND_REPORT_PER_DIMENSION_DELTAS"
+            }
+          ],
+          "not_claimed": [
+            "user-intent completeness",
+            "real-workflow coverage",
+            "generated runtime behavior",
+            "full-domain semantics",
+            "route quality",
+            "universal language completeness"
+          ],
+          "fail_closed_reason": null
+        }
+      },
+      "source": "package policy\n\n//gooo:generated:start id=\"policy://decision/v1\" kind=\"entity\"\ntype GoooRecord310f3795f70bb42930a8e3c9bccee22aa60fc9fe8c540f6e7155d6f3fbce373c struct {\n\tGoooFieldde873cb3dddfcb3edae5441f6049a7912cb8875bedb3fd3aeae6b8724ba6e508 bool   `json:\"approved\"`\n\tGoooFielda476416bccd75dd2631bd2a791cb5e91ace0fed5474c00b3c96d2f92401628b4 string `json:\"reason\"`\n\tGoooFieldfa971c8c460407f92dd6d4c0ca83f830e58fa43e2f43117627386c65d7024261 bool   `json:\"amount_ok\"`\n\tGoooField590470b53a4308c466be316c9d56b503f45ffaa1caaa993cebdecdae51b0b908 bool   `json:\"team_ok\"`\n\tGoooField1e8065733202c275bf0bd40412c3bd94b7a055d138d78f8e0a8b012f40273c77 bool   `json:\"reviewer_ok\"`\n\tGoooField9e1cd04bb13dc2144f4d9f78276a00a3a5e6ce55fffd2746ff4f2a0941804b00 bool   `json:\"self_ok\"`\n\tGoooField855809df0f3656ff5ce465c3d1bd7402fce1232a38e5eb3c9224ac4f9efecfe8 bool   `json:\"submitted_ok\"`\n}\n\n//gooo:generated:end id=\"policy://decision/v1\" kind=\"entity\"\n//gooo:generated:start id=\"policy://request/v1\" kind=\"entity\"\ntype GoooRecord64b793f49a41ccb9c4c6d5e3046f49c6a91bacdb93a04fa32cb7bba9f2aa1d8f struct {\n\tGoooFieldbbde5eb8ecd4d79fbc52e2c8dcc96c65517bc3aca8a2df94b1e54056171d4a03 string `json:\"key\"`\n\tGoooField0cfd221dd40a9f2b1d16855879f8e038cd6b595a2bac8e125d8ec883f591bf89 string `json:\"requester\"`\n\tGoooFielde1392d1c93459d29decdb95131776d1590400c8fcf4d1e39c1f8a320403b056e string `json:\"team\"`\n\tGoooFieldbed4498f53bef8107ce12afb9b244e4099a376516f54b04d3c650f09687120f6 int64  `json:\"amount\"`\n\tGoooFielda668bb08290b39a6c2324df0fd50e5ebfb263673e526c9b4381c4a13927282e9 bool   `json:\"submitted\"`\n}\n\n//gooo:generated:end id=\"policy://request/v1\" kind=\"entity\"\n//gooo:generated:start id=\"policy://reviewer/v1\" kind=\"entity\"\ntype GoooRecord88669270d5070ac80b1753a4fdaea64d003135b476b7981bc97226387ed99f1d struct {\n\tGoooField31757449b8e2a9400080714eb99bc3abe03df81dc0c6194375f3def889c55e1e string `json:\"key\"`\n\tGoooField8a408d1f6b03be9cfdd26cb03236582604f99983c92eab738a5dcf83e1d38069 string `json:\"team\"`\n\tGoooField24c75c390f6a3d4c0dc03a6a19ca77368753b32f11fa9969fab0e68556e70a24 bool   `json:\"active\"`\n}\n\n//gooo:generated:end id=\"policy://reviewer/v1\" kind=\"entity\"\n//gooo:generated:start id=\"policy://rules/v1\" kind=\"entity\"\ntype GoooRecordc34a4931657b32ca064c033136702023ca8f3d1375e3378a3acfd4e3e7ca6003 struct {\n\tGoooFieldda4f7ae5d193df488e7f5d75e3e8db111ec1a496f729ad43bc4896a00bb8a0d5 int64 `json:\"limit\"`\n\tGoooField3bb89bec89657bf30afd4c7993baa1ba00752723dce07c8384dfe867d2ac10ca bool  `json:\"same_team\"`\n\tGoooField69a36ac1107c6d4443bb27df469e3cf4a56cc9e2e62bf923d83931a638709c5e bool  `json:\"active_reviewer\"`\n\tGoooFieldd80b4eeb255aad366eaa83234dfbeffc6cb022a78990b09c504276dfc6439b3f bool  `json:\"prevent_self\"`\n}\n\n//gooo:generated:end id=\"policy://rules/v1\" kind=\"entity\"\n//gooo:generated:start id=\"policy://activity/evaluate\" kind=\"activity\"\nfunc Evaluate(input0 GoooRecord64b793f49a41ccb9c4c6d5e3046f49c6a91bacdb93a04fa32cb7bba9f2aa1d8f, input1 GoooRecord88669270d5070ac80b1753a4fdaea64d003135b476b7981bc97226387ed99f1d, input2 GoooRecordc34a4931657b32ca064c033136702023ca8f3d1375e3378a3acfd4e3e7ca6003) GoooRecord310f3795f70bb42930a8e3c9bccee22aa60fc9fe8c540f6e7155d6f3fbce373c {\n\n\tvar amountOK = input0.GoooFieldbed4498f53bef8107ce12afb9b244e4099a376516f54b04d3c650f09687120f6 \u003c= input2.GoooFieldda4f7ae5d193df488e7f5d75e3e8db111ec1a496f729ad43bc4896a00bb8a0d5\n\tvar teamOK = !input2.GoooField3bb89bec89657bf30afd4c7993baa1ba00752723dce07c8384dfe867d2ac10ca || input0.GoooFielde1392d1c93459d29decdb95131776d1590400c8fcf4d1e39c1f8a320403b056e == input1.GoooField8a408d1f6b03be9cfdd26cb03236582604f99983c92eab738a5dcf83e1d38069\n\tvar reviewerOK = !input2.GoooField69a36ac1107c6d4443bb27df469e3cf4a56cc9e2e62bf923d83931a638709c5e || input1.GoooField24c75c390f6a3d4c0dc03a6a19ca77368753b32f11fa9969fab0e68556e70a24\n\tvar selfOK = !input2.GoooFieldd80b4eeb255aad366eaa83234dfbeffc6cb022a78990b09c504276dfc6439b3f || input0.GoooField0cfd221dd40a9f2b1d16855879f8e038cd6b595a2bac8e125d8ec883f591bf89 != input1.GoooField31757449b8e2a9400080714eb99bc3abe03df81dc0c6194375f3def889c55e1e\n\tvar submittedOK = input0.GoooFielda668bb08290b39a6c2324df0fd50e5ebfb263673e526c9b4381c4a13927282e9\n\tvar approved = submittedOK \u0026\u0026 reviewerOK \u0026\u0026 selfOK \u0026\u0026 teamOK \u0026\u0026 amountOK\n\tvar reason = \"APPROVED\"\n\tif !submittedOK {\n\t\treason = \"NOT_SUBMITTED\"\n\t} else {\n\t\tif !reviewerOK {\n\t\t\treason = \"REVIEWER_INACTIVE\"\n\t\t} else {\n\t\t\tif !selfOK {\n\t\t\t\treason = \"SELF_APPROVAL\"\n\t\t\t} else {\n\t\t\t\tif !teamOK {\n\t\t\t\t\treason = \"TEAM_MISMATCH\"\n\t\t\t\t} else {\n\t\t\t\t\tif !amountOK {\n\t\t\t\t\t\treason = \"OVER_LIMIT\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\treturn GoooRecord310f3795f70bb42930a8e3c9bccee22aa60fc9fe8c540f6e7155d6f3fbce373c{GoooFieldde873cb3dddfcb3edae5441f6049a7912cb8875bedb3fd3aeae6b8724ba6e508: approved, GoooFielda476416bccd75dd2631bd2a791cb5e91ace0fed5474c00b3c96d2f92401628b4: reason, GoooFieldfa971c8c460407f92dd6d4c0ca83f830e58fa43e2f43117627386c65d7024261: amountOK, GoooField590470b53a4308c466be316c9d56b503f45ffaa1caaa993cebdecdae51b0b908: teamOK, GoooField1e8065733202c275bf0bd40412c3bd94b7a055d138d78f8e0a8b012f40273c77: reviewerOK, GoooField9e1cd04bb13dc2144f4d9f78276a00a3a5e6ce55fffd2746ff4f2a0941804b00: selfOK, GoooField855809df0f3656ff5ce465c3d1bd7402fce1232a38e5eb3c9224ac4f9efecfe8: submittedOK}\n\n}\n\n//gooo:generated:end id=\"policy://activity/evaluate\" kind=\"activity\"\n"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+name: Verify
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27.1'
+          cache: false
+      - name: Format
+        run: test -z "$(gofmt -l cmd internal web/embed.go)"
+      - name: Vet
+        run: go vet ./...
+      - name: Race and domain tests
+        run: go test -race ./...
+      - name: Build standalone executable
+        run: go build -trimpath -o bin/policy-studio ./cmd/server
+      - name: Check JavaScript syntax
+        run: node --check web/app.js
+      - name: Build clean pinned Gooo compiler
+        run: |
+          git clone --quiet --filter=blob:none https://github.com/kimjooyoon/meta-ontology-go.git "$RUNNER_TEMP/gooo-compiler"
+          git -C "$RUNNER_TEMP/gooo-compiler" checkout --quiet "$(cat tools/compiler-version.txt)"
+          go -C "$RUNNER_TEMP/gooo-compiler" build -o "$RUNNER_TEMP/gooo" ./cmd/gooo
+      - name: Verify source and generated projection
+        run: go run ./cmd/generate --compiler "$RUNNER_TEMP/gooo" --check

@@ -1,0 +1,67 @@
+package policy
+namespace policy
+entity Integer id "policy://integer"
+entity Boolean id "policy://boolean"
+entity Text id "policy://text"
+entity Request id "policy://request/v1" fields {
+ field key id "policy://request/id" type string required one
+ field requester id "policy://request/requester" type string required one
+ field team id "policy://request/team" type string required one
+ field amount id "policy://request/amount" type integer required one
+ field submitted id "policy://request/submitted" type boolean required one
+}
+entity Reviewer id "policy://reviewer/v1" fields {
+ field key id "policy://reviewer/id" type string required one
+ field team id "policy://reviewer/team" type string required one
+ field active id "policy://reviewer/active" type boolean required one
+}
+entity Policy id "policy://rules/v1" fields {
+ field limit id "policy://rules/limit" type integer required one
+ field same_team id "policy://rules/same-team" type boolean required one
+ field active_reviewer id "policy://rules/active-reviewer" type boolean required one
+ field prevent_self id "policy://rules/prevent-self" type boolean required one
+}
+entity Decision id "policy://decision/v1" fields {
+ field approved id "policy://decision/approved" type boolean required one
+ field reason id "policy://decision/reason" type string required one
+ field amount_ok id "policy://decision/amount-ok" type boolean required one
+ field team_ok id "policy://decision/team-ok" type boolean required one
+ field reviewer_ok id "policy://decision/reviewer-ok" type boolean required one
+ field self_ok id "policy://decision/self-ok" type boolean required one
+ field submitted_ok id "policy://decision/submitted-ok" type boolean required one
+}
+entity Change id "policy://change/v1" fields {
+ field changed id "policy://change/changed" type boolean required one
+ field direction id "policy://change/direction" type string required one
+ field reason_changed id "policy://change/reason-changed" type boolean required one
+}
+
+// Rule order determines the first explanation; all rule observations are retained.
+activity Evaluate(Request, Reviewer, Policy) -> Decision computes `
+let amountOK = input0.amount <= input2.limit
+let teamOK = !input2.same_team || input0.team == input1.team
+let reviewerOK = !input2.active_reviewer || input1.active
+let selfOK = !input2.prevent_self || input0.requester != input1.key
+let submittedOK = input0.submitted
+let approved = submittedOK && reviewerOK && selfOK && teamOK && amountOK
+let reason = "APPROVED"
+if !submittedOK { reason = "NOT_SUBMITTED" } else {
+ if !reviewerOK { reason = "REVIEWER_INACTIVE" } else {
+  if !selfOK { reason = "SELF_APPROVAL" } else {
+   if !teamOK { reason = "TEAM_MISMATCH" } else {
+    if !amountOK { reason = "OVER_LIMIT" }
+   }
+  }
+ }
+}
+return Decision{approved: approved, reason: reason, amount_ok: amountOK, team_ok: teamOK, reviewer_ok: reviewerOK, self_ok: selfOK, submitted_ok: submittedOK}
+`
+
+activity Compare(Decision, Decision) -> Change computes `
+let changed = input0.approved != input1.approved
+let direction = "UNCHANGED"
+if changed {
+ if input1.approved { direction = "NEWLY_APPROVED" } else { direction = "NEWLY_DENIED" }
+}
+return Change{changed: changed, direction: direction, reason_changed: input0.reason != input1.reason}
+`
