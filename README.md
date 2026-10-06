@@ -135,7 +135,7 @@ flowchart LR
 ```sh
 mkdir -p .tools
 git clone --filter=blob:none https://github.com/kimjooyoon/meta-ontology-go.git .tools/compiler
-git -C .tools/compiler checkout "$(cat tools/compiler-version.txt)"
+git -C .tools/compiler checkout "$(cattools/compiler-version.txt)"
 go -C .tools/compiler build -o "$(pwd)/.tools/gooo" ./cmd/gooo
 
 go run ./cmd/generate --compiler .tools/gooo
@@ -205,6 +205,8 @@ node --check web/app.js
 
 GitHub Actions는 형식·vet·race 테스트·바이너리 빌드·JS 문법 검사 후 고정 Gooo로 소스의 생성 코드 일치를 확인합니다. 태그 릴리스는 테스트 후 Linux/macOS/Windows 바이너리와 SHA256SUMS를 게시합니다.
 
+실제 브라우저 확인과 환경별 관측은 [검증 기록](docs/verification.md)에 정리했습니다.
+
 ## 저장소 구조
 
 ```text
@@ -214,10 +216,10 @@ cmd/server/                  표준 HTTP 서버 실행
 internal/policy/             생성된 규칙·어댑터, 기록·재실행
 internal/httpapp/            HTTP 라우트·엄격한 JSON 경계
 web/                         순수 HTML/CSS/JS + embed
- evidence/generation.json    실제 컴파일러 출력과 출처
- tools/compiler-version.txt  고정 컴파일러 SHA
- docs/screenshots/           실제 웹 화면
- .github/workflows/          검증·릴리스
+evidence/generation.json    실제 컴파일러 출력과 출처
+tools/compiler-version.txt  고정 컴파일러 SHA
+docs/screenshots/           실제 웹 화면
+.github/workflows/          검증·릴리스
 ```
 
 ## 현재 범위와 다음 확장
