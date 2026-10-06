@@ -20,8 +20,8 @@
 - 브라우저 콘솔: 확인한 흐름에서 error/warn 없음.
 - 모바일 폭: 375px 실제 레이아웃에서 문서 너비/스크롤 너비 모두 375px, 페이지 가로 넘침 없음. 모바일/데스크톱 전체 화면을 `docs/screenshots`에 보관.
 
-브라우저의 Blob 다운로드 이벤트는 사용한 자동화 환경에서 포착되지 않아 파일 저장까지 자동 검증하지 못했습니다. JSON 내보내기는 표준 Blob/Object URL 방식으로 구현되어 있으며 API 기록과 파일 가져오기·재실행은 확인했습니다.
+JSON 내보내기는 표준 Blob/Object URL 방식입니다. 자동화의 다운로드 이벤트는 포착되지 않았지만 실제 Downloads 폴더의 `gooo-policy-receipt.json`을 읽어 `policy-studio/execution/v1` 스키마, 실행 시각과 화면에서 생성한 기록 ID의 일치를 확인했습니다. 파일 가져오기·실제 재실행도 별도로 확인했습니다.
 
 ## CI
 
-공개 저장소의 `Verify` 워크플로가 형식·vet·race·빌드·JS 문법과 Linux의 고정 Gooo 재생성을 검사합니다. 이 문서의 로컬 관측과 GitHub Actions 결과는 별도로 확인합니다.
+공개 저장소의 `Verify` 워크플로가 형식·vet·race·빌드·JS 문법과 Linux의 고정 Gooo 재생성을 검사합니다. 공개 저장소의 [Linux CI](https://github.com/kimjooyoon/gooo-policy-studio/actions/runs/37545335161)가 위 검사를 모두 통과했습니다. 이 문서의 로컬 관측과 GitHub Actions 결과는 별도로 확인합니다.
