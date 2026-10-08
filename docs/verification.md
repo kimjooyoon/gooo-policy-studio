@@ -8,7 +8,7 @@
 - `go run ./cmd/generate --compiler <clean-pinned-gooo> --check`: 통과. 고정 리비전에서 생성한 코드/전달 어댑터/내장 사본 일치.
 - `go build -trimpath -o bin/policy-studio ./cmd/server`: 통과. 해당 실행 파일로 화면과 API 확인.
 
-컴파일러: clean Git revision `49f5a8c46507bed813a1eae4f7b10e7436eeb3ba`, Gooo `0.6.4-dev`, Go `1.27.1`. 애플리케이션 로컬 빌드: Go `1.26.5`, macOS arm64. 자세한 생성 출력은 `evidence/generation.json`에 저장.
+컴파일러: clean Git revision `49f5a8c46507bed813a1eae4f7b10e7436eeb3ba`, Gooo `0.6.4-dev`, Go `1.27.1`. 애플리케이션 로컬 빌드: Go `1.26.5`, macOS arm64. 당시 출력은 해당 리비전의 `evidence/generation.json`에 저장되어 있습니다.
 
 ## 브라우저에서 직접 확인
 
@@ -25,3 +25,12 @@ JSON 내보내기는 표준 Blob/Object URL 방식입니다. 자동화의 다운
 ## CI
 
 공개 저장소의 `Verify` 워크플로가 형식·vet·race·빌드·JS 문법과 Linux의 고정 Gooo 재생성을 검사합니다. 공개 저장소의 [Linux CI](https://github.com/kimjooyoon/gooo-policy-studio/actions/runs/37545335161)가 위 검사를 모두 통과했습니다. 이 문서의 로컬 관측과 GitHub Actions 결과는 별도로 확인합니다.
+
+## Go 1.27.2 전환 — 2026-10-09
+
+현재 모듈과 CI·릴리스 빌드는 Go 1.27.2를 사용합니다. 컴파일러 소스는
+`be4ef88cca4bc3df1e78ae91c8fe8388413f05c9` (Gooo 0.6.17-dev)로 고정했습니다.
+이 깨끗한 소스로 다시 생성했고 `--check`도 통과했습니다. 생성된 두 정책 함수와
+전달 어댑터의 바이트는 그대로이며, 두 `generation.json`은 새 컴파일러의 실제
+응답과 빌드 정보를 담습니다. Go 1.27.2에서 race·vet와 서버 빌드가 통과했습니다.
+이 관측은 위의 10월 7일 브라우저 검사를 다시 수행했다는 뜻으로 확장하지 않습니다.
