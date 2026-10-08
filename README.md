@@ -128,14 +128,14 @@ flowchart LR
 
 ## Gooo 코드 재생성
 
-컴파일러 리비전은 [`tools/compiler-version.txt`](tools/compiler-version.txt)의 **`49f5a8c46507bed813a1eae4f7b10e7436eeb3ba`**로 고정합니다. 컴파일러 자체의 요구사항은 **Go 1.27.1**입니다. `GOTOOLCHAIN=auto` 환경에서는 Go가 해당 도구체인을 준비합니다.
+컴파일러 리비전은 [`tools/compiler-version.txt`](tools/compiler-version.txt)의 **`be4ef88cca4bc3df1e78ae91c8fe8388413f05c9`**로 고정합니다. 컴파일러 자체의 요구사항은 **Go 1.27.2**입니다. `GOTOOLCHAIN=auto` 환경에서는 Go가 해당 도구체인을 준비합니다.
 
 깨끗한 Git 체크아웃에서 컴파일러를 빌드해야 버전 기록에 정확한 소스 SHA가 들어갑니다. `go install …@SHA`로 빌드하면 모듈 버전은 고정돼도 이 컴파일러가 VCS 출처를 `UNBOUND_LOCAL_SOURCE`로 기록할 수 있으므로, 이 도구는 그런 컴파일러를 거부합니다.
 
 ```sh
 mkdir -p .tools
 git clone --filter=blob:none https://github.com/kimjooyoon/meta-ontology-go.git .tools/compiler
-git -C .tools/compiler checkout "$(cattools/compiler-version.txt)"
+git -C .tools/compiler checkout "$(cat tools/compiler-version.txt)"
 go -C .tools/compiler build -o "$(pwd)/.tools/gooo" ./cmd/gooo
 
 go run ./cmd/generate --compiler .tools/gooo
