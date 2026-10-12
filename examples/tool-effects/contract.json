@@ -1,0 +1,216 @@
+{
+  "schema": "gooo/tool-effects-contract/v1",
+  "status": "DECLARED_CONTRACT_WITH_INDEPENDENT_EXPECTATIONS",
+  "compiler": {
+    "repository": "https://github.com/kimjooyoon/meta-ontology-go",
+    "revision": "83928fa4538245abe33b08549da47f8cbdc50ed2",
+    "version": "0.6.32-dev",
+    "go_toolchain": "go1.27.2",
+    "integration": "Separate example using the evidence-admission compiler pin; existing Policy Studio generator, primary compiler pin, machine gate and portable binaries remain separate."
+  },
+  "package_path": "gooo/tool-effects",
+  "source_files": [
+    "tool_effects.gooo",
+    "effect_budget.gooo"
+  ],
+  "shared_input": {
+    "entity": "ToolEffects",
+    "required_fields": 10,
+    "fields": {
+      "mutatesTarget": "Boolean",
+      "mutatesSession": "Boolean",
+      "writesFilesystem": "Boolean",
+      "launchesProcess": "Boolean",
+      "accessesNetwork": "Boolean",
+      "changesUiState": "Boolean",
+      "mayDiscardData": "Boolean",
+      "executesForeignCode": "Boolean",
+      "mutatesDevice": "Boolean",
+      "idempotent": "Boolean"
+    },
+    "meaning": "All possible effects across supported inputs, temporary work and successful or failed paths, taken from a host-owned audited tool/version registry."
+  },
+  "entries": {
+    "AnnotationsFromEffects": {
+      "manifest": "annotations.workspace.json",
+      "activity_id": "gooo://rea/annotations-from-effects",
+      "upstream_symbol": "annotationsFromEffects",
+      "inputs": [
+        "ToolEffects"
+      ],
+      "output": {
+        "entity": "DerivedToolAnnotations",
+        "required_fields": 4,
+        "fields": {
+          "readOnlyHint": "Boolean",
+          "destructiveHint": "Boolean",
+          "idempotentHint": "Boolean",
+          "openWorldHint": "Boolean"
+        }
+      },
+      "rules": {
+        "readOnlyHint": "NOT (mutatesTarget OR mutatesSession OR writesFilesystem OR launchesProcess OR accessesNetwork OR changesUiState OR mayDiscardData OR executesForeignCode OR mutatesDevice)",
+        "destructiveHint": "mayDiscardData OR executesForeignCode OR mutatesDevice",
+        "idempotentHint": "idempotent",
+        "openWorldHint": "launchesProcess OR accessesNetwork"
+      },
+      "verification_domain": "All 2^10 Boolean assignments, comparing all four fields to the exact pinned pure upstream function and independently authored expectations."
+    },
+    "ToolReturnsTargetContent": {
+      "manifest": "content.workspace.json",
+      "activity_id": "gooo://rea/tool-returns-target-content",
+      "upstream_symbol": "toolReturnsTargetContent",
+      "inputs": [
+        "Text"
+      ],
+      "output": "Boolean",
+      "rules": {
+        "false_only": [
+          "export_evidence_bundle",
+          "record_unknown"
+        ],
+        "otherwise": true
+      },
+      "verification_domain": "Finite independently authored Text cases; unknown and near-match names remain true. Text-domain exhaustiveness is not claimed.",
+      "does_not": "A false target-content marker does not authorize execution or imply absence of other effects."
+    },
+    "EffectBudgetAccepts": {
+      "manifest": "budget.workspace.json",
+      "activity_id": "gooo://automation/effect-budget-accepts",
+      "ownership": "Original Gooo composition; not a REA port.",
+      "inputs": [
+        "ToolEffects",
+        "EffectBudget"
+      ],
+      "input_port_binding": {
+        "input0": "ToolEffects",
+        "input1": "EffectBudget"
+      },
+      "budget": {
+        "entity": "EffectBudget",
+        "required_fields": 10,
+        "fields": {
+          "allow_target": "Boolean",
+          "allow_session": "Boolean",
+          "allow_filesystem": "Boolean",
+          "allow_process": "Boolean",
+          "allow_network": "Boolean",
+          "allow_ui": "Boolean",
+          "allow_discard": "Boolean",
+          "allow_foreign_code": "Boolean",
+          "allow_device": "Boolean",
+          "require_idempotent": "Boolean"
+        }
+      },
+      "output": {
+        "entity": "EffectBudgetDecision",
+        "required_fields": 12,
+        "fields": {
+          "admissible": "Boolean",
+          "reason": "Text",
+          "target_ok": "Boolean",
+          "session_ok": "Boolean",
+          "filesystem_ok": "Boolean",
+          "process_ok": "Boolean",
+          "network_ok": "Boolean",
+          "ui_ok": "Boolean",
+          "discard_ok": "Boolean",
+          "foreign_code_ok": "Boolean",
+          "device_ok": "Boolean",
+          "idempotency_ok": "Boolean"
+        }
+      },
+      "conditions": {
+        "target_ok": "NOT mutatesTarget OR allow_target",
+        "session_ok": "NOT mutatesSession OR allow_session",
+        "filesystem_ok": "NOT writesFilesystem OR allow_filesystem",
+        "process_ok": "NOT launchesProcess OR allow_process",
+        "network_ok": "NOT accessesNetwork OR allow_network",
+        "ui_ok": "NOT changesUiState OR allow_ui",
+        "discard_ok": "NOT mayDiscardData OR allow_discard",
+        "foreign_code_ok": "NOT executesForeignCode OR allow_foreign_code",
+        "device_ok": "NOT mutatesDevice OR allow_device",
+        "idempotency_ok": "NOT require_idempotent OR idempotent",
+        "admissible": "All ten condition fields are true. All flags remain visible even when an earlier condition fails."
+      },
+      "reason_priority": [
+        {
+          "condition": "target_ok",
+          "failure": "TARGET_MUTATION_DISALLOWED"
+        },
+        {
+          "condition": "session_ok",
+          "failure": "SESSION_MUTATION_DISALLOWED"
+        },
+        {
+          "condition": "filesystem_ok",
+          "failure": "FILESYSTEM_WRITE_DISALLOWED"
+        },
+        {
+          "condition": "process_ok",
+          "failure": "PROCESS_LAUNCH_DISALLOWED"
+        },
+        {
+          "condition": "network_ok",
+          "failure": "NETWORK_ACCESS_DISALLOWED"
+        },
+        {
+          "condition": "ui_ok",
+          "failure": "UI_CHANGE_DISALLOWED"
+        },
+        {
+          "condition": "discard_ok",
+          "failure": "DATA_DISCARD_DISALLOWED"
+        },
+        {
+          "condition": "foreign_code_ok",
+          "failure": "FOREIGN_CODE_DISALLOWED"
+        },
+        {
+          "condition": "device_ok",
+          "failure": "DEVICE_MUTATION_DISALLOWED"
+        },
+        {
+          "condition": "idempotency_ok",
+          "failure": "IDEMPOTENCY_REQUIRED"
+        }
+      ],
+      "success_reason": "WITHIN_EFFECT_BUDGET",
+      "verification_domain": "Finite independently authored budget expectations, including singleton failures, combinations and first-reason precedence. The complete 2^20 input domain is not claimed."
+    }
+  },
+  "upstream": {
+    "revision": "8fc2043eb8bcedbf34dce064f977e455438635d6",
+    "metadata": "upstream.json",
+    "exact_source": "upstream/toolEffects.ts",
+    "license": "LICENSE-REA"
+  },
+  "host_owned_preconditions": [
+    "Authenticate the machine principal and select an actual execution permission before dispatch. This pure relation contains no per-call human approval condition.",
+    "Maintain a complete audited effect registry bound to the exact tool implementation/version and all supported inputs, including failure paths and temporary work. Do not take permission-establishing flags from a caller, model, tool name heuristic or self-description.",
+    "Reject missing, unaudited or stale tool/version entries at the host boundary before projecting ToolEffects. The upstream metadata resolver throws for missing audit entries; this port does not implement that resolver.",
+    "Strictly decode all required Boolean fields; missing fields, string booleans and extra fields are not implicit false/default effects. Own all EffectBudget values in current policy.",
+    "Bind the selected audit, budget, principal, request, operation, current policy and implementation revision at the serialized dispatch boundary. Recheck changing host state before an effect is executed.",
+    "Enforce filesystem, process, network, UI and device restrictions with appropriate host controls. A descriptive MCP hint or admissible budget result does not impose a sandbox.",
+    "Provide durable idempotency and outcome handling where needed. A true idempotent fact is compatibility metadata, not proof of exactly-once remote execution.",
+    "Keep output containing target/provider/process/device text untrusted. The target-content function marks every unknown name as possibly carrying such content; it does not establish tool identity or authenticity.",
+    "Check evidence completeness, provenance, request/artifact/policy bindings and freshness separately before automatic dispatch. Historical execution receipts and replay grant no fresh permission."
+  ],
+  "automation_example": "A host-owned API adapter automatically compares a version-bound tool audit with a current machine policy budget. A read-only analysis budget may allow session recording while denying target writes, filesystem writes, foreign code and device mutation. Denied effect categories are reported together; the first failure selects one stable reason. No human approval field is required in this pure decision.",
+  "reproducibility": {
+    "helper": "tools/verify-tool-effects.py",
+    "max_cases_file_bytes": 32768,
+    "batch_target_bytes": 30000,
+    "coverage": "Preserve every case in order, compare every output field, execute and replay actual generated code per batch, retain exact workspace/source/case/compiler/runtime bindings. Do not trim the corpus to fit one batch.",
+    "actual_execution_status": "This contract is not execution evidence. Inspect observations.json from an actual helper or CI run."
+  },
+  "not_claimed": [
+    "Full REA runtime or full upstream tool registry translation",
+    "Actual tool execution or sandbox enforcement",
+    "Provider/principal authentication or permission grant",
+    "Integration with the existing machine gate or previously released portable binaries",
+    "Exactly-once external effects",
+    "All-input budget correctness, all-Text content-marker validation or autonomous-system safety",
+    "Customer adoption, trials, revenue or endorsement"
+  ]
+}

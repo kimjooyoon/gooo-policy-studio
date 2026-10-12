@@ -75,6 +75,16 @@ jobs:
           path: out/evidence-admission/*
           if-no-files-found: error
           retention-days: 14
+      - name: Execute and replay Rea tool effects and Gooo effect budgets
+        run: |
+          python3 -I tools/verify-tool-effects.py --compiler "$RUNNER_TEMP/evidence-gooo" --go "$(go env GOROOT)/bin/go" --out out/tool-effects
+      - name: Preserve the tool effects observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: tool-effects-observations
+          path: out/tool-effects/*
+          if-no-files-found: error
+          retention-days: 14
       - name: Build and observe the exact portable release assets
         env:
           RELEASE_VERSION: ${{ inputs.release_version || format('preview-{0}', github.sha) }}
