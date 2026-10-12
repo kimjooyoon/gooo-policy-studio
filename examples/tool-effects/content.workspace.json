@@ -1,0 +1,7 @@
+{
+  "schema": "gooo/package-workspace-manifest/v1",
+  "entry": {"package_path": "gooo/tool-effects", "activity": "ToolReturnsTargetContent"},
+  "packages": [
+    {"path": "gooo/tool-effects", "sources": ["tool_effects.gooo", "effect_budget.gooo"]}
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "policy-studio/tool-effects-upstream/v1",
+  "repository": "morluto/rea",
+  "commit": "8fc2043eb8bcedbf34dce064f977e455438635d6",
+  "tree": "7bf06188ddec6a4ceae4ef1771c8267d8eb84b73",
+  "source": "src/contracts/toolEffects.ts",
+  "copied_source": "upstream/toolEffects.ts",
+  "source_sha256": "c6437904a505f1fee0d0547f05ddef629bda74168420b8f6424a5413ab1f1dfb",
+  "source_bytes": 19855,
+  "source_git_blob_sha1": "4b0d0b7457b14a875cfdd0b5cf4423d00cca248e",
+  "source_url": "https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/src/contracts/toolEffects.ts",
+  "license": "MIT",
+  "copied_license": "LICENSE-REA",
+  "license_sha256": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b",
+  "license_bytes": 1064,
+  "ported_symbols": [
+    "ToolEffects",
+    "DerivedToolAnnotations",
+    "annotationsFromEffects",
+    "toolReturnsTargetContent"
+  ],
+  "referenced_symbol": "TARGET_CONTENT_FREE_TOOLS",
+  "port_scope": "Two complete pure functions; no full TOOL_EFFECTS registry, metadata resolver, MCP server, provider, launcher, or tool execution is implemented by this port.",
+  "valid_annotations_domain": {
+    "boolean_fields": 10,
+    "assignments": 1024,
+    "output_fields": 4
+  },
+  "target_content_rule": {
+    "false_only": [
+      "export_evidence_bundle",
+      "record_unknown"
+    ],
+    "all_other_Text_values": true
+  },
+  "original_composition": "EffectBudgetAccepts is an original Gooo effect-budget relation, not an upstream REA function.",
+  "license_git_blob_sha1": "2d476d24fa5a9ae2ab35e5fd121494049eb2ee5d"
+}

@@ -56,7 +56,7 @@ def read(path):
 def source_image_digest(path):
     # package-runtime source images hash Go's JSON encoding of a string, not
     # its raw bytes. Raw file hashes are recorded separately in this report.
-    encoded = json.dumps(path.read_text(), ensure_ascii=False, separators=(",", ":"))
+    encoded = json.dumps(path.read_bytes().decode("utf-8"), ensure_ascii=False, separators=(",", ":"))
     for plain, escaped in (("&", "\\u0026"), ("<", "\\u003c"), (">", "\\u003e"),
                            ("\u2028", "\\u2028"), ("\u2029", "\\u2029")):
         encoded = encoded.replace(plain, escaped)
@@ -101,7 +101,7 @@ def original_authority_reference(env):
             "true": 25, "false": 39, "extension_cases": 9, "scope": "One isolated pure function; only TypeScript annotations/export removed. No REA setup or application execution."}
 
 
-def validate(receipt, workspace, cases_file, entry, pin, go_digest):
+def validate(receipt, workspace, cases_file, entry, pin, go_digest, example_root=EXAMPLE):
     cases = read(cases_file)["cases"]
     require(receipt["schema"] == "gooo/workspace-body-execution-receipt/v1" and receipt["decision"] == "PASS", "execution decision differs")
     require(receipt["manifest_digest"] == sha(workspace.read_bytes()) and receipt["cases_digest"] == sha(cases_file.read_bytes()), "input byte binding differs")
@@ -122,7 +122,7 @@ def validate(receipt, workspace, cases_file, entry, pin, go_digest):
     for package in read(workspace)["packages"]:
         source_images = packages[package["path"]]["sources"]
         actual = {s["filename"]: s["source_digest"] for s in source_images}
-        expected = {name: source_image_digest(EXAMPLE / name) for name in package["sources"]}
+        expected = {name: source_image_digest(example_root / name) for name in package["sources"]}
         require(len(actual) == len(source_images) and actual == expected, "package source image differs")
     require(runtime["producer_source_sha"] == pin and runtime["go_tool_sha256"] == go_digest and
             runtime["go_version"].startswith("go version go1.27.2 ") and type(runtime["model_calls"]) is int and runtime["model_calls"] == 0, "producer or model scope differs")
@@ -148,10 +148,10 @@ def validate(receipt, workspace, cases_file, entry, pin, go_digest):
     return runtime
 
 
-def mutation_checks(receipt, workspace, cases_file, entry, pin, go_digest):
+def mutation_checks(receipt, workspace, cases_file, entry, pin, go_digest, example_root=EXAMPLE):
     def change_input(document):
         delivery = document["result"]["runtime"]["traces"][-1]["deliveries"][0]
-        if entry == ENTRY_ADMISSION:
+        if entry in read(cases_file)["cases"][-1]["inputs"]:
             delivery["input"] = "different"
         else:
             delivery["inputs"][0]["value"] = "different"
@@ -175,7 +175,7 @@ def mutation_checks(receipt, workspace, cases_file, entry, pin, go_digest):
         candidate = copy.deepcopy(receipt)
         change(candidate)
         try:
-            validate(candidate, workspace, cases_file, entry, pin, go_digest)
+            validate(candidate, workspace, cases_file, entry, pin, go_digest, example_root)
         except (ValueError, KeyError, TypeError):
             continue
         raise ValueError("receipt mutation accepted: " + name)
@@ -185,14 +185,14 @@ def mutation_checks(receipt, workspace, cases_file, entry, pin, go_digest):
 def batches(cases_file, out, name):
     """Retain every ordered fixture under the compiler's 32KiB JSON bound."""
     document = read(cases_file)
-    if cases_file.stat().st_size <= 30000:
+    if cases_file.stat().st_size <= 30000 and len(document["cases"]) <= 128:
         return [cases_file]
     groups, current = [], []
     def encode(rows):
         return json.dumps({"schema": document["schema"], "cases": rows}, ensure_ascii=False, separators=(",", ":")).encode()
     for case in document["cases"]:
         require(len(encode([case])) <= 30000, "one fixture exceeds the bounded JSON profile")
-        if current and len(encode(current + [case])) > 30000:
+        if current and (len(current) >= 128 or len(encode(current + [case])) > 30000):
             groups.append(current)
             current = []
         current.append(case)

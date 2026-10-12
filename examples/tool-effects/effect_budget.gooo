@@ -1,0 +1,71 @@
+// Copyright (c) 2026 kimjooyoon. MIT License.
+// Original Gooo composition over REA's pinned ToolEffects vocabulary.
+// This is a pure compatibility decision; permissions and effect enforcement
+// remain in the host. It does not execute a tool or provide a sandbox.
+package tooleffects
+namespace gooo_tool_effects
+
+entity EffectBudget id "gooo://automation/effect-budget/v1" fields {
+ field allow_target id "gooo://automation/effect-budget/allow-target" type boolean required one
+ field allow_session id "gooo://automation/effect-budget/allow-session" type boolean required one
+ field allow_filesystem id "gooo://automation/effect-budget/allow-filesystem" type boolean required one
+ field allow_process id "gooo://automation/effect-budget/allow-process" type boolean required one
+ field allow_network id "gooo://automation/effect-budget/allow-network" type boolean required one
+ field allow_ui id "gooo://automation/effect-budget/allow-ui" type boolean required one
+ field allow_discard id "gooo://automation/effect-budget/allow-discard" type boolean required one
+ field allow_foreign_code id "gooo://automation/effect-budget/allow-foreign-code" type boolean required one
+ field allow_device id "gooo://automation/effect-budget/allow-device" type boolean required one
+ field require_idempotent id "gooo://automation/effect-budget/require-idempotent" type boolean required one
+}
+
+entity EffectBudgetDecision id "gooo://automation/effect-budget-decision/v1" fields {
+ field admissible id "gooo://automation/effect-budget-decision/admissible" type boolean required one
+ field reason id "gooo://automation/effect-budget-decision/reason" type string required one
+ field target_ok id "gooo://automation/effect-budget-decision/target-ok" type boolean required one
+ field session_ok id "gooo://automation/effect-budget-decision/session-ok" type boolean required one
+ field filesystem_ok id "gooo://automation/effect-budget-decision/filesystem-ok" type boolean required one
+ field process_ok id "gooo://automation/effect-budget-decision/process-ok" type boolean required one
+ field network_ok id "gooo://automation/effect-budget-decision/network-ok" type boolean required one
+ field ui_ok id "gooo://automation/effect-budget-decision/ui-ok" type boolean required one
+ field discard_ok id "gooo://automation/effect-budget-decision/discard-ok" type boolean required one
+ field foreign_code_ok id "gooo://automation/effect-budget-decision/foreign-code-ok" type boolean required one
+ field device_ok id "gooo://automation/effect-budget-decision/device-ok" type boolean required one
+ field idempotency_ok id "gooo://automation/effect-budget-decision/idempotency-ok" type boolean required one
+}
+
+// Every condition is computed before choosing the first failure reason. This
+// exposes additional incompatible effects without masking them by priority.
+activity EffectBudgetAccepts(ToolEffects, EffectBudget) -> EffectBudgetDecision id "gooo://automation/effect-budget-accepts" computes `
+let targetOK = !input0.mutatesTarget || input1.allow_target
+let sessionOK = !input0.mutatesSession || input1.allow_session
+let filesystemOK = !input0.writesFilesystem || input1.allow_filesystem
+let processOK = !input0.launchesProcess || input1.allow_process
+let networkOK = !input0.accessesNetwork || input1.allow_network
+let uiOK = !input0.changesUiState || input1.allow_ui
+let discardOK = !input0.mayDiscardData || input1.allow_discard
+let foreignCodeOK = !input0.executesForeignCode || input1.allow_foreign_code
+let deviceOK = !input0.mutatesDevice || input1.allow_device
+let idempotencyOK = !input1.require_idempotent || input0.idempotent
+let admissible = targetOK && sessionOK && filesystemOK && processOK && networkOK && uiOK && discardOK && foreignCodeOK && deviceOK && idempotencyOK
+let reason = "WITHIN_EFFECT_BUDGET"
+if !targetOK { reason = "TARGET_MUTATION_DISALLOWED" } else {
+ if !sessionOK { reason = "SESSION_MUTATION_DISALLOWED" } else {
+  if !filesystemOK { reason = "FILESYSTEM_WRITE_DISALLOWED" } else {
+   if !processOK { reason = "PROCESS_LAUNCH_DISALLOWED" } else {
+    if !networkOK { reason = "NETWORK_ACCESS_DISALLOWED" } else {
+     if !uiOK { reason = "UI_CHANGE_DISALLOWED" } else {
+      if !discardOK { reason = "DATA_DISCARD_DISALLOWED" } else {
+       if !foreignCodeOK { reason = "FOREIGN_CODE_DISALLOWED" } else {
+        if !deviceOK { reason = "DEVICE_MUTATION_DISALLOWED" } else {
+         if !idempotencyOK { reason = "IDEMPOTENCY_REQUIRED" }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
+return EffectBudgetDecision{admissible: admissible, reason: reason, target_ok: targetOK, session_ok: sessionOK, filesystem_ok: filesystemOK, process_ok: processOK, network_ok: networkOK, ui_ok: uiOK, discard_ok: discardOK, foreign_code_ok: foreignCodeOK, device_ok: deviceOK, idempotency_ok: idempotencyOK}
+`

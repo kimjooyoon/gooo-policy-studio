@@ -1,0 +1,589 @@
+{
+  "schema": "gooo/body-composition-cases/v1",
+  "cases": [
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": false
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": false
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": ""
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "get_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "list_unknowns"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "update_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "verify_unknown_resolution"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "close_binary"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "binary_session"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "inspect_go_binary"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "goto_address"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "capture_browser_scenario"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "unregistered_tool"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "totally_new_tool"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "_"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "."
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "xexport_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "_export_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundlex"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundle_"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundle_extra"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "pre_export_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "xrecord_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "_record_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknownx"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknown_"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknown_extra"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "pre_record_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "EXPORT_EVIDENCE_BUNDLE"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "Export_Evidence_Bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "Export_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundlE"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "RECORD_UNKNOWN"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "Record_Unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "Record_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknowN"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": " export_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundle "
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "\texport_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundle\n"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_ bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": " record_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknown "
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "\trecord_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknown\n"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_ unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": " export_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundle　"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": " record_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknown　"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "еxport_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "expоrt_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "ｅxport_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export＿evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "rеcord_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "recоrd_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "ｒecord_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record＿unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundle​"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknown​"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundle🧪"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "🧪record_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "도구"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "名前"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "é"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "é"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "\u0000"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "\u0000export_evidence_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence_bundle\u0000"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "export_evidence\u0000_bundle"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "\u0000record_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record_unknown\u0000"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    },
+    {
+      "inputs": {
+        "gooo/tool-effects:ToolReturnsTargetContent": "record\u0000_unknown"
+      },
+      "expected": {
+        "gooo/tool-effects:ToolReturnsTargetContent": true
+      }
+    }
+  ]
+}
