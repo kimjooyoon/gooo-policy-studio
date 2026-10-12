@@ -1,0 +1,70 @@
+{
+  "schema": "rea-analysis/proof-authority-table/v1",
+  "upstream_repository": "https://github.com/morluto/rea",
+  "upstream_commit": "8fc2043eb8bcedbf34dce064f977e455438635d6",
+  "source_path": "src/application/ReconstructionObligationAuthority.ts",
+  "source_sha256": "c84086e441fa52140a9c67d27f5fba538e871dbfe18ec6069038fe074da67b33",
+  "function": "proofAuthoritySatisfies",
+  "parameter_order": [
+    "actual",
+    "required"
+  ],
+  "domain": [
+    "unit",
+    "integration",
+    "protocol",
+    "renderer",
+    "packaged-process",
+    "native-abi",
+    "live-observation",
+    "external"
+  ],
+  "required_to_accepted_actual": {
+    "unit": [
+      "unit",
+      "integration",
+      "protocol",
+      "renderer",
+      "packaged-process",
+      "native-abi",
+      "live-observation",
+      "external"
+    ],
+    "integration": [
+      "integration",
+      "protocol",
+      "renderer",
+      "packaged-process",
+      "native-abi",
+      "live-observation"
+    ],
+    "protocol": [
+      "protocol",
+      "packaged-process",
+      "live-observation"
+    ],
+    "renderer": [
+      "renderer",
+      "packaged-process",
+      "live-observation"
+    ],
+    "packaged-process": [
+      "packaged-process",
+      "live-observation"
+    ],
+    "native-abi": [
+      "native-abi"
+    ],
+    "live-observation": [
+      "live-observation"
+    ],
+    "external": [
+      "external"
+    ]
+  },
+  "valid_domain_pairs": 64,
+  "valid_domain_true": 25,
+  "unknown_extension_cases": 9,
+  "execution_status": "NOT_RUN",
+  "semantic_scope": "The 64 typed-domain inputs preserve upstream compatibility. Unknown Text labels returning false are an explicit API extension, not upstream exception parity. No evidence authenticity or permission is established."
+}

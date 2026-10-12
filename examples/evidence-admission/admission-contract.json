@@ -1,0 +1,143 @@
+{
+  "schema": "gooo/evidence-admission-contract/v1",
+  "status": "DECLARED_CONTRACT_WITH_INDEPENDENT_FINITE_EXPECTATIONS",
+  "entry": "app/evidence-admission:EvidenceAdmission",
+  "compiler": {
+    "repository": "https://github.com/kimjooyoon/meta-ontology-go",
+    "revision": "83928fa4538245abe33b08549da47f8cbdc50ed2",
+    "version": "0.6.32-dev",
+    "go_toolchain": "go1.27.2",
+    "integration": "Separate example workspace. Existing Policy Studio compiler pin, generator and admission gate remain unchanged."
+  },
+  "upstream": {
+    "repository": "https://github.com/morluto/rea",
+    "revision": "8fc2043eb8bcedbf34dce064f977e455438635d6",
+    "source": "src/application/ReconstructionObligationAuthority.ts",
+    "symbol": "proofAuthoritySatisfies",
+    "ported_source": "proof_authority.gooo",
+    "copied_exact_upstream_source": "upstream/ReconstructionObligationAuthority.ts",
+    "original_license": "LICENSE-REA",
+    "relation_metadata": "upstream-relation.json",
+    "extension": "Unknown Text authority labels return false. This does not preserve out-of-domain TypeScript exceptions."
+  },
+  "input": {
+    "entity": "ObservationFacts",
+    "required_fields": 15,
+    "fields": {
+      "actual_authority": "Text",
+      "required_authority": "Text",
+      "status": "Text",
+      "confidence": "Text",
+      "provider_verified": "Boolean",
+      "observed_binding": "Text",
+      "required_binding": "Text",
+      "observed_artifact": "Text",
+      "required_artifact": "Text",
+      "observed_policy": "Text",
+      "required_policy": "Text",
+      "observed_at_unix": "Integer",
+      "now_unix": "Integer",
+      "max_age_seconds": "Integer",
+      "expires_at_unix": "Integer"
+    }
+  },
+  "output": {
+    "entity": "EvidenceDecision",
+    "required_fields": 10,
+    "fields": {
+      "admissible": "Boolean",
+      "reason": "Text",
+      "provider_ok": "Boolean",
+      "evidence_ok": "Boolean",
+      "authority_ok": "Boolean",
+      "binding_ok": "Boolean",
+      "artifact_ok": "Boolean",
+      "policy_ok": "Boolean",
+      "freshness_ok": "Boolean",
+      "deadline_ok": "Boolean"
+    }
+  },
+  "conditions": {
+    "provider_ok": "provider_verified is true; the host must establish this fact before projecting it",
+    "evidence_ok": "confidence is exactly observed and status is exactly pass",
+    "authority_ok": "Pinned REA ProofAuthoritySatisfies(actual_authority, required_authority)",
+    "binding_ok": "Both binding strings are canonical sha256 text and exactly equal",
+    "artifact_ok": "Both artifact strings are canonical sha256 text and exactly equal",
+    "policy_ok": "Both policy strings are canonical sha256 text and exactly equal",
+    "freshness_ok": "observed_at_unix, now_unix and max_age_seconds are nonnegative; observed_at_unix is not in the future; only after those guards, now_unix minus observed_at_unix is at most max_age_seconds",
+    "deadline_ok": "now_unix and expires_at_unix are nonnegative and now_unix is strictly less than expires_at_unix",
+    "admissible": "All eight condition fields are true; every condition remains visible even when an earlier one fails"
+  },
+  "canonical_digest": {
+    "format": "sha256: followed by exactly 64 ASCII lowercase hexadecimal bytes",
+    "source_helper": "ValidDigest",
+    "bounded_iteration": 64,
+    "length_guard_bytes": 71,
+    "does_not": [
+      "compute SHA-256",
+      "authenticate an issuer",
+      "verify signatures",
+      "prove observed content is true"
+    ]
+  },
+  "reason_priority": [
+    {
+      "condition": "provider_ok",
+      "failure": "PROVIDER_UNVERIFIED"
+    },
+    {
+      "condition": "evidence_ok",
+      "failure": "EVIDENCE_INCOMPLETE"
+    },
+    {
+      "condition": "authority_ok",
+      "failure": "AUTHORITY_INSUFFICIENT"
+    },
+    {
+      "condition": "binding_ok",
+      "failure": "BINDING_MISMATCH"
+    },
+    {
+      "condition": "artifact_ok",
+      "failure": "ARTIFACT_MISMATCH"
+    },
+    {
+      "condition": "policy_ok",
+      "failure": "POLICY_MISMATCH"
+    },
+    {
+      "condition": "freshness_ok",
+      "failure": "EVIDENCE_STALE"
+    },
+    {
+      "condition": "deadline_ok",
+      "failure": "DEADLINE_EXPIRED"
+    }
+  ],
+  "success_reason": "ADMISSIBLE",
+  "host_owned_preconditions": [
+    "Authenticate the machine principal and recognize the trusted observation provider through a real host-controlled observation or independently validated provider credential path. Client-authored provider_verified=true is never such proof.",
+    "Strictly validate the observation envelope, result types, content hashes, source/artifact/producer identities and full required verification corpus. A self-consistent unsigned hash alone cannot establish provider identity or truth.",
+    "Recompute observed_binding and required_binding from a documented unambiguous encoding of principal, request ID, operation, request revision and complete required verification corpus. No canonicalization or hashing implementation is supplied by this pure example.",
+    "Own the current artifact identity, complete policy identity including policy values, requirement authority, expiry and maximum age. Obtain now_unix from the host clock. The caller must not choose these requirements or the clock.",
+    "Project all fifteen scalar fields from those verified observations and requirements. This workspace accepts synthetic fixture inputs for demonstration and is not itself a trusted provider integration.",
+    "After an admissible evidence decision, still enforce current authentication, execution permissions, request revision and policy version under the real gate's serialization boundary. Persist the bounded effect and idempotency outcome atomically.",
+    "A saved execution receipt or historical replay grants no fresh authority. Existing committed retries retain their original outcome and must not blindly perform a second effect."
+  ],
+  "automation_example": "Before an API automation policy update, a host-owned runner binds protocol or packaged-process observations to the exact candidate artifact, full regression corpus, policy version, request revision and machine principal. Gooo checks compatibility, binding and time validity without a per-call human approval condition. This prototype does not implement that runner or update any actual policy.",
+  "case_files": {
+    "runtime": "cases/admission-cases.json",
+    "independent_catalog": "cases/admission-case-catalog.json",
+    "maximum_native_case_count": 100,
+    "expected_observation": "Every case supplies all ten independent expected output fields, including failed-condition observations and first-reason precedence.",
+    "actual_execution_status": "Inspect CI artifact observations.json for an actual run; the contract itself is not execution evidence."
+  },
+  "not_claimed": [
+    "Actual evidence authenticity or signature verification",
+    "Execution permission or an external effect",
+    "Integration with the existing authenticated machine gate",
+    "Canonical JSON hashing or full REA ledger/provider/MCP translation",
+    "All-input or autonomous-system safety",
+    "Any customer trial, adoption or revenue"
+  ]
+}

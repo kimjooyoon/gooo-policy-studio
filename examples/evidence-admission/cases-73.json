@@ -1,0 +1,662 @@
+{
+  "schema": "gooo/body-composition-cases/v1",
+  "cases": [
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "integration",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "protocol",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "renderer",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "packaged-process",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "native-abi",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "external",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "integration"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "integration",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "integration"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "protocol",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "integration"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "renderer",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "integration"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "packaged-process",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "integration"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "native-abi",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "integration"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "integration"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "external",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "integration"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "protocol"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "integration",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "protocol"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "protocol",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "protocol"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "renderer",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "protocol"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "packaged-process",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "protocol"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "native-abi",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "protocol"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "protocol"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "external",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "protocol"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "renderer"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "integration",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "renderer"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "protocol",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "renderer"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "renderer",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "renderer"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "packaged-process",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "renderer"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "native-abi",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "renderer"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "renderer"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "external",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "renderer"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "packaged-process"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "integration",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "packaged-process"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "protocol",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "packaged-process"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "renderer",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "packaged-process"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "packaged-process",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "packaged-process"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "native-abi",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "packaged-process"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "packaged-process"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "external",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "packaged-process"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "native-abi"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "integration",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "native-abi"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "protocol",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "native-abi"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "renderer",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "native-abi"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "packaged-process",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "native-abi"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "native-abi",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "native-abi"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "native-abi"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "external",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "native-abi"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "live-observation"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "integration",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "live-observation"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "protocol",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "live-observation"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "renderer",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "live-observation"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "packaged-process",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "live-observation"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "native-abi",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "live-observation"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "live-observation"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "external",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "live-observation"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "external"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "integration",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "external"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "protocol",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "external"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "renderer",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "external"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "packaged-process",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "external"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "native-abi",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "external"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "external"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "external",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "external"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": true
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": ""
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": ""
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "Unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "Unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "Unit",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "Unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "future-authority",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "unit"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "live-observation",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "future-authority"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    },
+    {
+      "inputs": {
+        "rea/proof-authority:ProofAuthoritySatisfies.input0": "future-authority",
+        "rea/proof-authority:ProofAuthoritySatisfies.input1": "future-authority"
+      },
+      "expected": {
+        "rea/proof-authority:ProofAuthoritySatisfies": false
+      }
+    }
+  ]
+}

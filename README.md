@@ -27,6 +27,15 @@ go build -trimpath -o bin/policy-studio ./cmd/server
 
 `go:embed`로 웹 파일·Gooo 소스·생성 코드·생성 근거를 실행 파일에 포함합니다. 실행 파일 하나를 다른 폴더로 옮겨도 동작합니다. [Releases](https://github.com/kimjooyoon/gooo-policy-studio/releases)에서 역할별 실행 파일과 [시작 안내](docs/START-HERE.txt)를 확인하세요. 각 릴리스의 근거에서 실제 실행한 타깃과 교차 컴파일한 타깃을 구분합니다.
 
+## Gooo로 검증 근거 판단하기
+
+[Evidence Admission 예제](examples/evidence-admission/README.md)는 Rea의 검증 종류
+호환성 판정을 Gooo로 옮기고, 관측 상태·요청 연결·산출물·정책·최신성·만료를
+결합합니다. 사람의 건별 승인 없이 사용할 근거를 판단하며, 원본과 비교하는
+73개 사례 및 별도로 작성한 100개 복합 사례를 실제 실행·재실행하는 CI를 제공합니다.
+15개 입력과 10개 결과 전체를 검사합니다. 별도 컴파일러 리비전을 사용하는
+순수 예제이며, 현재 서버·기계 게이트·배포 실행 파일에는 아직 연결하지 않았습니다.
+
 ## 화면에서 할 수 있는 일
 
 1. **정책 비교:** 건별 금액 한도, 같은 팀 제한, 활성 검토자 필수, 본인 승인 방지를 현재/변경 정책에 각각 설정합니다.

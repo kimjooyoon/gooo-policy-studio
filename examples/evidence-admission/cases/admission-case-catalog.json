@@ -1,0 +1,1077 @@
+{
+  "schema": "rea-analysis/evidence-admission-case-catalog/v1",
+  "entry": "app/evidence-admission:EvidenceAdmission",
+  "input_key": "app/evidence-admission:EvidenceAdmission",
+  "upstream_repository": "https://github.com/morluto/rea",
+  "upstream_commit": "8fc2043eb8bcedbf34dce064f977e455438635d6",
+  "upstream_source": "src/application/ReconstructionObligationAuthority.ts",
+  "upstream_source_sha256": "c84086e441fa52140a9c67d27f5fba538e871dbfe18ec6069038fe074da67b33",
+  "relation_source": "../upstream-relation.json",
+  "case_count": 100,
+  "authority_domain": [
+    "unit",
+    "integration",
+    "protocol",
+    "renderer",
+    "packaged-process",
+    "native-abi",
+    "live-observation",
+    "external"
+  ],
+  "authority_matrix_case_count": 64,
+  "literal_true_authority_matrix_cells": 25,
+  "focused_case_count": 36,
+  "input_fields": [
+    "actual_authority",
+    "required_authority",
+    "status",
+    "confidence",
+    "provider_verified",
+    "observed_binding",
+    "required_binding",
+    "observed_artifact",
+    "required_artifact",
+    "observed_policy",
+    "required_policy",
+    "observed_at_unix",
+    "now_unix",
+    "max_age_seconds",
+    "expires_at_unix"
+  ],
+  "expected_fields": [
+    "admissible",
+    "reason",
+    "provider_ok",
+    "evidence_ok",
+    "authority_ok",
+    "binding_ok",
+    "artifact_ok",
+    "policy_ok",
+    "freshness_ok",
+    "deadline_ok"
+  ],
+  "expected_authorship": "Manually transcribed upstream matrix cells and individually authored condition overrides. No candidate Gooo body, candidate output, runtime result, or mirror predicate oracle was read or used. The authoring routine only copies these authored inputs and expectations.",
+  "scope": "Synthetic finite examples for the chosen 15-field evidence condition. provider_verified=true is a fixture fact, not verification of a real provider. Digest identity strings do not authenticate signatures or grant execution permission. No build, execution, test or replay was run by the fixture author.",
+  "time_boundary_note": "63 ordinary authority cells use observed=90, now=100, max_age=10 and expires=101, exercising inclusive age admission. The unit/unit cell additionally admits at int64 max minus one with expiry int64 max. Maximum possible nonnegative int64 age is fresh but its equal maximum deadline is expired. A separate near-maximum stale case preserves a valid deadline.",
+  "cases": [
+    {
+      "index": 0,
+      "id": "authority-unit-requires-unit",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.maximum_admissible_nonnegative_int64_difference",
+        "deadline.maximum_signed_int64_expiry"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "The unit/unit matrix cell remains true. The latest signed-int64 now value that can precede an int64 deadline is admitted, with an exact maximum-age boundary and subtraction remaining in range."
+    },
+    {
+      "index": 1,
+      "id": "authority-integration-requires-unit",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 2,
+      "id": "authority-protocol-requires-unit",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 3,
+      "id": "authority-renderer-requires-unit",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 4,
+      "id": "authority-packaged-process-requires-unit",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 5,
+      "id": "authority-native-abi-requires-unit",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 6,
+      "id": "authority-live-observation-requires-unit",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 7,
+      "id": "authority-external-requires-unit",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 8,
+      "id": "authority-unit-requires-integration",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 9,
+      "id": "authority-integration-requires-integration",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 10,
+      "id": "authority-protocol-requires-integration",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 11,
+      "id": "authority-renderer-requires-integration",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 12,
+      "id": "authority-packaged-process-requires-integration",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 13,
+      "id": "authority-native-abi-requires-integration",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 14,
+      "id": "authority-live-observation-requires-integration",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 15,
+      "id": "authority-external-requires-integration",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 16,
+      "id": "authority-unit-requires-protocol",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 17,
+      "id": "authority-integration-requires-protocol",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 18,
+      "id": "authority-protocol-requires-protocol",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 19,
+      "id": "authority-renderer-requires-protocol",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 20,
+      "id": "authority-packaged-process-requires-protocol",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 21,
+      "id": "authority-native-abi-requires-protocol",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 22,
+      "id": "authority-live-observation-requires-protocol",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 23,
+      "id": "authority-external-requires-protocol",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 24,
+      "id": "authority-unit-requires-renderer",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 25,
+      "id": "authority-integration-requires-renderer",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 26,
+      "id": "authority-protocol-requires-renderer",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 27,
+      "id": "authority-renderer-requires-renderer",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 28,
+      "id": "authority-packaged-process-requires-renderer",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 29,
+      "id": "authority-native-abi-requires-renderer",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 30,
+      "id": "authority-live-observation-requires-renderer",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 31,
+      "id": "authority-external-requires-renderer",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 32,
+      "id": "authority-unit-requires-packaged-process",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 33,
+      "id": "authority-integration-requires-packaged-process",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 34,
+      "id": "authority-protocol-requires-packaged-process",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 35,
+      "id": "authority-renderer-requires-packaged-process",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 36,
+      "id": "authority-packaged-process-requires-packaged-process",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 37,
+      "id": "authority-native-abi-requires-packaged-process",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 38,
+      "id": "authority-live-observation-requires-packaged-process",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 39,
+      "id": "authority-external-requires-packaged-process",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 40,
+      "id": "authority-unit-requires-native-abi",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 41,
+      "id": "authority-integration-requires-native-abi",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 42,
+      "id": "authority-protocol-requires-native-abi",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 43,
+      "id": "authority-renderer-requires-native-abi",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 44,
+      "id": "authority-packaged-process-requires-native-abi",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 45,
+      "id": "authority-native-abi-requires-native-abi",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 46,
+      "id": "authority-live-observation-requires-native-abi",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 47,
+      "id": "authority-external-requires-native-abi",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 48,
+      "id": "authority-unit-requires-live-observation",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 49,
+      "id": "authority-integration-requires-live-observation",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 50,
+      "id": "authority-protocol-requires-live-observation",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 51,
+      "id": "authority-renderer-requires-live-observation",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 52,
+      "id": "authority-packaged-process-requires-live-observation",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 53,
+      "id": "authority-native-abi-requires-live-observation",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 54,
+      "id": "authority-live-observation-requires-live-observation",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 55,
+      "id": "authority-external-requires-live-observation",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 56,
+      "id": "authority-unit-requires-external",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 57,
+      "id": "authority-integration-requires-external",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 58,
+      "id": "authority-protocol-requires-external",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 59,
+      "id": "authority-renderer-requires-external",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 60,
+      "id": "authority-packaged-process-requires-external",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 61,
+      "id": "authority-native-abi-requires-external",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 62,
+      "id": "authority-live-observation-requires-external",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 63,
+      "id": "authority-external-requires-external",
+      "coverage": [
+        "authority.typed_domain_pair",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "ADMISSIBLE",
+      "explanation": "Independent literal upstream matrix cell; other admission conditions are satisfied. The ordinary timestamp baseline is exactly the inclusive age boundary."
+    },
+    {
+      "index": 64,
+      "id": "authority-unknown-actual",
+      "coverage": [
+        "authority.unknown_actual"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Unknown actual Text label is an explicit fail-closed extension; all other flags stay true."
+    },
+    {
+      "index": 65,
+      "id": "authority-unknown-required",
+      "coverage": [
+        "authority.unknown_required"
+      ],
+      "expected_reason": "AUTHORITY_INSUFFICIENT",
+      "explanation": "Unknown required Text label is an explicit fail-closed extension; all other flags stay true."
+    },
+    {
+      "index": 66,
+      "id": "binding-first-nonhex",
+      "coverage": [
+        "binding.canonical_digest",
+        "binding.first-nonhex",
+        "binding.equal_malformed_values"
+      ],
+      "expected_reason": "BINDING_MISMATCH",
+      "explanation": "Both digest strings are equal, but first hex position is invalid; all other condition flags remain true."
+    },
+    {
+      "index": 67,
+      "id": "binding-last-nonhex",
+      "coverage": [
+        "binding.canonical_digest",
+        "binding.last-nonhex",
+        "binding.equal_malformed_values"
+      ],
+      "expected_reason": "BINDING_MISMATCH",
+      "explanation": "Both digest strings are equal, but last hex position is invalid; all other condition flags remain true."
+    },
+    {
+      "index": 68,
+      "id": "binding-uppercase-hex",
+      "coverage": [
+        "binding.canonical_digest",
+        "binding.uppercase-hex",
+        "binding.equal_malformed_values"
+      ],
+      "expected_reason": "BINDING_MISMATCH",
+      "explanation": "Both digest strings are equal, but uppercase hexadecimal is noncanonical; all other condition flags remain true."
+    },
+    {
+      "index": 69,
+      "id": "binding-wrong-prefix",
+      "coverage": [
+        "binding.canonical_digest",
+        "binding.wrong-prefix",
+        "binding.equal_malformed_values"
+      ],
+      "expected_reason": "BINDING_MISMATCH",
+      "explanation": "Both digest strings are equal, but case-altered digest prefix is noncanonical; all other condition flags remain true."
+    },
+    {
+      "index": 70,
+      "id": "binding-short",
+      "coverage": [
+        "binding.canonical_digest",
+        "binding.short",
+        "binding.equal_malformed_values"
+      ],
+      "expected_reason": "BINDING_MISMATCH",
+      "explanation": "Both digest strings are equal, but 63 hexadecimal characters are too short; all other condition flags remain true."
+    },
+    {
+      "index": 71,
+      "id": "binding-long",
+      "coverage": [
+        "binding.canonical_digest",
+        "binding.long",
+        "binding.equal_malformed_values"
+      ],
+      "expected_reason": "BINDING_MISMATCH",
+      "explanation": "Both digest strings are equal, but 65 hexadecimal characters are too long; all other condition flags remain true."
+    },
+    {
+      "index": 72,
+      "id": "binding-different-canonical",
+      "coverage": [
+        "binding.exact_identity",
+        "binding.two_canonical_unequal_values"
+      ],
+      "expected_reason": "BINDING_MISMATCH",
+      "explanation": "Both digests have canonical lowercase sha256 form, but one hex character differs; identity is required."
+    },
+    {
+      "index": 73,
+      "id": "artifact-first-nonhex",
+      "coverage": [
+        "artifact.canonical_digest",
+        "artifact.first-nonhex",
+        "artifact.equal_malformed_values"
+      ],
+      "expected_reason": "ARTIFACT_MISMATCH",
+      "explanation": "Both digest strings are equal, but first hex position is invalid; all other condition flags remain true."
+    },
+    {
+      "index": 74,
+      "id": "artifact-last-nonhex",
+      "coverage": [
+        "artifact.canonical_digest",
+        "artifact.last-nonhex",
+        "artifact.equal_malformed_values"
+      ],
+      "expected_reason": "ARTIFACT_MISMATCH",
+      "explanation": "Both digest strings are equal, but last hex position is invalid; all other condition flags remain true."
+    },
+    {
+      "index": 75,
+      "id": "artifact-uppercase-hex",
+      "coverage": [
+        "artifact.canonical_digest",
+        "artifact.uppercase-hex",
+        "artifact.equal_malformed_values"
+      ],
+      "expected_reason": "ARTIFACT_MISMATCH",
+      "explanation": "Both digest strings are equal, but uppercase hexadecimal is noncanonical; all other condition flags remain true."
+    },
+    {
+      "index": 76,
+      "id": "artifact-wrong-prefix",
+      "coverage": [
+        "artifact.canonical_digest",
+        "artifact.wrong-prefix",
+        "artifact.equal_malformed_values"
+      ],
+      "expected_reason": "ARTIFACT_MISMATCH",
+      "explanation": "Both digest strings are equal, but case-altered digest prefix is noncanonical; all other condition flags remain true."
+    },
+    {
+      "index": 77,
+      "id": "artifact-short",
+      "coverage": [
+        "artifact.canonical_digest",
+        "artifact.short",
+        "artifact.equal_malformed_values"
+      ],
+      "expected_reason": "ARTIFACT_MISMATCH",
+      "explanation": "Both digest strings are equal, but 63 hexadecimal characters are too short; all other condition flags remain true."
+    },
+    {
+      "index": 78,
+      "id": "artifact-long",
+      "coverage": [
+        "artifact.canonical_digest",
+        "artifact.long",
+        "artifact.equal_malformed_values"
+      ],
+      "expected_reason": "ARTIFACT_MISMATCH",
+      "explanation": "Both digest strings are equal, but 65 hexadecimal characters are too long; all other condition flags remain true."
+    },
+    {
+      "index": 79,
+      "id": "artifact-different-canonical",
+      "coverage": [
+        "artifact.exact_identity",
+        "artifact.two_canonical_unequal_values"
+      ],
+      "expected_reason": "ARTIFACT_MISMATCH",
+      "explanation": "Both digests have canonical lowercase sha256 form, but one hex character differs; identity is required."
+    },
+    {
+      "index": 80,
+      "id": "policy-first-nonhex",
+      "coverage": [
+        "policy.canonical_digest",
+        "policy.first-nonhex",
+        "policy.equal_malformed_values"
+      ],
+      "expected_reason": "POLICY_MISMATCH",
+      "explanation": "Both digest strings are equal, but first hex position is invalid; all other condition flags remain true."
+    },
+    {
+      "index": 81,
+      "id": "policy-last-nonhex",
+      "coverage": [
+        "policy.canonical_digest",
+        "policy.last-nonhex",
+        "policy.equal_malformed_values"
+      ],
+      "expected_reason": "POLICY_MISMATCH",
+      "explanation": "Both digest strings are equal, but last hex position is invalid; all other condition flags remain true."
+    },
+    {
+      "index": 82,
+      "id": "policy-uppercase-hex",
+      "coverage": [
+        "policy.canonical_digest",
+        "policy.uppercase-hex",
+        "policy.equal_malformed_values"
+      ],
+      "expected_reason": "POLICY_MISMATCH",
+      "explanation": "Both digest strings are equal, but uppercase hexadecimal is noncanonical; all other condition flags remain true."
+    },
+    {
+      "index": 83,
+      "id": "policy-wrong-prefix",
+      "coverage": [
+        "policy.canonical_digest",
+        "policy.wrong-prefix",
+        "policy.equal_malformed_values"
+      ],
+      "expected_reason": "POLICY_MISMATCH",
+      "explanation": "Both digest strings are equal, but case-altered digest prefix is noncanonical; all other condition flags remain true."
+    },
+    {
+      "index": 84,
+      "id": "policy-short",
+      "coverage": [
+        "policy.canonical_digest",
+        "policy.short",
+        "policy.equal_malformed_values"
+      ],
+      "expected_reason": "POLICY_MISMATCH",
+      "explanation": "Both digest strings are equal, but 63 hexadecimal characters are too short; all other condition flags remain true."
+    },
+    {
+      "index": 85,
+      "id": "policy-long",
+      "coverage": [
+        "policy.canonical_digest",
+        "policy.long",
+        "policy.equal_malformed_values"
+      ],
+      "expected_reason": "POLICY_MISMATCH",
+      "explanation": "Both digest strings are equal, but 65 hexadecimal characters are too long; all other condition flags remain true."
+    },
+    {
+      "index": 86,
+      "id": "policy-different-canonical",
+      "coverage": [
+        "policy.exact_identity",
+        "policy.two_canonical_unequal_values"
+      ],
+      "expected_reason": "POLICY_MISMATCH",
+      "explanation": "Both digests have canonical lowercase sha256 form, but one hex character differs; identity is required."
+    },
+    {
+      "index": 87,
+      "id": "time-future-observation",
+      "coverage": [
+        "freshness.future_observation"
+      ],
+      "expected_reason": "EVIDENCE_STALE",
+      "explanation": "An observation one second after now fails freshness, while the deadline still passes."
+    },
+    {
+      "index": 88,
+      "id": "time-negative-observation",
+      "coverage": [
+        "freshness.minimum_signed_int64_observation",
+        "freshness.guarded_before_subtraction",
+        "deadline.exclusive_expiry_boundary",
+        "reason.freshness_before_deadline"
+      ],
+      "expected_reason": "EVIDENCE_STALE",
+      "explanation": "MinInt64 observation time fails the nonnegative guard before MaxInt64 minus MinInt64 can be evaluated. Freshness is false; now equal to maximum expiry independently makes deadline false. EVIDENCE_STALE precedes DEADLINE_EXPIRED."
+    },
+    {
+      "index": 89,
+      "id": "time-negative-now",
+      "coverage": [
+        "freshness.negative_now",
+        "deadline.negative_now",
+        "reason.freshness_before_deadline"
+      ],
+      "expected_reason": "EVIDENCE_STALE",
+      "explanation": "Negative now invalidates both freshness and deadline; EVIDENCE_STALE has priority over DEADLINE_EXPIRED."
+    },
+    {
+      "index": 90,
+      "id": "time-negative-max-age",
+      "coverage": [
+        "freshness.negative_max_age"
+      ],
+      "expected_reason": "EVIDENCE_STALE",
+      "explanation": "Negative maximum age is invalid even though the ordinary observation and deadline are valid."
+    },
+    {
+      "index": 91,
+      "id": "time-negative-expiry",
+      "coverage": [
+        "deadline.negative_expiry"
+      ],
+      "expected_reason": "DEADLINE_EXPIRED",
+      "explanation": "Negative expiry fails the deadline guard; the age is exactly the allowed inclusive boundary."
+    },
+    {
+      "index": 92,
+      "id": "time-exact-expiry-deadline",
+      "coverage": [
+        "deadline.exclusive_expiry_boundary",
+        "freshness.inclusive_age_boundary"
+      ],
+      "expected_reason": "DEADLINE_EXPIRED",
+      "explanation": "Now equal to expiry is expired. In contrast, age equal to max age still passes."
+    },
+    {
+      "index": 93,
+      "id": "time-already-expired-positive",
+      "coverage": [
+        "deadline.past_positive_expiry"
+      ],
+      "expected_reason": "DEADLINE_EXPIRED",
+      "explanation": "A positive expiry one second before now is expired; this checks ordering as well as equality."
+    },
+    {
+      "index": 94,
+      "id": "time-int64-maximum-freshness-difference",
+      "coverage": [
+        "freshness.maximum_signed_int64_nonnegative_difference",
+        "freshness.inclusive_age_boundary",
+        "deadline.exclusive_expiry_boundary"
+      ],
+      "expected_reason": "DEADLINE_EXPIRED",
+      "explanation": "The maximum nonnegative int64 difference is fresh with an equal max age. Admission still fails because no signed-int64 expiry can exceed now at int64 max; the full decision exposes freshness_ok=true and deadline_ok=false."
+    },
+    {
+      "index": 95,
+      "id": "time-near-int64-maximum-stale",
+      "coverage": [
+        "freshness.near_maximum_int64_stale",
+        "freshness.age_exceeds_max_by_one",
+        "deadline.maximum_signed_int64_expiry"
+      ],
+      "expected_reason": "EVIDENCE_STALE",
+      "explanation": "Large in-range age exceeds the allowed max age by one. The maximum signed-int64 expiry is still strictly after now, so only freshness fails."
+    },
+    {
+      "index": 96,
+      "id": "evidence-unsupported-confidence",
+      "coverage": [
+        "evidence.only_observed_confidence"
+      ],
+      "expected_reason": "EVIDENCE_INCOMPLETE",
+      "explanation": "A pass status cannot admit evidence with inferred rather than observed confidence."
+    },
+    {
+      "index": 97,
+      "id": "evidence-unsupported-status",
+      "coverage": [
+        "evidence.only_pass_status",
+        "evidence.unknown_status"
+      ],
+      "expected_reason": "EVIDENCE_INCOMPLETE",
+      "explanation": "Observed confidence cannot admit an unknown rather than pass status."
+    },
+    {
+      "index": 98,
+      "id": "priority-provider-before-evidence",
+      "coverage": [
+        "provider.unverified",
+        "evidence.failed_status",
+        "reason.provider_before_evidence"
+      ],
+      "expected_reason": "PROVIDER_UNVERIFIED",
+      "explanation": "Provider and evidence both fail. Both flags must be reported, and provider failure is the first reason."
+    },
+    {
+      "index": 99,
+      "id": "priority-evidence-before-authority",
+      "coverage": [
+        "evidence.failed_status",
+        "authority.incomparable_known_labels",
+        "reason.evidence_before_authority"
+      ],
+      "expected_reason": "EVIDENCE_INCOMPLETE",
+      "explanation": "The known external/integration pair is not comparable and status is fail. Both flags must be false, with evidence failure first."
+    }
+  ]
+}
