@@ -1,0 +1,8 @@
+{
+  "schema": "policy-studio/completion-input/v1",
+  "request_id": "release-candidate-missing",
+  "records": [
+    {"claim_id": "api.authentication", "status": "pass", "evidence_ids": ["ev_1111111111111111111111111111111111111111111111111111111111111111"]},
+    {"claim_id": "api.schema", "status": "pass", "evidence_ids": ["ev_2222222222222222222222222222222222222222222222222222222222222222"]}
+  ]
+}

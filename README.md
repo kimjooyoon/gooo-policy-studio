@@ -46,6 +46,30 @@ go build -trimpath -o bin/policy-studio ./cmd/server
 사람의 건별 승인 조건 없이 판단하지만, 실제 도구 감사·인증·효과 제한은
 호스트가 확립해야 합니다. 기존 서버·기계 게이트에 연결한 기능은 아닙니다.
 
+## Gooo로 필수 검증의 완료 판단하기
+
+[`completion-check`](docs/completion-check.md)는 운영자가 별도 파일로 지정한
+필수 검증 목록과 제공된 결과를 비교합니다. Rea의 다섯 상태 집계를 Gooo의
+누적 활동으로 옮기고, 필수 검증의 누락·예상하지 않은 검증·완료 요약을 확인하는
+독자적 `CompletionReady`를 구성했습니다. 중간의 실패·미지원·잘림·미확인 결과는
+뒤따르는 성공으로 지워지지 않으며, 필수 목록을 입력에서 줄여 통과시킬 수 없습니다.
+
+```sh
+go build -trimpath -o bin/completion-check ./cmd/completion-check
+./bin/completion-check --policy examples/completion-ledger/policy.json \
+  --input examples/completion-ledger/input-ready.json > completion-report.json
+./bin/completion-check --policy examples/completion-ledger/policy.json \
+  --replay --input completion-report.json > completion-replay.json
+```
+
+Gooo 설치나 네트워크 호출 없이 최대 256개 결과를 처리하며, 각 누적 단계와
+전체 결과·정책·소스 연결을 보고서에 보존합니다. 현재 정책을 다시 읽어 보고서를
+재계산하므로, 필수 검증이 빠진 보고서도 거절 상태로 재현됩니다. 사람의 건별
+승인 조건은 없습니다. 종료 코드 0만 다음 자동화 단계의 실행 조건으로 사용하세요.
+이 명령은 제공된 검증 결과의 일관성을 검사하며, 근거의 실제 출처 인증과
+실행 권한·외부 효과 제한은 호출 파이프라인이 확립해야 합니다. 기존 서버·기계
+게이트와 배포된 미리보기 실행 파일에는 아직 연결하지 않았습니다.
+
 ## 화면에서 할 수 있는 일
 
 1. **정책 비교:** 건별 금액 한도, 같은 팀 제한, 활성 검토자 필수, 본인 승인 방지를 현재/변경 정책에 각각 설정합니다.

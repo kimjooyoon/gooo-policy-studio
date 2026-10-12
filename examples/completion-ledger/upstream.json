@@ -1,0 +1,30 @@
+{
+  "schema": "policy-studio/completion-ledger-upstream/v1",
+  "repository": "morluto/rea",
+  "commit": "8fc2043eb8bcedbf34dce064f977e455438635d6",
+  "tree": "7bf06188ddec6a4ceae4ef1771c8267d8eb84b73",
+  "source": "src/domain/evidenceCompletionLedger.ts",
+  "copied_source": "upstream/evidenceCompletionLedger.ts",
+  "source_sha256": "cb721d4422094f2b2051625de83b3981642c388b114f5ce26d4de48fd83a749b",
+  "source_bytes": 5416,
+  "source_git_blob_sha1": "bf3e0f9e9800970592fffeb9120deac5d86213ff",
+  "source_url": "https://github.com/morluto/rea/blob/8fc2043eb8bcedbf34dce064f977e455438635d6/src/domain/evidenceCompletionLedger.ts",
+  "license": "MIT",
+  "copied_license": "LICENSE-REA",
+  "license_sha256": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b",
+  "license_bytes": 1064,
+  "license_git_blob_sha1": "2d476d24fa5a9ae2ab35e5fd121494049eb2ee5d",
+  "adapted_symbols": [
+    "evidenceCompletionStatusSchema",
+    "summarize",
+    "completionSummarySchema",
+    "completionLedgerObjectSchema"
+  ],
+  "port_scope": "Five exact terminal status categories and count/pass semantics, split into generic checked-int64 Step and public-nonempty Finish. Does not implement canonical ledger creation/parsing or the full upstream schema.",
+  "original_composition": "CompletionReady applies operator-required claim coverage and summary consistency; it is not an upstream REA function.",
+  "deliberate_boundaries": {
+    "private_summarize_empty": "The private upstream summarize([]) returns total0 and complete=true.",
+    "public_ledger_nonempty": "The upstream public records and summary schema require at least one record; CompletionFinish rejects zero with NO_RECORDS.",
+    "counter_domain": "Checked nonnegative int64 Gooo counters. This is a deliberate numeric-domain extension, not a claim of all JavaScript Number or RFC8785 compatibility."
+  }
+}
