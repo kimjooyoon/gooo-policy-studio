@@ -15,6 +15,7 @@ import (
 	"os"
 	"os/exec"
 	"reflect"
+	"sort"
 	"strings"
 	"time"
 
@@ -248,7 +249,7 @@ func transport(in,out any) error {b,err:=json.Marshal(in);if err!=nil{return err
 			return err
 		}
 		if !reflect.DeepEqual(oldIdentity, freshIdentity) {
-			return fmt.Errorf("stale complete compiler identity")
+			return fmt.Errorf("stale complete compiler identity: %s", strings.Join(differencePaths(oldIdentity, freshIdentity, "$"), ","))
 		}
 		for activity, freshRaw := range receipts {
 			old, err := stableReceipt(saved.Activities[activity])
@@ -260,7 +261,7 @@ func transport(in,out any) error {b,err:=json.Marshal(in);if err!=nil{return err
 				return err
 			}
 			if !reflect.DeepEqual(old, fresh) {
-				return fmt.Errorf("stale %s receipt", activity)
+				return fmt.Errorf("stale %s receipt: %s", activity, strings.Join(differencePaths(old, fresh, "$"), ","))
 			}
 		}
 	} else {
@@ -292,8 +293,8 @@ func run(ctx context.Context, compiler string, args ...string) ([]byte, error) {
 }
 func digest(b []byte) string { return fmt.Sprintf("sha256:%x", sha256.Sum256(b)) }
 
-// The one timing observation is not a semantic binding. All other receipt
-// keys, metadata, values and types must match the fresh pinned compiler report.
+// The exact timing and known generating-host observations are retained in the
+// raw record, separately from semantic bindings. All other keys and types match.
 func stableReceipt(raw []byte) (any, error) {
 	value, err := rawValue(raw)
 	if err != nil {
@@ -312,6 +313,21 @@ func stableReceipt(raw []byte) (any, error) {
 		return nil, fmt.Errorf("invalid route latency")
 	}
 	delete(report, "route_decision_latency_ms")
+	// Generation is byte-identical across these two observed hosts. This field
+	// records the generating host, not the safety/execution facts of a request.
+	completeness, ok := report["completeness_receipt"].(map[string]any)
+	if !ok {
+		return nil, fmt.Errorf("missing completeness receipt")
+	}
+	scope, ok := completeness["scope"].(map[string]any)
+	if !ok {
+		return nil, fmt.Errorf("missing generation scope")
+	}
+	platform, ok := scope["execution_environment"].(string)
+	if !ok || (platform != "darwin/arm64" && platform != "linux/amd64") {
+		return nil, fmt.Errorf("unsupported generation observation platform")
+	}
+	scope["execution_environment"] = "observed-generation-host"
 	return value, nil
 }
 
@@ -350,4 +366,53 @@ func compilerIdentity(raw []byte) (map[string]any, error) {
 	value["module_version"] = pin
 	module["version"] = pin
 	return value, nil
+}
+
+func differencePaths(a, b any, path string) []string {
+	if reflect.DeepEqual(a, b) {
+		return nil
+	}
+	if am, ok := a.(map[string]any); ok {
+		if bm, ok := b.(map[string]any); ok {
+			keys := map[string]bool{}
+			for k := range am {
+				keys[k] = true
+			}
+			for k := range bm {
+				keys[k] = true
+			}
+			ordered := make([]string, 0, len(keys))
+			for k := range keys {
+				ordered = append(ordered, k)
+			}
+			sort.Strings(ordered)
+			out := []string{}
+			for _, k := range ordered {
+				av, aok := am[k]
+				bv, bok := bm[k]
+				if !aok || !bok {
+					out = append(out, path+"."+k)
+				} else {
+					out = append(out, differencePaths(av, bv, path+"."+k)...)
+				}
+				if len(out) >= 8 {
+					return out[:8]
+				}
+			}
+			return out
+		}
+	}
+	if aa, ok := a.([]any); ok {
+		if bb, ok := b.([]any); ok && len(aa) == len(bb) {
+			out := []string{}
+			for i := range aa {
+				out = append(out, differencePaths(aa[i], bb[i], fmt.Sprintf("%s[%d]", path, i))...)
+				if len(out) >= 8 {
+					return out[:8]
+				}
+			}
+			return out
+		}
+	}
+	return []string{path}
 }

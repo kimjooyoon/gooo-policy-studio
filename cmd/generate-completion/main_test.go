@@ -124,3 +124,41 @@ func TestPinnedCompilerInstallationLabels(t *testing.T) {
 		}
 	}
 }
+
+func TestObservedGenerationPlatforms(t *testing.T) {
+	raw, err := os.ReadFile("../../internal/completion/generation.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var saved generation
+	if err := json.Unmarshal(raw, &saved); err != nil {
+		t.Fatal(err)
+	}
+	original := saved.Activities["CompletionStep"]
+	base, err := stableReceipt(original)
+	if err != nil {
+		t.Fatal(err)
+	}
+	value, _ := rawValue(original)
+	scope := value["report"].(map[string]any)["completeness_receipt"].(map[string]any)["scope"].(map[string]any)
+	scope["execution_environment"] = "linux/amd64"
+	changed, _ := json.Marshal(value)
+	got, err := stableReceipt(changed)
+	if err != nil || !reflect.DeepEqual(base, got) {
+		t.Fatal("observed generation host labels should match", err)
+	}
+	for _, platform := range []string{"unknown", "linux/arm64", "windows/amd64", "darwin/amd64"} {
+		scope["execution_environment"] = platform
+		changed, _ = json.Marshal(value)
+		if _, err := stableReceipt(changed); err == nil {
+			t.Fatal("unobserved generation platform accepted", platform)
+		}
+	}
+	scope["execution_environment"] = "linux/amd64"
+	scope["compiler_source_sha"] = "changed"
+	changed, _ = json.Marshal(value)
+	got, err = stableReceipt(changed)
+	if err == nil && reflect.DeepEqual(base, got) {
+		t.Fatal("other scope mutation disappeared")
+	}
+}

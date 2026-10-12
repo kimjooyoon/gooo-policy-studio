@@ -5,6 +5,11 @@
 빌드의 `v0.6.32-dev`와 설치 빌드의 `v0.0.0-20261011201109-83928fa45382` 모듈
 표시만 같은 것으로 취급합니다. 원시 표시를 기록에 보존하며, 모듈 경로·소스·
 수정 여부·의존 런타임 및 다른 정보는 그대로 비교합니다.
+생성 기록의 직접적인 `route_decision_latency_ms` 관측과, 관측된 두 생성 호스트
+`darwin/arm64`·`linux/amd64`를 나타내는 정확한
+`completeness_receipt.scope.execution_environment` 경로만 의미 비교에서 분리합니다.
+원시 기록은 보존합니다. 이 예외는 생성 기록 비교에만 적용하며, 실행 결과의
+유효기간·현재 정책·실제 native receipt 재실행에서는 적용하지 않습니다.
 
 REA의 검증 결과 집계 규칙을 Gooo의 세 활동으로 나누고, **현재 정책이 요구하는 모든 claim을 실제로 관측했는가**를 별도 판단합니다. `pass` 하나가 있다고 전체 작업이 완료되는 것은 아닙니다. `fail`, `unsupported`, `truncated`, `unknown`이 남아 있거나 필수 claim이 빠지면 `ready=false`가 됩니다.
 
