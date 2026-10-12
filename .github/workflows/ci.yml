@@ -28,6 +28,17 @@ jobs:
           mkdir -p out
           go run ./cmd/policy-check --input examples/automation-policy/impact-input.json > out/impact-report.json
           go run ./cmd/policy-check --replay --input out/impact-report.json > out/impact-replay.json
+      - name: Verify the actual machine request gate and durable retries
+        run: |
+          go build -trimpath -o bin/policy-gate ./cmd/policy-gate
+          python3 tools/verify-machine-gate.py --binary bin/policy-gate --out out/machine-gate-proof.json
+      - name: Preserve the synthetic machine gate observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: machine-gate-proof
+          path: out/machine-gate-proof.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Check JavaScript syntax
         run: node --check web/app.js
       - name: Check import and pending-operation behavior
