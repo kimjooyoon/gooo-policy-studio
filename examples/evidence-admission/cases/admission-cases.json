@@ -1,0 +1,3505 @@
+{
+  "schema": "gooo/body-composition-cases/v1",
+  "cases": [
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "unit",
+          "required_authority": "unit",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 0,
+          "now_unix": 9223372036854775806,
+          "max_age_seconds": 9223372036854775806,
+          "expires_at_unix": 9223372036854775807
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "integration",
+          "required_authority": "unit",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "protocol",
+          "required_authority": "unit",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "renderer",
+          "required_authority": "unit",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "unit",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "native-abi",
+          "required_authority": "unit",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "live-observation",
+          "required_authority": "unit",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "external",
+          "required_authority": "unit",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "unit",
+          "required_authority": "integration",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "integration",
+          "required_authority": "integration",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "protocol",
+          "required_authority": "integration",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "renderer",
+          "required_authority": "integration",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "integration",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "native-abi",
+          "required_authority": "integration",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "live-observation",
+          "required_authority": "integration",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "external",
+          "required_authority": "integration",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "unit",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "integration",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "protocol",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "renderer",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "native-abi",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "live-observation",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "external",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "unit",
+          "required_authority": "renderer",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "integration",
+          "required_authority": "renderer",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "protocol",
+          "required_authority": "renderer",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "renderer",
+          "required_authority": "renderer",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "renderer",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "native-abi",
+          "required_authority": "renderer",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "live-observation",
+          "required_authority": "renderer",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "external",
+          "required_authority": "renderer",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "unit",
+          "required_authority": "packaged-process",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "integration",
+          "required_authority": "packaged-process",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "protocol",
+          "required_authority": "packaged-process",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "renderer",
+          "required_authority": "packaged-process",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "packaged-process",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "native-abi",
+          "required_authority": "packaged-process",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "live-observation",
+          "required_authority": "packaged-process",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "external",
+          "required_authority": "packaged-process",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "unit",
+          "required_authority": "native-abi",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "integration",
+          "required_authority": "native-abi",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "protocol",
+          "required_authority": "native-abi",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "renderer",
+          "required_authority": "native-abi",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "native-abi",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "native-abi",
+          "required_authority": "native-abi",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "live-observation",
+          "required_authority": "native-abi",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "external",
+          "required_authority": "native-abi",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "unit",
+          "required_authority": "live-observation",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "integration",
+          "required_authority": "live-observation",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "protocol",
+          "required_authority": "live-observation",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "renderer",
+          "required_authority": "live-observation",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "live-observation",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "native-abi",
+          "required_authority": "live-observation",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "live-observation",
+          "required_authority": "live-observation",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "external",
+          "required_authority": "live-observation",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "unit",
+          "required_authority": "external",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "integration",
+          "required_authority": "external",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "protocol",
+          "required_authority": "external",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "renderer",
+          "required_authority": "external",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "external",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "native-abi",
+          "required_authority": "external",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "live-observation",
+          "required_authority": "external",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "external",
+          "required_authority": "external",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": true,
+          "reason": "ADMISSIBLE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "future-authority",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "future-authority",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "AUTHORITY_INSUFFICIENT",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:g123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:g123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "BINDING_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": false,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdeg",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdeg",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "BINDING_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": false,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:A123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:A123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "BINDING_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": false,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "SHA256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "SHA256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "BINDING_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": false,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "BINDING_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": false,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "BINDING_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": false,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:1123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "BINDING_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": false,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:gedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:gedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "ARTIFACT_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": false,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba987654321g",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba987654321g",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "ARTIFACT_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": false,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:Aedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:Aedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "ARTIFACT_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": false,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "SHA256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "SHA256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "ARTIFACT_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": false,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba987654321",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba987654321",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "ARTIFACT_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": false,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba98765432100",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba98765432100",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "ARTIFACT_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": false,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:1edcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "ARTIFACT_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": false,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:gbcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:gbcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "POLICY_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": false,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef012345678g",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef012345678g",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "POLICY_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": false,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:Abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:Abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "POLICY_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": false,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "SHA256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "SHA256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "POLICY_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": false,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef012345678",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef012345678",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "POLICY_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": false,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef01234567890",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef01234567890",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "POLICY_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": false,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:1bcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "POLICY_MISMATCH",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": false,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 101,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "EVIDENCE_STALE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": false,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": -9223372036854775808,
+          "now_unix": 9223372036854775807,
+          "max_age_seconds": 9223372036854775807,
+          "expires_at_unix": 9223372036854775807
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "EVIDENCE_STALE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": false,
+          "deadline_ok": false
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": -1,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "EVIDENCE_STALE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": false,
+          "deadline_ok": false
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": -1,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "EVIDENCE_STALE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": false,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": -1
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "DEADLINE_EXPIRED",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": false
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 100
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "DEADLINE_EXPIRED",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": false
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 99
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "DEADLINE_EXPIRED",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": false
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 0,
+          "now_unix": 9223372036854775807,
+          "max_age_seconds": 9223372036854775807,
+          "expires_at_unix": 9223372036854775807
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "DEADLINE_EXPIRED",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": false
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 0,
+          "now_unix": 9223372036854775806,
+          "max_age_seconds": 9223372036854775805,
+          "expires_at_unix": 9223372036854775807
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "EVIDENCE_STALE",
+          "provider_ok": true,
+          "evidence_ok": true,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": false,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "pass",
+          "confidence": "inferred",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "EVIDENCE_INCOMPLETE",
+          "provider_ok": true,
+          "evidence_ok": false,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "unknown",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "EVIDENCE_INCOMPLETE",
+          "provider_ok": true,
+          "evidence_ok": false,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "packaged-process",
+          "required_authority": "protocol",
+          "status": "fail",
+          "confidence": "observed",
+          "provider_verified": false,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "PROVIDER_UNVERIFIED",
+          "provider_ok": false,
+          "evidence_ok": false,
+          "authority_ok": true,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "actual_authority": "external",
+          "required_authority": "integration",
+          "status": "fail",
+          "confidence": "observed",
+          "provider_verified": true,
+          "observed_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "required_binding": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+          "observed_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "required_artifact": "sha256:fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+          "observed_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "required_policy": "sha256:abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789",
+          "observed_at_unix": 90,
+          "now_unix": 100,
+          "max_age_seconds": 10,
+          "expires_at_unix": 101
+        }
+      },
+      "expected": {
+        "app/evidence-admission:EvidenceAdmission": {
+          "admissible": false,
+          "reason": "EVIDENCE_INCOMPLETE",
+          "provider_ok": true,
+          "evidence_ok": false,
+          "authority_ok": false,
+          "binding_ok": true,
+          "artifact_ok": true,
+          "policy_ok": true,
+          "freshness_ok": true,
+          "deadline_ok": true
+        }
+      }
+    }
+  ]
+}

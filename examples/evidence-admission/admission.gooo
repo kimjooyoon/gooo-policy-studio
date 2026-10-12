@@ -1,0 +1,89 @@
+// Copyright (c) 2026 kimjooyoon. MIT License.
+// Original Gooo composition using REA's pinned proof-authority relation.
+// This decides a projected evidence condition, not authentication or permission.
+// All requirements and observations must be assembled by a trusted host. Public
+// fixture inputs, provider_verified=true and matching hashes do not prove origin.
+package evidenceadmission
+namespace gooo_evidence_admission
+import authority "rea/proof-authority"
+entity Integer id "gooo://std/integer"
+entity Text id "gooo://std/text"
+entity Boolean id "gooo://std/boolean"
+
+entity ObservationFacts id "gooo://evidence/admission-facts/v1" fields {
+ field actual_authority id "gooo://evidence/admission-facts/actual-authority" type string required one
+ field required_authority id "gooo://evidence/admission-facts/required-authority" type string required one
+ field status id "gooo://evidence/admission-facts/status" type string required one
+ field confidence id "gooo://evidence/admission-facts/confidence" type string required one
+ field provider_verified id "gooo://evidence/admission-facts/provider-verified" type boolean required one
+ field observed_binding id "gooo://evidence/admission-facts/observed-binding" type string required one
+ field required_binding id "gooo://evidence/admission-facts/required-binding" type string required one
+ field observed_artifact id "gooo://evidence/admission-facts/observed-artifact" type string required one
+ field required_artifact id "gooo://evidence/admission-facts/required-artifact" type string required one
+ field observed_policy id "gooo://evidence/admission-facts/observed-policy" type string required one
+ field required_policy id "gooo://evidence/admission-facts/required-policy" type string required one
+ field observed_at_unix id "gooo://evidence/admission-facts/observed-at-unix" type integer required one
+ field now_unix id "gooo://evidence/admission-facts/now-unix" type integer required one
+ field max_age_seconds id "gooo://evidence/admission-facts/max-age-seconds" type integer required one
+ field expires_at_unix id "gooo://evidence/admission-facts/expires-at-unix" type integer required one
+}
+
+entity EvidenceDecision id "gooo://evidence/admission-decision/v1" fields {
+ field admissible id "gooo://evidence/admission-decision/admissible" type boolean required one
+ field reason id "gooo://evidence/admission-decision/reason" type string required one
+ field provider_ok id "gooo://evidence/admission-decision/provider-ok" type boolean required one
+ field evidence_ok id "gooo://evidence/admission-decision/evidence-ok" type boolean required one
+ field authority_ok id "gooo://evidence/admission-decision/authority-ok" type boolean required one
+ field binding_ok id "gooo://evidence/admission-decision/binding-ok" type boolean required one
+ field artifact_ok id "gooo://evidence/admission-decision/artifact-ok" type boolean required one
+ field policy_ok id "gooo://evidence/admission-decision/policy-ok" type boolean required one
+ field freshness_ok id "gooo://evidence/admission-decision/freshness-ok" type boolean required one
+ field deadline_ok id "gooo://evidence/admission-decision/deadline-ok" type boolean required one
+}
+
+// Shape validation only: this does not compute SHA-256 or verify a signature.
+// The length check protects the fixed prefix slice and every byte index.
+activity ValidDigest(Text) -> Boolean id "gooo://evidence/canonical-sha256-text" computes `
+if int64(len(input)) != 71 { return false }
+if input[0:7] != "sha256:" { return false }
+let offset = 0
+for offset = 0; offset < 64; offset = offset + 1 {
+ let digit = int64(input[7 + offset])
+ if !((digit >= 48 && digit <= 57) || (digit >= 97 && digit <= 102)) { return false }
+}
+return true
+`
+
+activity EvidenceAdmission(ObservationFacts) -> EvidenceDecision id "gooo://evidence/admission" computes `
+let providerOK = input.provider_verified
+let evidenceOK = input.confidence == "observed" && input.status == "pass"
+let authorityOK = authority.ProofAuthoritySatisfies(input.actual_authority, input.required_authority)
+let bindingOK = ValidDigest(input.observed_binding) && ValidDigest(input.required_binding) && input.observed_binding == input.required_binding
+let artifactOK = ValidDigest(input.observed_artifact) && ValidDigest(input.required_artifact) && input.observed_artifact == input.required_artifact
+let policyOK = ValidDigest(input.observed_policy) && ValidDigest(input.required_policy) && input.observed_policy == input.required_policy
+let freshnessOK = false
+// Guard before subtraction: 0 <= observed <= now <= MaxInt64 makes the
+// difference nonnegative and representable without signed integer overflow.
+if input.observed_at_unix >= 0 && input.now_unix >= 0 && input.max_age_seconds >= 0 && input.observed_at_unix <= input.now_unix {
+ freshnessOK = input.now_unix - input.observed_at_unix <= input.max_age_seconds
+}
+let deadlineOK = input.now_unix >= 0 && input.expires_at_unix >= 0 && input.now_unix < input.expires_at_unix
+let admissible = providerOK && evidenceOK && authorityOK && bindingOK && artifactOK && policyOK && freshnessOK && deadlineOK
+let reason = "ADMISSIBLE"
+if !providerOK { reason = "PROVIDER_UNVERIFIED" } else {
+ if !evidenceOK { reason = "EVIDENCE_INCOMPLETE" } else {
+  if !authorityOK { reason = "AUTHORITY_INSUFFICIENT" } else {
+   if !bindingOK { reason = "BINDING_MISMATCH" } else {
+    if !artifactOK { reason = "ARTIFACT_MISMATCH" } else {
+     if !policyOK { reason = "POLICY_MISMATCH" } else {
+      if !freshnessOK { reason = "EVIDENCE_STALE" } else {
+       if !deadlineOK { reason = "DEADLINE_EXPIRED" }
+      }
+     }
+    }
+   }
+  }
+ }
+}
+return EvidenceDecision{admissible: admissible, reason: reason, provider_ok: providerOK, evidence_ok: evidenceOK, authority_ok: authorityOK, binding_ok: bindingOK, artifact_ok: artifactOK, policy_ok: policyOK, freshness_ok: freshnessOK, deadline_ok: deadlineOK}
+`

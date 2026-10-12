@@ -1,0 +1,17 @@
+{
+  "schema": "policy-studio/evidence-upstream/v1",
+  "repository": "morluto/rea",
+  "commit": "8fc2043eb8bcedbf34dce064f977e455438635d6",
+  "source": "src/application/ReconstructionObligationAuthority.ts",
+  "source_sha256": "c84086e441fa52140a9c67d27f5fba538e871dbfe18ec6069038fe074da67b33",
+  "license": "MIT",
+  "license_sha256": "798f9e4d18e49b30bf2f12696c8ced73dc4e1413da375a333d01281543a1ea8b",
+  "ported_function": "proofAuthoritySatisfies",
+  "valid_domain": {
+    "labels": 8,
+    "pairs": 64,
+    "true": 25,
+    "false": 39
+  },
+  "Text_extension": "Unknown actual or required labels return false; upstream invalid-required exception parity is not claimed."
+}

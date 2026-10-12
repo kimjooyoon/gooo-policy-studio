@@ -1,0 +1,5 @@
+{
+  "schema": "gooo/package-workspace-manifest/v1",
+  "entry": {"package_path": "rea/proof-authority", "activity": "ProofAuthoritySatisfies"},
+  "packages": [{"path": "rea/proof-authority", "sources": ["proof_authority.gooo"]}]
+}
