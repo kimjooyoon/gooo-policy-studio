@@ -1,8 +1,8 @@
 # Gooo Policy Studio
 
-**Gooo 정책의 변경 영향을 재현하고, API·자동화 요청의 기대 결과를 자동 검사하는 도구.**
+**Gooo 정책의 변경 영향을 재현하고, 인증된 자동화 요청을 서버 정책으로 판단하는 도구.**
 
-구매 요청과 검토자 정보를 입력하고 현재 정책/변경할 정책을 비교합니다. 승인 여부, 최초 거절 이유, 다섯 규칙의 통과 여부를 표시하고 실제 실행의 입력·결과·소스 해시를 JSON으로 보관합니다.
+같은 입력으로 현재/변경 정책을 비교하고 기대 결과를 자동 검사합니다. 별도의 기계 실행 게이트는 서버가 보관한 정책과 요청으로 로컬 상태 변경을 판단·저장하며 사람이 요청마다 승인하는 절차를 요구하지 않습니다. 기본 예제는 금액 한도·팀·활성 상태·자기 검증·제출 상태의 다섯 규칙이며, 실제 실행의 입력·결과·소스 해시를 JSON으로 확인할 수 있습니다.
 
 업무 규칙은 **Gooo**, 서버와 실행 연결은 **Go 표준 라이브러리**, 화면은 **HTML/CSS/Vanilla JavaScript**로 구현했습니다. 웹 프레임워크, UI 라이브러리, npm 의존성, CDN, 외부 폰트가 없습니다. `go.mod`에도 외부 런타임 의존성이 없습니다.
 
@@ -25,7 +25,7 @@ go build -trimpath -o bin/policy-studio ./cmd/server
 ./bin/policy-studio -addr 127.0.0.1:8080
 ```
 
-`go:embed`로 웹 파일·Gooo 소스·생성 코드·생성 근거를 실행 파일에 포함합니다. 실행 파일 하나를 다른 폴더로 옮겨도 동작합니다. [Releases](https://github.com/kimjooyoon/gooo-policy-studio/releases)에서 OS별 실행 파일을 받을 수 있습니다.
+`go:embed`로 웹 파일·Gooo 소스·생성 코드·생성 근거를 실행 파일에 포함합니다. 실행 파일 하나를 다른 폴더로 옮겨도 동작합니다. [Releases](https://github.com/kimjooyoon/gooo-policy-studio/releases)에서 역할별 실행 파일과 [시작 안내](docs/START-HERE.txt)를 확인하세요. 각 릴리스의 근거에서 실제 실행한 타깃과 교차 컴파일한 타깃을 구분합니다.
 
 ## 화면에서 할 수 있는 일
 
@@ -123,6 +123,8 @@ go build -trimpath -o bin/policy-check ./cmd/policy-check
 | JSON 타입 전달 | 메타데이터에서 생성된 Go | [`bridge_generated.go`](internal/policy/bridge_generated.go) | 사람이 읽는 HTTP 타입 ↔ 안정 ID 기반 생성 타입, 업무 조건 없음 |
 | API 입출력 타입 | 수작업 Go | [`policy.go`](internal/policy/policy.go) | HTTP 경계용 구조체, 금액 범위·문자열 입력 검증 |
 | 실행 기록·재실행 | 수작업 Go | 같은 파일 | 소스/코드/기록 SHA-256 계산, 현재 출처 비교, 입력 재실행과 결과 비교 |
+| 기계 권한·영속 상태 전이 | 수작업 Go | [`store.go`](internal/admission/store.go) | 인증·정책/요청 최신성 확인, Gooo 판단 호출, 단일 writer·원자적 저장·원래 결과 재시도 |
+| 기계 API 경계 | 수작업 Go | [`server.go`](internal/gatehttp/server.go) | Bearer 인증 경계, 정확한 명령 JSON·오류 코드, 로컬 실행 게이트 라우트 |
 | HTTP·JSON 경계 | 수작업 Go | [`server.go`](internal/httpapp/server.go), [`json.go`](internal/httpapp/json.go) | 라우팅, 크기 제한, 필수 필드·null·중복 키·타입 검증, 동일 출처 제한 |
 | 서버 수명 | 수작업 Go | [`cmd/server/main.go`](cmd/server/main.go) | 주소 설정, HTTP 시간 제한, 종료 신호·graceful shutdown |
 | 정적 파일 배포 | Go | [`web/embed.go`](web/embed.go) | HTML/CSS/JS를 바이너리에 포함하고 표준 파일 서버로 제공 |
@@ -162,7 +164,7 @@ approved    = submittedOK && reviewerOK && selfOK && teamOK && amountOK
 - 기록은 JSON을 정규 Go 구조체로 직렬화해 SHA-256을 계산합니다. ID 계산 시 ID 자신은 빈 문자열입니다. 시각은 UTC RFC3339Nano이며 화면에서 브라우저 현지 시각으로 표시합니다.
 - 재실행 시 스키마·범위·기록 해시, 현재 Gooo 소스/생성 코드 해시, 컴파일러 출처와 결과를 확인합니다. 새 기록에는 새 실행 시각과 ID가 부여됩니다.
 - 해시는 **전자서명이 아닙니다**. 파일 작성자가 입력과 해시를 함께 바꿀 수 있습니다. 따라서 이는 발급자 인증이 아닌 내용 일관성과 현재 코드에서의 재현 확인입니다.
-- 기본은 `127.0.0.1` 바인딩입니다. 다른 호스트로 노출하려면 `-addr`를 지정하며 인증·TLS·영구 감사 저장은 이 프로젝트 범위 밖입니다.
+- Studio 서버(`cmd/server`)는 기본 `127.0.0.1` 바인딩이며 `-addr`로 주소를 바꿀 수 있습니다. 이 시뮬레이터 서버에는 인증·TLS·영구 감사 저장이 없습니다. 별도 기계 게이트(`cmd/policy-gate`)는 Bearer 인증과 영속 상태를 구현하며 리터럴 loopback IP만 허용합니다. 게이트의 계약은 [별도 안내](docs/machine-gate.md)에 있습니다.
 
 ### 화면 구현 상세
 
