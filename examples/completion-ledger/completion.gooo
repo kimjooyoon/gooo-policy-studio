@@ -1,0 +1,194 @@
+// Copyright (c) 2026 morluto and kimjooyoon. MIT License: LICENSE-REA.
+// Adapted count/status semantics from REA evidenceCompletionLedger.ts at
+// 8fc2043eb8bcedbf34dce064f977e455438635d6. The exact upstream file is retained.
+// Step/Finish split its summarize fold into scalar-record activities, extend
+// count handling to checked int64 and apply the public nonempty boundary.
+// CompletionReady is an original Gooo required-claim coverage composition.
+// These activities check supplied outcomes; they do not authenticate evidence,
+// compute the upstream canonical ledger ID, grant permission or execute effects.
+package completionledger
+namespace gooo_completion_ledger
+entity Integer id "gooo://std/integer"
+entity Text id "gooo://std/text"
+entity Boolean id "gooo://std/boolean"
+
+entity CompletionCounts id "gooo://rea/completion-counts/v1" fields {
+ field total id "gooo://rea/completion-counts/total" type integer required one
+ field pass id "gooo://rea/completion-counts/pass" type integer required one
+ field fail id "gooo://rea/completion-counts/fail" type integer required one
+ field unsupported id "gooo://rea/completion-counts/unsupported" type integer required one
+ field truncated id "gooo://rea/completion-counts/truncated" type integer required one
+ field unknown id "gooo://rea/completion-counts/unknown" type integer required one
+}
+
+entity CompletionDecision id "gooo://rea/completion-decision/v1" fields {
+ field total id "gooo://rea/completion-decision/total" type integer required one
+ field pass id "gooo://rea/completion-decision/pass" type integer required one
+ field fail id "gooo://rea/completion-decision/fail" type integer required one
+ field unsupported id "gooo://rea/completion-decision/unsupported" type integer required one
+ field truncated id "gooo://rea/completion-decision/truncated" type integer required one
+ field unknown id "gooo://rea/completion-decision/unknown" type integer required one
+ field valid id "gooo://rea/completion-decision/valid" type boolean required one
+ field complete id "gooo://rea/completion-decision/complete" type boolean required one
+ field reason id "gooo://rea/completion-decision/reason" type string required one
+}
+
+entity CompletionCoverage id "gooo://automation/completion-coverage/v1" fields {
+ field required_count id "gooo://automation/completion-coverage/required-count" type integer required one
+ field matched_count id "gooo://automation/completion-coverage/matched-count" type integer required one
+ field unexpected_count id "gooo://automation/completion-coverage/unexpected-count" type integer required one
+ field observed_count id "gooo://automation/completion-coverage/observed-count" type integer required one
+}
+
+entity CompletionReadiness id "gooo://automation/completion-readiness/v1" fields {
+ field ready id "gooo://automation/completion-readiness/ready" type boolean required one
+ field reason id "gooo://automation/completion-readiness/reason" type string required one
+ field counts_ok id "gooo://automation/completion-readiness/counts-ok" type boolean required one
+ field coverage_ok id "gooo://automation/completion-readiness/coverage-ok" type boolean required one
+ field summary_ok id "gooo://automation/completion-readiness/summary-ok" type boolean required one
+ field all_pass_ok id "gooo://automation/completion-readiness/all-pass-ok" type boolean required one
+}
+
+// Validate the five-way partition before either addition. Remaining is always
+// nonnegative before subtracting an individual nonnegative category; summing
+// categories is deliberately avoided because a malicious sum could overflow.
+activity CompletionStep(CompletionCounts, Text) -> CompletionDecision id "gooo://rea/completion-step" computes `
+let counterOK = input0.total >= 0 && input0.pass >= 0 && input0.fail >= 0 && input0.unsupported >= 0 && input0.truncated >= 0 && input0.unknown >= 0
+let remaining = input0.total
+if counterOK {
+ if input0.pass > remaining { counterOK = false } else {
+  remaining = remaining - input0.pass
+ }
+}
+if counterOK {
+ if input0.fail > remaining { counterOK = false } else {
+  remaining = remaining - input0.fail
+ }
+}
+if counterOK {
+ if input0.unsupported > remaining { counterOK = false } else {
+  remaining = remaining - input0.unsupported
+ }
+}
+if counterOK {
+ if input0.truncated > remaining { counterOK = false } else {
+  remaining = remaining - input0.truncated
+ }
+}
+if counterOK {
+ if input0.unknown > remaining { counterOK = false } else {
+  remaining = remaining - input0.unknown
+ }
+}
+if counterOK && remaining != 0 { counterOK = false }
+if !counterOK { return CompletionDecision{total: 0, pass: 0, fail: 0, unsupported: 0, truncated: 0, unknown: 0, valid: false, complete: false, reason: "INVALID_COUNTS"} }
+let statusOK = input1 == "pass" || input1 == "fail" || input1 == "unsupported" || input1 == "truncated" || input1 == "unknown"
+if !statusOK { return CompletionDecision{total: 0, pass: 0, fail: 0, unsupported: 0, truncated: 0, unknown: 0, valid: false, complete: false, reason: "INVALID_STATUS"} }
+if input0.total == 9223372036854775807 { return CompletionDecision{total: 0, pass: 0, fail: 0, unsupported: 0, truncated: 0, unknown: 0, valid: false, complete: false, reason: "COUNTER_CAPACITY"} }
+// Each category is <= total after validation, so total < MaxInt64 protects
+// both the total increment and whichever one category is incremented.
+let total = input0.total + 1
+let passed = input0.pass
+let failed = input0.fail
+let unsupported = input0.unsupported
+let truncated = input0.truncated
+let unknown = input0.unknown
+if input1 == "pass" { passed = passed + 1 }
+if input1 == "fail" { failed = failed + 1 }
+if input1 == "unsupported" { unsupported = unsupported + 1 }
+if input1 == "truncated" { truncated = truncated + 1 }
+if input1 == "unknown" { unknown = unknown + 1 }
+return CompletionDecision{total: total, pass: passed, fail: failed, unsupported: unsupported, truncated: truncated, unknown: unknown, valid: true, complete: passed == total, reason: "ACCUMULATED"}
+`
+
+// REA's private summarize([]) reports complete=true for zero records. Its public
+// ledger schema requires at least one record. Finish deliberately implements
+// that public nonempty boundary with NO_RECORDS instead of accepting vacuity.
+activity CompletionFinish(CompletionCounts) -> CompletionDecision id "gooo://rea/completion-finish" computes `
+let counterOK = input.total >= 0 && input.pass >= 0 && input.fail >= 0 && input.unsupported >= 0 && input.truncated >= 0 && input.unknown >= 0
+let remaining = input.total
+if counterOK {
+ if input.pass > remaining { counterOK = false } else {
+  remaining = remaining - input.pass
+ }
+}
+if counterOK {
+ if input.fail > remaining { counterOK = false } else {
+  remaining = remaining - input.fail
+ }
+}
+if counterOK {
+ if input.unsupported > remaining { counterOK = false } else {
+  remaining = remaining - input.unsupported
+ }
+}
+if counterOK {
+ if input.truncated > remaining { counterOK = false } else {
+  remaining = remaining - input.truncated
+ }
+}
+if counterOK {
+ if input.unknown > remaining { counterOK = false } else {
+  remaining = remaining - input.unknown
+ }
+}
+if counterOK && remaining != 0 { counterOK = false }
+if !counterOK { return CompletionDecision{total: 0, pass: 0, fail: 0, unsupported: 0, truncated: 0, unknown: 0, valid: false, complete: false, reason: "INVALID_COUNTS"} }
+if input.total == 0 { return CompletionDecision{total: 0, pass: 0, fail: 0, unsupported: 0, truncated: 0, unknown: 0, valid: false, complete: false, reason: "NO_RECORDS"} }
+let complete = input.pass == input.total
+let reason = "NON_PASS_RESULTS"
+if complete { reason = "ALL_PASS" }
+return CompletionDecision{total: input.total, pass: input.pass, fail: input.fail, unsupported: input.unsupported, truncated: input.truncated, unknown: input.unknown, valid: true, complete: complete, reason: reason}
+`
+
+// The host derives coverage from actual unique claim IDs and operator-selected
+// required IDs. A caller-supplied count cannot establish claim identity. All
+// four flags stay independently observable even when an earlier one fails.
+activity CompletionReady(CompletionDecision, CompletionCoverage) -> CompletionReadiness id "gooo://automation/completion-ready" computes `
+let counterOK = input0.total >= 0 && input0.pass >= 0 && input0.fail >= 0 && input0.unsupported >= 0 && input0.truncated >= 0 && input0.unknown >= 0
+let remaining = input0.total
+if counterOK {
+ if input0.pass > remaining { counterOK = false } else {
+  remaining = remaining - input0.pass
+ }
+}
+if counterOK {
+ if input0.fail > remaining { counterOK = false } else {
+  remaining = remaining - input0.fail
+ }
+}
+if counterOK {
+ if input0.unsupported > remaining { counterOK = false } else {
+  remaining = remaining - input0.unsupported
+ }
+}
+if counterOK {
+ if input0.truncated > remaining { counterOK = false } else {
+  remaining = remaining - input0.truncated
+ }
+}
+if counterOK {
+ if input0.unknown > remaining { counterOK = false } else {
+  remaining = remaining - input0.unknown
+ }
+}
+if counterOK && remaining != 0 { counterOK = false }
+let coverageFactsOK = input1.required_count > 0 && input1.matched_count >= 0 && input1.unexpected_count >= 0 && input1.observed_count >= 0 && input1.matched_count <= input1.required_count && input1.observed_count >= input1.matched_count
+if coverageFactsOK {
+ coverageFactsOK = input1.observed_count - input1.matched_count == input1.unexpected_count
+}
+let countsOK = counterOK && coverageFactsOK
+let coverageOK = coverageFactsOK && input1.matched_count == input1.required_count && input1.unexpected_count == 0
+let summaryOK = input0.valid && input0.total > 0 && input0.total == input1.observed_count && input0.complete == (input0.pass == input0.total)
+let allPassOK = counterOK && input0.total > 0 && input0.pass == input0.total && input0.complete
+let ready = countsOK && coverageOK && summaryOK && allPassOK
+let reason = "READY"
+if !countsOK { reason = "INVALID_COUNTS" } else {
+ if !coverageOK { reason = "INCOMPLETE_CLAIM_COVERAGE" } else {
+  if !summaryOK { reason = "INVALID_COMPLETION_SUMMARY" } else {
+   if !allPassOK { reason = "NON_PASS_RESULTS" }
+  }
+ }
+}
+return CompletionReadiness{ready: ready, reason: reason, counts_ok: countsOK, coverage_ok: coverageOK, summary_ok: summaryOK, all_pass_ok: allPassOK}
+`

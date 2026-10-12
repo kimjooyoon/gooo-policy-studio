@@ -1,0 +1,6 @@
+{
+  "schema": "policy-studio/completion-policy/v1",
+  "policy_id": "api-release",
+  "revision": 1,
+  "required_claims": ["api.authentication", "api.schema", "automation.replay"]
+}

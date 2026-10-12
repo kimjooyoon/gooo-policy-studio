@@ -1,0 +1,158 @@
+{
+  "schema": "gooo/completion-ledger-contract/v1",
+  "status": "DECLARED_IMPLEMENTATION_CONTRACT_NOT_EXECUTION_EVIDENCE",
+  "compiler": {
+    "repository": "https://github.com/kimjooyoon/meta-ontology-go",
+    "revision": "83928fa4538245abe33b08549da47f8cbdc50ed2",
+    "version": "0.6.32-dev",
+    "go_toolchain": "go1.27.2"
+  },
+  "package_path": "gooo/completion-ledger",
+  "source_files": [
+    "completion.gooo"
+  ],
+  "entities": {
+    "CompletionCounts": {
+      "total": "Integer",
+      "pass": "Integer",
+      "fail": "Integer",
+      "unsupported": "Integer",
+      "truncated": "Integer",
+      "unknown": "Integer"
+    },
+    "CompletionDecision": {
+      "total": "Integer",
+      "pass": "Integer",
+      "fail": "Integer",
+      "unsupported": "Integer",
+      "truncated": "Integer",
+      "unknown": "Integer",
+      "valid": "Boolean",
+      "complete": "Boolean",
+      "reason": "Text"
+    },
+    "CompletionCoverage": {
+      "required_count": "Integer",
+      "matched_count": "Integer",
+      "unexpected_count": "Integer",
+      "observed_count": "Integer"
+    },
+    "CompletionReadiness": {
+      "ready": "Boolean",
+      "reason": "Text",
+      "counts_ok": "Boolean",
+      "coverage_ok": "Boolean",
+      "summary_ok": "Boolean",
+      "all_pass_ok": "Boolean"
+    }
+  },
+  "activities": {
+    "CompletionStep": {
+      "inputs": [
+        "CompletionCounts",
+        "Text"
+      ],
+      "output": "CompletionDecision",
+      "activity_id": "gooo://rea/completion-step",
+      "rules": "Counts nonnegative and sum exactly total: validate by guarded remaining subtraction to avoid overflow. Priority invalid counts -> INVALID_COUNTS, invalid exact status -> INVALID_STATUS, total==INT64_MAX -> COUNTER_CAPACITY. Invalid output all six counts0, valid=false,complete=false. Otherwise increase total and matching counter by1 only after guard; valid=true, complete=pass==total,reason=ACCUMULATED."
+    },
+    "CompletionFinish": {
+      "inputs": [
+        "CompletionCounts"
+      ],
+      "output": "CompletionDecision",
+      "activity_id": "gooo://rea/completion-finish",
+      "rules": "Same count validation; invalid counts -> zeroed invalid decision INVALID_COUNTS. Valid empty counts -> zeroed invalid decision NO_RECORDS (public nonempty boundary extension, not private summarize([]) equivalence). Valid nonempty preserves all counts,valid=true,complete=(pass==total),reason=ALL_PASS if complete else NON_PASS_RESULTS."
+    },
+    "CompletionReady": {
+      "inputs": [
+        "CompletionDecision",
+        "CompletionCoverage"
+      ],
+      "output": "CompletionReadiness",
+      "activity_id": "gooo://automation/completion-ready",
+      "rules": "Summary counters validated overflow safely. Coverage facts: required>0, matched/unexpected/observed>=0,matched<=required,observed>=matched and observed-matched==unexpected. counts_ok=both counter and coverage-fact invariants. coverage_ok=coverage facts valid &&matched==required&&unexpected==0. summary_ok=summary.valid&&total>0&&total==observed&&summary.complete==(pass==total). all_pass_ok=summary counters valid&&total>0&&pass==total&&summary.complete. ready=all four flags. All flags computed independently. Reason priority !counts_ok INVALID_COUNTS -> !coverage_ok INCOMPLETE_CLAIM_COVERAGE -> !summary_ok INVALID_COMPLETION_SUMMARY -> !all_pass_ok NON_PASS_RESULTS -> READY."
+    }
+  },
+  "manifests": {
+    "step.workspace.json": "CompletionStep",
+    "finish.workspace.json": "CompletionFinish",
+    "ready.workspace.json": "CompletionReady"
+  },
+  "core_scope": "Generic consistent int64 counters and one status per step. API is not restricted to four slots; 0..4 counters/sequences are only finite test domains. Host CLI supports0..256 observed records and1..256 required claims with strict size bounds.",
+  "host": {
+    "package": "internal/completion",
+    "command": "cmd/completion-check",
+    "generator": "cmd/generate-completion",
+    "wrappers": {
+      "stepNative": "(Counts,string)(Decision,error)",
+      "finishNative": "(Counts)(Decision,error)",
+      "readyNative": "(Decision,Coverage)(Readiness,error)"
+    },
+    "policy_schema": "policy-studio/completion-policy/v1",
+    "policy_fields": {
+      "schema": "string",
+      "policy_id": "ASCII ID1..80",
+      "revision": "positive int64",
+      "required_claims": "1..256 unique ASCII IDs1..80"
+    },
+    "input_schema": "policy-studio/completion-input/v1",
+    "input_fields": {
+      "schema": "string",
+      "request_id": "ASCII ID1..80",
+      "records": "0..256 records"
+    },
+    "record_fields": {
+      "claim_id": "ASCII ID1..80",
+      "status": "one of pass/fail/unsupported/truncated/unknown",
+      "evidence_ids": "1..256 unique ev_ followed by64lowercasehex; same ID across different claims allowed"
+    },
+    "argv": "--policy required operator-selected local policy file, --input file|- defaultstdin, --replay optional; policy never accepted in regular input payload",
+    "limits": {
+      "policy_bytes": 65536,
+      "input_bytes": 1048576,
+      "report_replay_bytes": 4194304
+    },
+    "normalization": "Preserve complete original input/policy and record order; fold every observed record through compiled Gooo; no host implementation of status counts or completion predicates. Compute matched/unexpected/missing claim sets against separately loaded policy, sorted missing/unexpected output. Duplicate claim/evidenceIDs and invalid labels are inputerrors; missing/unexpected claims produce complete not-ready report. Empty observed list produces not-ready NO_RECORDS. Do not continue after invalid native decision.",
+    "report_fields": {
+      "schema": "policy-studio/completion-report/v1",
+      "policy": "complete loaded Policy",
+      "input": "complete Input",
+      "steps": "ordered [{index,counts_before,status,decision}]",
+      "summary": "CompletionDecision",
+      "coverage": "CompletionCoverage",
+      "missing_claims": "sorted []string",
+      "unexpected_claims": "sorted []string",
+      "readiness": "CompletionReadiness",
+      "bindings": "actual raw policyfile/source/generated/bridge/generation digests"
+    },
+    "replay": "Load current policy independently again, verify it/current bytes against report; recompute all decisions/steps/coverage/bindings and require exact typed complete report equality; reject any change.",
+    "exit_codes": {
+      "0": "complete ready report",
+      "1": "complete well-formed not-ready report",
+      "2": "invalid input/policy/replay or runtime/output error"
+    },
+    "scope": "Unsigned completion check of supplied verifier outcomes, not evidence authentication, RFC8785 full Rea ledger compatibility, target tool execution or permission grant. Machine workflow owns policyfile/argv and establishes authenticated evidence facts before feeding records."
+  },
+  "independent_fixtures": {
+    "step": "All six nonnegative consistent counters with total0..4 (126states) x5exactstatuses=630 valid cases, plus INT64 boundaries/inconsistent/negative/count-overflow and invalid exact-name statuses. Expectations authored without candidate/verifier output.",
+    "finish": "All126consistent total0..4states including explicit NO_RECORDS atzero; int64max synthetic and negative/sumunder/over boundary extensions.",
+    "ready": "Independent cases spanning all flags and first failure priorities, exact full six-field result; use declared rules only.",
+    "host": "All780 ordered status sequences length1..4 are finite TEST domain, not an API limit. Literal policy/input and complete semantic expected steps/summary/coverage/missing/unexpected/readiness; also empty/missing/unexpected records and256records, malformed structural/replay cases handled separate. Do not read candidate/output."
+  },
+  "upstream": {
+    "metadata": "upstream.json",
+    "exact_source": "upstream/evidenceCompletionLedger.ts",
+    "license": "LICENSE-REA",
+    "revision": "8fc2043eb8bcedbf34dce064f977e455438635d6"
+  },
+  "scope": "Supplied verifier status counts and required-claim coverage. Host owns current policy, input identity, evidence authentication and downstream dispatch. No per-call human approval condition is required by this relation.",
+  "not_claimed": [
+    "Full REA runtime, full completion ledger schema or RFC8785 ledger-ID compatibility",
+    "Evidence ID authentication or provider/principal authentication",
+    "Permission grant, target tool execution, sandboxing or exactly-once external effects",
+    "All-input validation from finite fixtures",
+    "Customer adoption, trials, revenue or upstream endorsement"
+  ],
+  "actual_execution_status": "Inspect generated observations, actual CLI reports and CI. This declaration is not runtime evidence."
+}

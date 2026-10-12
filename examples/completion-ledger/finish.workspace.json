@@ -1,0 +1,15 @@
+{
+  "schema": "gooo/package-workspace-manifest/v1",
+  "entry": {
+    "package_path": "gooo/completion-ledger",
+    "activity": "CompletionFinish"
+  },
+  "packages": [
+    {
+      "path": "gooo/completion-ledger",
+      "sources": [
+        "completion.gooo"
+      ]
+    }
+  ]
+}
