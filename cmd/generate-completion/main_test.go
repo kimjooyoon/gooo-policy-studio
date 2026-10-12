@@ -78,3 +78,49 @@ func TestCompleteCompilerIdentity(t *testing.T) {
 		}
 	}
 }
+
+func TestPinnedCompilerInstallationLabels(t *testing.T) {
+	raw, err := os.ReadFile("../../internal/completion/generation.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var saved generation
+	if err := json.Unmarshal(raw, &saved); err != nil {
+		t.Fatal(err)
+	}
+	base, err := compilerIdentity(saved.Compiler)
+	if err != nil {
+		t.Fatal(err)
+	}
+	tagged, _ := rawValue(saved.Compiler)
+	tagged["module_version"] = "v0.6.32-dev"
+	tagged["module"].(map[string]any)["version"] = "v0.6.32-dev"
+	changed, _ := json.Marshal(tagged)
+	got, err := compilerIdentity(changed)
+	if err != nil || !reflect.DeepEqual(base, got) {
+		t.Fatal("exact known installation labels should match", err)
+	}
+	for _, label := range []string{"(devel)", "v0.6.33-dev", "v0.0.0-20261011201109-83928fa45383"} {
+		tagged["module_version"] = label
+		tagged["module"].(map[string]any)["version"] = label
+		changed, _ = json.Marshal(tagged)
+		if _, err := compilerIdentity(changed); err == nil {
+			t.Fatal("unrecognized module label accepted", label)
+		}
+	}
+	tagged, _ = rawValue(saved.Compiler)
+	tagged["module"].(map[string]any)["path"] = "changed"
+	changed, _ = json.Marshal(tagged)
+	if _, err := compilerIdentity(changed); err == nil {
+		t.Fatal("module path mutation accepted")
+	}
+	for _, field := range []string{"decision_runtime", "module"} {
+		value, _ := rawValue(saved.Compiler)
+		value[field].(map[string]any)["replaced"] = true
+		changed, _ = json.Marshal(value)
+		got, err := compilerIdentity(changed)
+		if err == nil && reflect.DeepEqual(base, got) {
+			t.Fatal("nested identity mutation accepted")
+		}
+	}
+}

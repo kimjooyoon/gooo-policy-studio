@@ -239,11 +239,11 @@ func transport(in,out any) error {b,err:=json.Marshal(in);if err!=nil{return err
 		if saved.Schema != evidence.Schema || saved.SourceDigest != evidence.SourceDigest || saved.GeneratedDigest != evidence.GeneratedDigest || saved.BridgeDigest != evidence.BridgeDigest || savedID != id || len(saved.Activities) != 3 {
 			return fmt.Errorf("stale generation bindings")
 		}
-		oldIdentity, err := rawValue(saved.Compiler)
+		oldIdentity, err := compilerIdentity(saved.Compiler)
 		if err != nil {
 			return err
 		}
-		freshIdentity, err := rawValue(version)
+		freshIdentity, err := compilerIdentity(version)
 		if err != nil {
 			return err
 		}
@@ -325,5 +325,29 @@ func rawValue(raw []byte) (map[string]any, error) {
 	if err := decoder.Decode(&value); err != nil {
 		return nil, err
 	}
+	return value, nil
+}
+
+// Go reports the pinned source under its release tag when built in the clean
+// checkout, and under its exact pseudo-version when installed from that source.
+// Preserve both raw identities in provenance. Only these two observed labels
+// are equivalent for this fixed pin; every other identity field stays exact.
+func compilerIdentity(raw []byte) (map[string]any, error) {
+	value, err := rawValue(raw)
+	if err != nil {
+		return nil, err
+	}
+	const pin = "83928fa4538245abe33b08549da47f8cbdc50ed2"
+	const installed = "v0.0.0-20261011201109-83928fa45382"
+	module, ok := value["module"].(map[string]any)
+	if !ok {
+		return nil, fmt.Errorf("missing compiler module")
+	}
+	label, ok := value["module_version"].(string)
+	if !ok || value["compiler_source_sha"] != pin || module["path"] != "github.com/kimjooyoon/meta-ontology-go" || module["version"] != label || (label != "v0.6.32-dev" && label != installed) {
+		return nil, fmt.Errorf("unrecognized compiler module identity for pinned source")
+	}
+	value["module_version"] = pin
+	module["version"] = pin
 	return value, nil
 }
