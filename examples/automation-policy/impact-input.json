@@ -1,0 +1,138 @@
+{
+  "schema": "policy-studio/impact-input/v1",
+  "label": "Synthetic API automation budget-policy regression",
+  "before": {
+    "limit": 500000,
+    "same_team": true,
+    "active_reviewer": true,
+    "prevent_self": true
+  },
+  "after": {
+    "limit": 1000000,
+    "same_team": true,
+    "active_reviewer": true,
+    "prevent_self": true
+  },
+  "cases": [
+    {
+      "id": "api-export-001",
+      "request": {
+        "key": "api-export-001",
+        "requester": "svc-export",
+        "team": "platform",
+        "amount": 750000,
+        "submitted": true
+      },
+      "reviewer": {
+        "key": "policy-engine",
+        "team": "platform",
+        "active": true
+      },
+      "expected_after": {
+        "approved": true,
+        "reason": "APPROVED",
+        "amount_ok": true,
+        "team_ok": true,
+        "reviewer_ok": true,
+        "self_ok": true,
+        "submitted_ok": true
+      }
+    },
+    {
+      "id": "automation-sync-002",
+      "request": {
+        "key": "automation-sync-002",
+        "requester": "svc-export",
+        "team": "platform",
+        "amount": 1100000,
+        "submitted": true
+      },
+      "reviewer": {
+        "key": "policy-engine",
+        "team": "platform",
+        "active": true
+      },
+      "expected_after": {
+        "approved": false,
+        "reason": "OVER_LIMIT",
+        "amount_ok": false,
+        "team_ok": true,
+        "reviewer_ok": true,
+        "self_ok": true,
+        "submitted_ok": true
+      }
+    },
+    {
+      "id": "api-archive-003",
+      "request": {
+        "key": "api-archive-003",
+        "requester": "svc-export",
+        "team": "platform",
+        "amount": 100000,
+        "submitted": true
+      },
+      "reviewer": {
+        "key": "policy-engine",
+        "team": "operations",
+        "active": true
+      },
+      "expected_after": {
+        "approved": false,
+        "reason": "TEAM_MISMATCH",
+        "amount_ok": true,
+        "team_ok": false,
+        "reviewer_ok": true,
+        "self_ok": true,
+        "submitted_ok": true
+      }
+    },
+    {
+      "id": "automation-draft-004",
+      "request": {
+        "key": "automation-draft-004",
+        "requester": "svc-export",
+        "team": "platform",
+        "amount": 100000,
+        "submitted": false
+      },
+      "reviewer": {
+        "key": "policy-engine",
+        "team": "platform",
+        "active": true
+      },
+      "expected_after": {
+        "approved": false,
+        "reason": "NOT_SUBMITTED",
+        "amount_ok": true,
+        "team_ok": true,
+        "reviewer_ok": true,
+        "self_ok": true,
+        "submitted_ok": false
+      }
+    },
+    {
+      "id": "api-self-review-005",
+      "request": {
+        "key": "api-self-review-005",
+        "requester": "svc-export",
+        "team": "platform",
+        "amount": 100000,
+        "submitted": true
+      },
+      "reviewer": {
+        "key": "svc-export",
+        "team": "platform",
+        "active": true
+      },
+      "expected_after": {
+        "approved": false,
+        "reason": "SELF_APPROVAL",
+        "amount_ok": true,
+        "team_ok": true,
+        "reviewer_ok": true,
+        "self_ok": false,
+        "submitted_ok": true
+      }
+    }
+  ]
+}

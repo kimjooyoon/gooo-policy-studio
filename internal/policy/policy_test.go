@@ -78,7 +78,27 @@ func TestDecisionTruthTable(t *testing.T) {
 				t.Fatal(err)
 			}
 			want := submitted && (!i.Before.ActiveReviewer || active) && (!i.Before.PreventSelf || differentPerson) && (!i.Before.SameTeam || sameTeam) && withinLimit
-			if r.Result.Before.Approved != want || r.Result.Change.Changed {
+			wantDecision := Decision{
+				Approved: want, Reason: "APPROVED", AmountOK: withinLimit,
+				TeamOK: !i.Before.SameTeam || sameTeam, ReviewerOK: !i.Before.ActiveReviewer || active,
+				SelfOK: !i.Before.PreventSelf || differentPerson, SubmittedOK: submitted,
+			}
+			// The first failed observation supplies the explanation, independently
+			// of the generated activity's nested conditional structure.
+			for _, condition := range []struct {
+				pass   bool
+				reason string
+			}{
+				{submitted, "NOT_SUBMITTED"}, {wantDecision.ReviewerOK, "REVIEWER_INACTIVE"},
+				{wantDecision.SelfOK, "SELF_APPROVAL"}, {wantDecision.TeamOK, "TEAM_MISMATCH"},
+				{withinLimit, "OVER_LIMIT"},
+			} {
+				if !condition.pass {
+					wantDecision.Reason = condition.reason
+					break
+				}
+			}
+			if r.Result.Before != wantDecision || r.Result.After != wantDecision || r.Result.Change != (Change{Direction: "UNCHANGED"}) {
 				t.Fatalf("mask %d switches %d: %+v", mask, switches, r.Result)
 			}
 		}

@@ -18,6 +18,8 @@
       <nav aria-label="주 메뉴">
         <button class="nav-item active" data-view="studio">
           <span>◈</span> 정책 시뮬레이터</button
+        ><button class="nav-item" data-view="impact">
+          <span>⇄</span> API·자동화 검증</button
         ><button class="nav-item" data-view="history">
           <span>↺</span> 실행 기록
           <span class="count" id="history-count">0</span></button
@@ -262,6 +264,89 @@
             Built with Gooo. Served by Go.
             <span>실제 결재·송금과 연결되지 않은 시뮬레이터입니다.</span>
           </footer>
+        </section>
+        <section id="impact-view" class="view" hidden>
+          <div class="page-heading">
+            <div class="eyebrow">VERIFY AUTOMATICALLY BEFORE YOU CHANGE</div>
+            <h1>API·자동화 자동 정책 검증</h1>
+            <p>
+              API·자동화 실행 요청과 독립적으로 작성한 기대 결과를 가져오세요.
+              Gooo 정책을 실제로 실행해 기대 결과와 대조하고, 두 매개변수 설정의 영향을 비교합니다.
+            </p>
+          </div>
+          <div class="intro-note">
+            <span class="note-mark">i</span>
+            <div>
+              <strong>매 실행마다 사람이 승인할 필요 없이, 가져온 사례의 기대 결과를 자동 대조합니다.</strong>
+              <span>검증 주체는 서비스·다른 주체일 수 있습니다. 기존 Gooo 조건은 제출·팀 일치·주체 활성·본인 분리·실행 예산입니다.
+                실제 API 접근 제어·인증·자동화 실행은 연결되지 않습니다. 유한한 사례의 검증이며, 전체 입력이나 외부 효과의 안전성 증명이 아닙니다.</span>
+            </div>
+          </div>
+          <section class="card impact-input-card">
+            <div class="card-heading">
+              <div><span class="step">01</span><h2>사례와 비교 설정</h2></div>
+              <button class="text-button" data-view="studio">정책 매개변수 수정 ↗</button>
+            </div>
+            <form id="impact-form" class="impact-form">
+              <div class="field">
+                <label for="impact-label">검증 이름</label>
+                <input id="impact-label" value="API·자동화 실행 예산 변경 검증" maxlength="120" required />
+              </div>
+              <div id="impact-policy-preview" class="impact-policy-preview"></div>
+              <div class="impact-actions">
+                <div class="field impact-file-field">
+                  <label for="impact-corpus-file">사례 JSON 가져오기 · UTF-8, 256KiB 이하, 1~256개</label>
+                  <input id="impact-corpus-file" type="file" accept="application/json,.json" />
+                </div>
+                <button id="impact-sample" class="button" type="button">합성 사례 양식 ↓</button>
+              </div>
+              <p class="section-description impact-privacy">
+                연결된 서버가 파일의 모든 사례를 검증하고 실행합니다. 기본 설정은 로컬 서버입니다.
+                일괄 사례와 보고서는 자동 저장하지 않습니다. 보고서 다운로드에는 모든 입력과 결과가 포함됩니다.
+              </p>
+              <p id="impact-corpus-status" class="impact-status" role="status" aria-live="polite">아직 가져온 사례가 없습니다.</p>
+              <div id="impact-corpus-preview" class="table-scroll" hidden></div>
+              <div class="policy-footer">
+                <span>정책 시뮬레이터에 설정된 현재·변경 매개변수를 함께 사용합니다.</span>
+                <button id="impact-run" class="button primary" type="submit" disabled>전체 사례 비교 →</button>
+              </div>
+            </form>
+          </section>
+          <section class="card impact-report-card">
+            <div class="card-heading">
+              <div><span class="step">02</span><h2>변경 영향과 자동 검증</h2></div>
+              <button id="impact-download" class="button small" disabled>보고서 JSON ↓</button>
+            </div>
+            <div class="impact-report-toolbar">
+              <div class="field">
+                <label for="impact-filter">표시할 사례</label>
+                <select id="impact-filter" disabled>
+                  <option value="all">모든 사례</option>
+                  <option value="failed">기대 결과 불일치</option>
+                  <option value="newly_approved">새로 승인 가능</option>
+                  <option value="newly_denied">새로 거절</option>
+                  <option value="reason_only">승인 상태 동일 · 이유 변경</option>
+                  <option value="rule_changed">규칙별 관측 변경</option>
+                  <option value="unchanged">승인 상태와 이유 유지</option>
+                </select>
+              </div>
+              <div class="field impact-file-field">
+                <label for="impact-report-file">보고서 가져오기 &amp; 재실행 · UTF-8, 4MiB 이하</label>
+                <input id="impact-report-file" type="file" accept="application/json,.json" />
+              </div>
+            </div>
+            <p id="impact-status" class="impact-status" role="status" aria-live="polite">사례를 가져와 전체 비교를 실행하세요.</p>
+            <div id="impact-summary"></div>
+            <div id="impact-rows" class="table-scroll"></div>
+            <div id="impact-evidence" class="receipt-foot impact-evidence"></div>
+          </section>
+          <section id="impact-detail" class="card impact-detail-card" tabindex="-1" aria-labelledby="impact-detail-title" hidden>
+            <div class="card-heading">
+              <div><span class="step">03</span><h2 id="impact-detail-title">사례 상세</h2></div>
+              <button id="impact-close-detail" class="button small">상세 닫기</button>
+            </div>
+            <div id="impact-detail-content" class="result-content"></div>
+          </section>
         </section>
         <section id="history-view" class="view" hidden>
           <div class="page-heading">

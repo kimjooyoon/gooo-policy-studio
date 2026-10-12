@@ -1,5 +1,9 @@
 name: Verify
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+    tags: ['**']
+  pull_request:
 permissions:
   contents: read
 jobs:
@@ -19,8 +23,15 @@ jobs:
         run: go test -race ./...
       - name: Build standalone executable
         run: go build -trimpath -o bin/policy-studio ./cmd/server
+      - name: Run and replay headless policy requirements
+        run: |
+          mkdir -p out
+          go run ./cmd/policy-check --input examples/automation-policy/impact-input.json > out/impact-report.json
+          go run ./cmd/policy-check --replay --input out/impact-report.json > out/impact-replay.json
       - name: Check JavaScript syntax
         run: node --check web/app.js
+      - name: Check import and pending-operation behavior
+        run: node --test tools/policy-impact-app.test.cjs
       - name: Build clean pinned Gooo compiler
         run: |
           git clone --quiet --filter=blob:none https://github.com/kimjooyoon/meta-ontology-go.git "$RUNNER_TEMP/gooo-compiler"
