@@ -1,0 +1,35 @@
+{
+  "schema": "policy-studio/admission-bootstrap/v1",
+  "policy": {
+    "limit": 1000000,
+    "same_team": true,
+    "active_reviewer": true,
+    "prevent_self": true
+  },
+  "principals": [
+    {
+      "key": "svc-policy-engine",
+      "team": "platform",
+      "active": true,
+      "enabled": true,
+      "can_execute": true,
+      "token_sha256": ""
+    }
+  ],
+  "requests": [
+    {
+      "key": "req-export-1",
+      "requester": "svc-export",
+      "team": "platform",
+      "amount": 750000,
+      "submitted": true
+    },
+    {
+      "key": "req-export-over-limit",
+      "requester": "svc-export",
+      "team": "platform",
+      "amount": 1100000,
+      "submitted": true
+    }
+  ]
+}
