@@ -3,31 +3,28 @@ on:
   push:
     tags: ['v*']
 permissions:
-  contents: write
+  contents: read
 jobs:
+  verify:
+    uses: ./.github/workflows/ci.yml
+    with:
+      release_version: ${{ github.ref_name }}
   release:
+    needs: verify
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
-        with:
-          go-version: '1.27.2'
-          cache: false
-      - run: go test -race ./...
-      - name: Build portable binaries
+      - name: Retrieve only the assets checked in this workflow run
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          mkdir dist
-          for target in linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64; do
-            target_os="${target%/*}"
-            target_arch="${target#*/}"
-            suffix=""
-            if [ "$target_os" = windows ]; then suffix=".exe"; fi
-            CGO_ENABLED=0 GOOS="$target_os" GOARCH="$target_arch" go build -trimpath -o "dist/policy-studio-${target_os}-${target_arch}${suffix}" ./cmd/server
-          done
-          cp evidence/generation.json dist/generation.json
-          cd dist
-          sha256sum * > SHA256SUMS
+          gh run download "$GITHUB_RUN_ID" --repo "$GITHUB_REPOSITORY" --name portable-release-assets --dir dist
+      - name: Check exact downloaded asset bytes and source bindings
+        run: python3 -I tools/verify-release-assets.py --dist dist --version "$GITHUB_REF_NAME" --commit "$GITHUB_SHA" --source .
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist/* --verify-tag --title "Gooo Policy Studio $GITHUB_REF_NAME" --notes-file docs/release-notes.md
+        run: gh release create "$GITHUB_REF_NAME" dist/* --verify-tag --prerelease --title "Gooo Policy Studio $GITHUB_REF_NAME" --notes-file docs/release-notes.md

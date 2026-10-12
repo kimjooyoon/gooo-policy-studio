@@ -1,0 +1,60 @@
+Gooo Policy Studio @VERSION@
+Source commit: @COMMIT@
+
+Download the binary matching your operating system and CPU, START-HERE.txt,
+provenance.json, SHA256SUMS, LICENSE, Go-LICENSE and the example JSON files. Running the binaries needs
+no Go/Gooo installation or model service. Source builds require Go 1.27.2.
+
+Three programs:
+  policy-studio-{os}-{arch}[.exe]  Policy comparison UI at localhost:8080.
+  policy-check-{os}-{arch}[.exe]   Finite expected-decision checks and report replay.
+  policy-gate-{os}-{arch}          Authenticated local machine request state gate.
+
+Studio and policy-check: linux/amd64, linux/arm64, darwin/amd64, darwin/arm64,
+windows/amd64. Gate: those Linux/macOS targets only; Windows locking is unsupported.
+The release workflow executes the packaged Linux/amd64 gate and policy-check.
+Other target builds are cross-compilation, not runtime verification. provenance.json
+records this boundary. Compare downloaded bytes with their SHA256SUMS entries using
+sha256sum (Linux) or shasum -a 256 (macOS). Unsigned hashes bind asset bytes; they do
+not authenticate a publisher by themselves.
+
+These commands assume macOS Apple Silicon and a POSIX shell. Select the matching
+filenames for another target. Unix programs need execute permission:
+  chmod +x policy-studio-darwin-arm64 policy-check-darwin-arm64 policy-gate-darwin-arm64
+
+1. Compare policies in your browser:
+  ./policy-studio-darwin-arm64 -addr 127.0.0.1:8080
+Open http://127.0.0.1:8080. Import impact-input.json in the API/automation screen.
+Changing an input invalidates the previous visible result. Reports include inputs
+and expectations.
+
+2. Check the five synthetic automation cases and replay their complete report:
+  ./policy-check-darwin-arm64 --input impact-input.json > impact-report.json
+  ./policy-check-darwin-arm64 --replay --input impact-report.json > impact-replay.json
+Exit 0: finite expectations match. Exit 1: complete mismatch report. Exit 2: input,
+execution or output error. A FAIL report can correctly replay as FAIL. Downloaded
+policy-check-report-linux-amd64.json and its replay are packaged Linux observations.
+
+3. Initialize a fresh local machine gate state:
+  mkdir -m 700 gooo-local-demo
+  ./policy-gate-darwin-arm64 -init bootstrap.json -state gooo-local-demo/state -token-file gooo-local-demo/private.token
+  ./policy-gate-darwin-arm64 -state gooo-local-demo/state -addr 127.0.0.1:8090
+Use fresh paths. Existing state/credentials are not overwritten. The raw token is
+saved privately outside the state directory and is not printed. Keep it out of
+URLs, logs, reports and repositories. Machine clients use a Bearer header with
+GET /api/state and POST /api/admit. The command binds only to a literal loopback IP.
+Read the command fields, retry and recovery contract first:
+https://github.com/kimjooyoon/gooo-policy-studio/blob/@COMMIT@/docs/machine-gate.md
+
+The server owns the loaded policy, principal and request data. Gooo determines
+whether a pending request may become approved. Same principal/key/command retries
+return the original durable outcome. Stale versions/revisions and changed intent
+are rejected. Uncertain storage results block further work until validated recovery.
+
+The effect is one trusted local request-state transition, fixed loaded settings and
+bounded durable history. No external API call or payment occurs. This preview does
+not establish remote exactly-once execution, all-input safety, crash/power-loss
+recovery or customer operation. machine-gate-proof-linux-amd64.json records 12
+actual synthetic API scenarios, a graceful process restart and second-writer
+rejection without raw credentials. Each archived release retains its own compiler
+pin and evidence scope; inspect provenance.json and generation.json.

@@ -2,8 +2,15 @@ name: Verify
 on:
   push:
     branches: [main]
-    tags: ['**']
+    tags: ['**', '!v*']
   pull_request:
+  workflow_call:
+    inputs:
+      release_version:
+        description: Version recorded in the exact portable asset provenance
+        required: false
+        default: ''
+        type: string
 permissions:
   contents: read
 jobs:
@@ -15,6 +22,8 @@ jobs:
         with:
           go-version: '1.27.2'
           cache: false
+      - name: Check release asset helpers and failure cases
+        run: python3 -I tools/package-release.py --self-test
       - name: Format
         run: test -z "$(gofmt -l cmd internal web/embed.go)"
       - name: Vet
@@ -50,3 +59,15 @@ jobs:
           go -C "$RUNNER_TEMP/gooo-compiler" build -o "$RUNNER_TEMP/gooo" ./cmd/gooo
       - name: Verify source and generated projection
         run: go run ./cmd/generate --compiler "$RUNNER_TEMP/gooo" --check
+      - name: Build and observe the exact portable release assets
+        env:
+          RELEASE_VERSION: ${{ inputs.release_version || format('preview-{0}', github.sha) }}
+          SOURCE_COMMIT: ${{ github.sha }}
+        run: python3 -I tools/package-release.py --out dist --version "$RELEASE_VERSION" --commit "$SOURCE_COMMIT"
+      - name: Preserve the checked portable assets and observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: portable-release-assets
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 14
