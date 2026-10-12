@@ -11,6 +11,7 @@ import (
 	"reflect"
 	"strings"
 	"time"
+	"unicode/utf8"
 )
 
 //go:embed approval.gooo
@@ -83,7 +84,7 @@ const MaxAmount int64 = 9_000_000_000_000
 func hash(b []byte) string { s := sha256.Sum256(b); return "sha256:" + hex.EncodeToString(s[:]) }
 func Validate(in Input) error {
 	for _, s := range []string{in.Request.Key, in.Request.Requester, in.Request.Team, in.Reviewer.Key, in.Reviewer.Team} {
-		if strings.TrimSpace(s) == "" || len(s) > 120 {
+		if !utf8.ValidString(s) || strings.TrimSpace(s) == "" || len(s) > 120 {
 			return errors.New("이름·팀·요청 ID는 1~120바이트로 입력하세요")
 		}
 	}

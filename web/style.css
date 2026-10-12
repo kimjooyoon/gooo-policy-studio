@@ -28,12 +28,16 @@ body {
   font-size: 14px;
 }
 button,
-input {
+input,
+select {
   font: inherit;
 }
 button,
 a,
 input {
+  outline-offset: 4px;
+}
+select {
   outline-offset: 4px;
 }
 button {
@@ -455,7 +459,8 @@ h3 {
   color: #7d8776;
   margin-bottom: 7px;
 }
-.field input {
+.field input,
+.field select {
   width: 100%;
   min-width: 0;
   border: 1px solid #e0e5da;
@@ -706,6 +711,157 @@ footer {
   display: flex;
   gap: 8px;
 }
+.impact-input-card,
+.impact-report-card,
+.impact-detail-card {
+  margin-bottom: 22px;
+}
+.impact-form > .field,
+.impact-policy-preview,
+.impact-actions,
+.impact-report-toolbar,
+.impact-status,
+.impact-evidence {
+  margin: 20px 23px;
+}
+.impact-form > .field {
+  max-width: 620px;
+}
+.impact-policy-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.impact-policy-preview article {
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fbf5;
+}
+.impact-policy-preview h3 {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.impact-policy-preview p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #617357;
+  margin: 0;
+}
+.impact-actions,
+.impact-report-toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.impact-actions .field,
+.impact-report-toolbar .field {
+  margin-bottom: 0;
+}
+.impact-file-field {
+  flex: 1 1 240px;
+}
+.impact-file-field input {
+  padding: 8px;
+}
+.impact-status {
+  color: #546a4a;
+  line-height: 1.8;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.impact-status.error {
+  color: var(--red);
+}
+.impact-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 23px;
+}
+.impact-summary-grid article {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f9fbf5;
+}
+.impact-summary-grid small {
+  display: block;
+  font-size: 11px;
+  color: #647859;
+}
+.impact-summary-grid strong {
+  display: block;
+  font-size: 23px;
+  font-weight: 600;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+.impact-summary-grid span {
+  display: block;
+  font-size: 11px;
+  color: #647859;
+  line-height: 1.8;
+}
+.impact-rule-summary {
+  margin: 20px 23px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #647859;
+}
+.impact-check-banner {
+  margin: 20px 23px;
+  padding: 18px;
+  border-radius: 8px;
+  border: 1px solid #c9dac2;
+  background: #edf4e7;
+  color: var(--green);
+}
+.impact-check-banner p {
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 9px 0 0;
+  overflow-wrap: anywhere;
+}
+.impact-check-banner.check-fail {
+  border-color: #ddbbb5;
+  background: #fcf1ee;
+  color: #8b4438;
+}
+.impact-expectation-title {
+  font-size: 14px;
+  margin: 24px 0 14px;
+}
+.impact-rule-summary ul {
+  padding: 0;
+  margin: 8px 0;
+  list-style: none;
+  display: flex;
+  gap: 8px 18px;
+  flex-wrap: wrap;
+}
+.impact-table {
+  min-width: 890px;
+}
+.impact-table small {
+  display: block;
+  margin-top: 5px;
+  color: #718166;
+  line-height: 1.6;
+}
+.impact-table td {
+  max-width: 220px;
+  overflow-wrap: anywhere;
+}
+.impact-evidence {
+  color: #718166;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+.impact-detail-card:focus {
+  outline: 2px solid var(--green);
+}
 .ownership-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -850,6 +1006,7 @@ pre {
   }
   .sidebar nav {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 18px;
     gap: 4px;
   }
@@ -859,6 +1016,7 @@ pre {
     margin: 0;
     justify-content: center;
     gap: 5px;
+    width: calc(50% - 2px);
   }
   .nav-item > span:first-child {
     font-size: 15px;
@@ -1045,6 +1203,33 @@ pre {
   }
   .section-description {
     margin: 15px 17px;
+  }
+  .impact-form > .field,
+  .impact-policy-preview,
+  .impact-actions,
+  .impact-report-toolbar,
+  .impact-status,
+  .impact-summary-grid,
+  .impact-rule-summary,
+  .impact-check-banner,
+  .impact-evidence {
+    margin: 17px;
+  }
+  .impact-policy-preview {
+    grid-template-columns: 1fr;
+  }
+  .impact-summary-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+  .impact-summary-grid article {
+    padding: 12px;
+  }
+  .impact-summary-grid strong {
+    font-size: 20px;
+  }
+  .impact-actions .button {
+    width: 100%;
   }
 }
 @media (prefers-reduced-motion: reduce) {

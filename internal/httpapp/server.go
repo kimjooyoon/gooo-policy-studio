@@ -1,13 +1,12 @@
 package httpapp
 
 import (
-	"bytes"
 	"encoding/json"
+	"github.com/kimjooyoon/gooo-policy-studio/internal/jsoninput"
 	"github.com/kimjooyoon/gooo-policy-studio/internal/policy"
 	"github.com/kimjooyoon/gooo-policy-studio/web"
 	"io"
 	"net/http"
-	"reflect"
 	"strings"
 )
 
@@ -39,6 +38,52 @@ func Handler() http.Handler {
 			return
 		}
 		write(w, 200, map[string]any{"matched": true, "receipt": out})
+	})
+	mux.HandleFunc("POST /api/impact/corpus", func(w http.ResponseWriter, r *http.Request) {
+		var in struct {
+			Cases []policy.Case `json:"cases"`
+		}
+		if !decodeLimit(w, r, &in, 256<<10) {
+			return
+		}
+		// Corpus admission validates every case before any domain activity runs.
+		if err := policy.ValidateBatch(policy.BatchInput{Schema: policy.BatchInputSchema, Label: "corpus admission", Cases: in.Cases}); err != nil {
+			write(w, 422, map[string]string{"error": err.Error()})
+			return
+		}
+		write(w, 200, in)
+	})
+	impact := func(w http.ResponseWriter, r *http.Request) {
+		var in policy.BatchInput
+		if !decodeLimit(w, r, &in, 1<<20) {
+			return
+		}
+		out, err := policy.SimulateBatch(in)
+		if err != nil {
+			write(w, 422, map[string]string{"error": err.Error()})
+			return
+		}
+		status := http.StatusOK
+		if r.URL.Path == "/api/impact/check" && !out.Checks.Passed {
+			status = http.StatusConflict
+		}
+		write(w, status, out)
+	}
+	mux.HandleFunc("POST /api/impact", impact)
+	// This route is suitable for automation: a mismatch cannot be a 2xx
+	// successful check, while the complete failed report remains inspectable.
+	mux.HandleFunc("POST /api/impact/check", impact)
+	mux.HandleFunc("POST /api/impact/replay", func(w http.ResponseWriter, r *http.Request) {
+		var in policy.BatchReport
+		if !decodeLimit(w, r, &in, 4<<20) {
+			return
+		}
+		out, err := policy.ReplayBatch(in)
+		if err != nil {
+			write(w, 422, map[string]string{"error": err.Error()})
+			return
+		}
+		write(w, 200, map[string]any{"matched": true, "report": out})
 	})
 	files := http.FileServerFS(web.Files)
 	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
@@ -76,25 +121,22 @@ func Handler() http.Handler {
 	})
 }
 func decode(w http.ResponseWriter, r *http.Request, out any) bool {
+	return decodeLimit(w, r, out, 128<<10)
+}
+func decodeLimit(w http.ResponseWriter, r *http.Request, out any, maxBytes int64) bool {
 	if strings.Split(r.Header.Get("Content-Type"), ";")[0] != "application/json" {
 		write(w, 415, map[string]string{"error": "application/json이 필요합니다"})
 		return false
 	}
-	r.Body = http.MaxBytesReader(w, r.Body, 128<<10)
+	r.Body = http.MaxBytesReader(w, r.Body, maxBytes)
 	defer r.Body.Close()
 	raw, err := io.ReadAll(r.Body)
-	if err != nil || completeJSON(raw, reflect.TypeOf(out).Elem()) != nil {
-		write(w, 400, map[string]string{"error": "필수 필드 누락·null·중복 키 또는 잘못된 JSON입니다"})
+	if err != nil {
+		write(w, 413, map[string]string{"error": "JSON 입력의 크기 제한을 초과했거나 본문을 읽을 수 없습니다"})
 		return false
 	}
-	d := json.NewDecoder(bytes.NewReader(raw))
-	d.DisallowUnknownFields()
-	if err := d.Decode(out); err != nil {
-		write(w, 400, map[string]string{"error": "JSON 형식·필드·정수 값을 확인하세요"})
-		return false
-	}
-	if err := d.Decode(&struct{}{}); err != io.EOF {
-		write(w, 400, map[string]string{"error": "JSON 객체 하나만 입력하세요"})
+	if err := jsoninput.Decode(raw, out, int(maxBytes)); err != nil {
+		write(w, 400, map[string]string{"error": "JSON 입력을 확인하세요: " + err.Error()})
 		return false
 	}
 	return true
