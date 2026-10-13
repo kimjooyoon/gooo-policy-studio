@@ -79,6 +79,15 @@ jobs:
           path: out/artifact-policy-impact-proof.json
           if-no-files-found: error
           retention-days: 14
+      - name: Replay retained comparisons without original artifact or input files
+        run: python3 tools/verify-artifact-policy-replay.py --impact-bin bin/policy-impact --proof out/artifact-policy-replay-proof.json
+      - name: Preserve the read-only historical comparison replay observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: artifact-policy-replay-proof
+          path: out/artifact-policy-replay-proof.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Check JavaScript syntax
         run: node --check web/app.js
       - name: Check import and pending-operation behavior

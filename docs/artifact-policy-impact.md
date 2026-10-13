@@ -88,6 +88,17 @@ inherently a safer or better policy. Neither command sends the plan anywhere
 or creates a live approval. Each invocation captures the file once; the second
 invocation is a separate comparison.
 
+Keep the complete `0600` reports if you need to revisit the decision later.
+[`policy-impact replay --report FILE`](artifact-policy-replay.md) checks both
+historical judgments from retained report data, including all observations,
+evidence decisions, completion steps, effect checks, and the difference. It
+does not reopen the original case, policy, or artifact paths, so the copied
+inputs can be removed after comparison. Replay uses the original observation
+time and requires matching comparison sources, Go runtime version, and host
+platform. Its success checks an unsigned historical record's internal
+consistency; it grants no current permission and does not establish that an
+original file still exists.
+
 The artifact bytes have the explicit expected digest
 `sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533`.
 The deadline `4102444800` is a demo value in 2100, not a recommended production
