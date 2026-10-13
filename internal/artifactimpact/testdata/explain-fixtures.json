@@ -1,0 +1,383 @@
+{
+  "observation_unix": 2000000000,
+  "healthy_deadline_unix": 2100000000,
+  "shared_case": {
+    "schema": "policy-studio/artifact-impact-case/v1",
+    "request": {
+      "key": "req-bounds-row-501",
+      "requester": "operator",
+      "team": "platform",
+      "amount": 0,
+      "submitted": true
+    },
+    "principal": {
+      "key": "svc-policy-engine",
+      "team": "platform",
+      "active": true,
+      "enabled": true,
+      "can_execute": true
+    },
+    "base_rules": {
+      "limit": 1000000,
+      "same_team": true,
+      "active_reviewer": true,
+      "prevent_self": true
+    },
+    "artifact": {
+      "path": "",
+      "expected_sha256": "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653",
+      "deadline_unix": 2100000000
+    }
+  },
+  "shared_policy_before": {
+    "schema": "policy-studio/artifact-admission-policy/v1",
+    "id": "artifact-impact-row-limit-bounds",
+    "revision": 1,
+    "recipe": {
+      "schema": "policy-studio/artifact-recipe/v2",
+      "producer_id": "flat-json/v2",
+      "artifact_schema": "gooo/export-plan/v1",
+      "max_bytes": 65536,
+      "fields": [
+        {
+          "name": "action",
+          "type": "text"
+        },
+        {
+          "name": "destination",
+          "type": "text"
+        },
+        {
+          "name": "row_limit",
+          "type": "int64"
+        },
+        {
+          "name": "dry_run",
+          "type": "bool"
+        },
+        {
+          "name": "format",
+          "type": "text"
+        }
+      ],
+      "claims": [
+        {
+          "id": "action_equal",
+          "verifier": "field_equals/v1",
+          "field": "action",
+          "expected": "prepare_export"
+        },
+        {
+          "id": "destination_equal",
+          "verifier": "field_equals/v1",
+          "field": "destination",
+          "expected": "internal"
+        },
+        {
+          "id": "row_limit_at_least",
+          "verifier": "field_int64_gte/v1",
+          "field": "row_limit",
+          "expected": "0"
+        },
+        {
+          "id": "row_limit_at_most",
+          "verifier": "field_int64_lte/v1",
+          "field": "row_limit",
+          "expected": "1000"
+        },
+        {
+          "id": "dry_run_equal",
+          "verifier": "field_equals/v1",
+          "field": "dry_run",
+          "expected": "true"
+        },
+        {
+          "id": "format_equal",
+          "verifier": "field_equals/v1",
+          "field": "format",
+          "expected": "jsonl"
+        }
+      ]
+    },
+    "required_authority": "live-observation",
+    "max_age_seconds": 60,
+    "approval_budget": {
+      "allow_target": true,
+      "allow_session": true,
+      "allow_filesystem": true,
+      "allow_process": false,
+      "allow_network": false,
+      "allow_ui": false,
+      "allow_discard": false,
+      "allow_foreign_code": false,
+      "allow_device": false,
+      "require_idempotent": true
+    },
+    "control_plane_budget": {
+      "allow_target": false,
+      "allow_session": true,
+      "allow_filesystem": true,
+      "allow_process": false,
+      "allow_network": false,
+      "allow_ui": false,
+      "allow_discard": false,
+      "allow_foreign_code": false,
+      "allow_device": false,
+      "require_idempotent": true
+    }
+  },
+  "shared_policy_after": {
+    "schema": "policy-studio/artifact-admission-policy/v1",
+    "id": "artifact-impact-row-limit-bounds",
+    "revision": 2,
+    "recipe": {
+      "schema": "policy-studio/artifact-recipe/v2",
+      "producer_id": "flat-json/v2",
+      "artifact_schema": "gooo/export-plan/v1",
+      "max_bytes": 65536,
+      "fields": [
+        {
+          "name": "action",
+          "type": "text"
+        },
+        {
+          "name": "destination",
+          "type": "text"
+        },
+        {
+          "name": "row_limit",
+          "type": "int64"
+        },
+        {
+          "name": "dry_run",
+          "type": "bool"
+        },
+        {
+          "name": "format",
+          "type": "text"
+        }
+      ],
+      "claims": [
+        {
+          "id": "action_equal",
+          "verifier": "field_equals/v1",
+          "field": "action",
+          "expected": "prepare_export"
+        },
+        {
+          "id": "destination_equal",
+          "verifier": "field_equals/v1",
+          "field": "destination",
+          "expected": "internal"
+        },
+        {
+          "id": "row_limit_at_least",
+          "verifier": "field_int64_gte/v1",
+          "field": "row_limit",
+          "expected": "0"
+        },
+        {
+          "id": "row_limit_at_most",
+          "verifier": "field_int64_lte/v1",
+          "field": "row_limit",
+          "expected": "500"
+        },
+        {
+          "id": "dry_run_equal",
+          "verifier": "field_equals/v1",
+          "field": "dry_run",
+          "expected": "true"
+        },
+        {
+          "id": "format_equal",
+          "verifier": "field_equals/v1",
+          "field": "format",
+          "expected": "jsonl"
+        }
+      ]
+    },
+    "required_authority": "live-observation",
+    "max_age_seconds": 60,
+    "approval_budget": {
+      "allow_target": true,
+      "allow_session": true,
+      "allow_filesystem": true,
+      "allow_process": false,
+      "allow_network": false,
+      "allow_ui": false,
+      "allow_discard": false,
+      "allow_foreign_code": false,
+      "allow_device": false,
+      "require_idempotent": true
+    },
+    "control_plane_budget": {
+      "allow_target": false,
+      "allow_session": true,
+      "allow_filesystem": true,
+      "allow_process": false,
+      "allow_network": false,
+      "allow_ui": false,
+      "allow_discard": false,
+      "allow_foreign_code": false,
+      "allow_device": false,
+      "require_idempotent": true
+    }
+  },
+  "fixtures": [
+    {
+      "id": "row501_forward",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\",\n  \"row_limit\": 501,\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653",
+      "raw_artifact_bytes": 157,
+      "case_and_policy_mutations": [],
+      "expected_scenario_ref": "row501_forward",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "id": "row501_reverse",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\",\n  \"row_limit\": 501,\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653",
+      "raw_artifact_bytes": 157,
+      "case_and_policy_mutations": [
+        {
+          "op": "swap_before_after_policies"
+        }
+      ],
+      "expected_scenario_ref": "row501_reverse",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "id": "negative_lower_bound",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\",\n  \"row_limit\": -1,\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:d60f6fc796ff7caede85febd0adda153ef18417b892d8fe97386db1f7356739e",
+      "raw_artifact_bytes": 156,
+      "case_and_policy_mutations": [],
+      "expected_scenario_ref": "negative_lower_bound",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "id": "mandatory_wrong_type",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\",\n  \"row_limit\": \"500\",\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:a01dd2631ea252f8730bcf1f5aa2439ee78ccfae9d68c1e9ce165bd56c994465",
+      "raw_artifact_bytes": 159,
+      "case_and_policy_mutations": [],
+      "expected_scenario_ref": "mandatory_wrong_type",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "id": "mandatory_digest_mismatch",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\",\n  \"row_limit\": 501,\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653",
+      "raw_artifact_bytes": 157,
+      "case_and_policy_mutations": [
+        {
+          "scope": "case.artifact.expected_sha256",
+          "value": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "expected_scenario_ref": "mandatory_digest_mismatch",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "id": "expired_evidence_passed_predicates",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\",\n  \"row_limit\": 100,\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:429b281f3f90562129e2365366b31afccf104610d67463a0aa02938e0c8a6fc3",
+      "raw_artifact_bytes": 157,
+      "case_and_policy_mutations": [
+        {
+          "scope": "case.artifact.deadline_unix",
+          "value": 2000000000
+        }
+      ],
+      "expected_scenario_ref": "expired_evidence_passed_predicates",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "id": "approval_effect_budget_denial",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\",\n  \"row_limit\": 100,\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:429b281f3f90562129e2365366b31afccf104610d67463a0aa02938e0c8a6fc3",
+      "raw_artifact_bytes": 157,
+      "case_and_policy_mutations": [
+        {
+          "scope": "after.approval_budget.allow_target",
+          "value": false
+        }
+      ],
+      "expected_scenario_ref": "approval_effect_budget_denial",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "id": "permission_denied_before_acquisition",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\",\n  \"row_limit\": 100,\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:429b281f3f90562129e2365366b31afccf104610d67463a0aa02938e0c8a6fc3",
+      "raw_artifact_bytes": 157,
+      "case_and_policy_mutations": [
+        {
+          "scope": "case.principal.can_execute",
+          "value": false
+        }
+      ],
+      "expected_scenario_ref": "permission_denied_before_acquisition",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "id": "base_denied_before_acquisition",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\",\n  \"row_limit\": 100,\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:429b281f3f90562129e2365366b31afccf104610d67463a0aa02938e0c8a6fc3",
+      "raw_artifact_bytes": 157,
+      "case_and_policy_mutations": [
+        {
+          "scope": "case.request.submitted",
+          "value": false
+        }
+      ],
+      "expected_scenario_ref": "base_denied_before_acquisition",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    },
+    {
+      "id": "valid_tainted_text",
+      "raw_artifact_utf8": "{\n  \"schema\": \"gooo/export-plan/v1\",\n  \"action\": \"prepare_export\",\n  \"destination\": \"internal\\n| ` <script>alert(\\\"fixture\\\")</script> & ‮private‬\",\n  \"row_limit\": 100,\n  \"dry_run\": true,\n  \"format\": \"jsonl\"\n}\n",
+      "raw_artifact_sha256": "sha256:dd5d91db979e53a5024fefdbe5d7048bfb1cde2ce11718e58dc395550b121c82",
+      "raw_artifact_bytes": 214,
+      "case_and_policy_mutations": [
+        {
+          "scope": "before.recipe.claims.destination_equal.expected",
+          "value": "internal\n| ` <script>alert(\"fixture\")</script> & ‮private‬"
+        },
+        {
+          "scope": "after.recipe.claims.destination_equal.expected",
+          "value": "internal\n| ` <script>alert(\"fixture\")</script> & ‮private‬"
+        }
+      ],
+      "expected_scenario_ref": "valid_tainted_text",
+      "fresh_output_permissions": "0600; no overwrite",
+      "execution_status": "NOT_EXECUTED"
+    }
+  ],
+  "rejected_identifier_cases": [
+    "bad|claim",
+    "bad`claim",
+    "bad<claim>",
+    "bad\nclaim",
+    "bad‮claim"
+  ],
+  "valid_taint_text": "internal\n| ` <script>alert(\"fixture\")</script> & ‮private‬",
+  "taint_escaping_expectations": {
+    "text_cell_decoded_value": "internal\n| ` <script>alert(\"fixture\")</script> & ‮private‬",
+    "escaped_text_fragment": "internal\n| ` &lt;script&gt;alert(&#34;fixture&#34;)&lt;/script&gt; &amp; ‮private‬",
+    "no_literal_active_script_element": true,
+    "no_dynamic_URL_CSS_attribute_or_JS_context": true,
+    "no_unescaped_private_value_in_stdout": true,
+    "JSON_detail_decodes_to_exact_typed_value": true
+  },
+  "schema": "artifact-impact-explain-test-fixtures/v1"
+}

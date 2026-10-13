@@ -16,6 +16,7 @@ const usage = `policy-impact compares two proposed v2 artifact policies locally.
 Usage:
   policy-impact compare --case FILE --before FILE --after FILE --report NEW_FILE
   policy-impact replay --report SAVED_FILE
+  policy-impact explain --report SAVED_FILE --output NEW_PRIVATE_HTML
 
 First use (from a source checkout with the existing Go toolchain):
   go build -o policy-impact ./cmd/policy-impact
@@ -24,6 +25,8 @@ First use (from a source checkout with the existing Go toolchain):
   # Reverse --before and --after with a new --report to compare the other direction.
   ./policy-impact replay --report private/comparison.json
   # Replay keeps the original time and works after original input/artifact deletion.
+  ./policy-impact explain --report private/comparison.json --output private/explanation.html
+  # Explain verifies the whole saved report and writes a new private HTML file.
 
 Inputs are bounded 0600 regular files. The case selects an absolute artifact
 path and trusted expected SHA/deadline. The required report is a new synced
@@ -38,6 +41,15 @@ the whole historical comparison matches current compiled rules and comparison
 source identity. It is not current authorization or authenticated history;
 coherently rewritten unsigned history can remain internally consistent.
 Replay never reads the current artifact or refreshes the original evidence time.
+
+Explain reads the private saved report once and replay-verifies its full history
+before rendering a bounded, escaped static HTML explanation. The output is a
+new synced 0600 file; an empty or partial file may remain on a late failure.
+Exit 0 means the explanation was saved, including denied historical judgments.
+Exit 2 means a fixed input, replay, rendering or file failure. Existing outputs
+are never overwritten. stdout contains only fixed summary labels, counts and
+public source hashes. Replay and identity probes execute compiled rules and may
+read the host clock; they do not refresh the historical evidence time.
 `
 
 func run(args []string, out io.Writer) int {
@@ -47,6 +59,9 @@ func run(args []string, out io.Writer) int {
 	}
 	if len(args) > 0 && args[0] == "replay" {
 		return runReplay(args[1:], out)
+	}
+	if len(args) > 0 && args[0] == "explain" {
+		return runExplain(args[1:], out)
 	}
 	emit := func(s artifactimpact.Summary, exit int) int {
 		if json.NewEncoder(out).Encode(s) != nil {
@@ -118,6 +133,44 @@ func runReplay(args []string, out io.Writer) int {
 		return emit(artifactimpact.ReplayFailure("USAGE_INVALID"), 2)
 	}
 	summary, exit := artifactimpact.ReplayFile(report)
+	return emit(summary, exit)
+}
+
+func runExplain(args []string, out io.Writer) int {
+	emit := func(s artifactimpact.ExplainSummary, exit int) int {
+		if json.NewEncoder(out).Encode(s) != nil {
+			return 2
+		}
+		return exit
+	}
+	flags := flag.NewFlagSet("explain", flag.ContinueOnError)
+	flags.SetOutput(io.Discard)
+	var report, output string
+	seen := map[string]bool{}
+	for _, field := range []struct {
+		name   string
+		target *string
+	}{{"report", &report}, {"output", &output}} {
+		flags.Func(field.name, "private file", func(value string) error {
+			if seen[field.name] {
+				return errors.New("repeated flag")
+			}
+			seen[field.name] = true
+			*field.target = value
+			return nil
+		})
+	}
+	if err := flags.Parse(args); err != nil {
+		if err == flag.ErrHelp {
+			fmt.Fprint(out, usage)
+			return 0
+		}
+		return emit(artifactimpact.ExplainFailure("USAGE_INVALID"), 2)
+	}
+	if flags.NArg() != 0 || report == "" || output == "" {
+		return emit(artifactimpact.ExplainFailure("USAGE_INVALID"), 2)
+	}
+	summary, exit := artifactimpact.ExplainFile(report, output)
 	return emit(summary, exit)
 }
 

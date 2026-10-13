@@ -87,6 +87,10 @@ deadline in 2100 is a demo value; choose a validity period for your own work.
 Compare exit 0 means a comparison was saved, including a denied judgment;
 it is not a current execution grant. Invalid configuration returns exit 2.
 
+To read the verified claim and stage details without searching the raw JSON,
+save a [private historical explanation](artifact-policy-explain.md) with
+`policy-impact explain --report FILE --output NEW_PRIVATE_HTML`.
+
 ## Retain the actual judgment
 
 Every executed numeric claim includes `native_proof` with typed `facts`
