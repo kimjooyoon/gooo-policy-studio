@@ -6,12 +6,15 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"
+	"reflect"
+	"strconv"
 	"strings"
 	"time"
 	"unicode"
 	"unicode/utf8"
 
 	"github.com/kimjooyoon/gooo-policy-studio/internal/admission"
+	"github.com/kimjooyoon/gooo-policy-studio/internal/artifactnumeric"
 	"github.com/kimjooyoon/gooo-policy-studio/internal/artifactpreflight"
 	"github.com/kimjooyoon/gooo-policy-studio/internal/completion"
 	"github.com/kimjooyoon/gooo-policy-studio/internal/policy"
@@ -96,8 +99,9 @@ func digestJSON(v any) string {
 }
 
 // These are consistency checks on the received v2 presentation. The client
-// does not load a server recipe, run Gooo, re-read artifacts, authenticate an
-// issuer, refresh the command, or decide whether an operation is admissible.
+// rederives numeric proofs with the checked pure Gooo predicate, but does not
+// load a server recipe, acquire artifacts, authenticate an issuer, refresh the
+// command, or decide whether the overall operation is admissible.
 func validOutcome(r admission.Result, c admission.Command, committed bool) bool {
 	o := r.Outcome
 	if o.Schema != admission.OutcomeSchemaV2 || o.Scope != admission.OutcomeScopeV2 || o.Preflight == nil || o.Command != c || o.PolicyVersion != c.PolicyVersion || !validDigest(o.ID) || !validText(o.PrincipalKey) || o.Committed != committed || o.PriorRevision != c.ExpectedRevision || c.ExpectedRevision != 1 {
@@ -139,7 +143,11 @@ func validOutcome(r admission.Result, c admission.Command, committed bool) bool 
 		return false
 	}
 	producer := p.Producer
-	if producer.Schema != artifactpreflight.ReportSchema || producer.ProducerID != artifactpreflight.ProducerID || producer.Identity.Schema != "policy-studio/artifact-producer-source/v1" || producer.Identity.ProducerID != artifactpreflight.ProducerID || producer.Identity.VerifierID != artifactpreflight.VerifierID || producer.ContextDigest != p.ContextSHA256 || producer.ExpectedSHA256 != x.Artifact.ExpectedSHA256 || !validDigest(producer.ActualSHA256) || producer.ObservationUnix < 0 {
+	if producer.Schema != artifactpreflight.ReportSchema || (producer.ProducerID != artifactpreflight.ProducerID && producer.ProducerID != artifactpreflight.NewProducerID) || producer.Identity.Schema != "policy-studio/artifact-producer-source/v2" || producer.Identity.ProducerID != artifactpreflight.NewProducerID || producer.Identity.VerifierID != artifactpreflight.RegistryVerifierID || producer.ContextDigest != p.ContextSHA256 || producer.ExpectedSHA256 != x.Artifact.ExpectedSHA256 || !validDigest(producer.ActualSHA256) || producer.ObservationUnix < 0 {
+		return false
+	}
+	numericBindings, err := artifactnumeric.SourceBindings()
+	if err != nil || producer.Identity.NumericBindings != numericBindings {
 		return false
 	}
 	retained, err := base64.StdEncoding.DecodeString(producer.ArtifactBase64)
@@ -170,7 +178,7 @@ func validOutcome(r admission.Result, c admission.Command, committed bool) bool 
 	var admissible int64
 	for i, claim := range producer.Observations {
 		record, evidence := co.Input.Records[i], p.Evidence[i]
-		if claim.ClaimID != co.Policy.RequiredClaims[i] || claim.Verifier != artifactpreflight.VerifierID || record.ClaimID != claim.ClaimID || record.Status != claim.Status || len(record.EvidenceIDs) != 1 || record.EvidenceIDs[0] != claim.EvidenceID || evidence.ClaimID != claim.ClaimID || co.Steps[i].Index != int64(i) || co.Steps[i].Status != claim.Status {
+		if claim.ClaimID != co.Policy.RequiredClaims[i] || !validClaimObservation(claim, producer) || record.ClaimID != claim.ClaimID || record.Status != claim.Status || len(record.EvidenceIDs) != 1 || record.EvidenceIDs[0] != claim.EvidenceID || evidence.ClaimID != claim.ClaimID || co.Steps[i].Index != int64(i) || co.Steps[i].Status != claim.Status {
 			return false
 		}
 		switch claim.Status {
@@ -218,6 +226,46 @@ func validOutcome(r admission.Result, c admission.Command, committed bool) bool 
 		return !decision.CompletionOK
 	case "OPERATION_EFFECT_DISALLOWED":
 		return !decision.ApprovalEffectOK
+	default:
+		return false
+	}
+}
+
+func validClaimObservation(claim artifactpreflight.ClaimObservation, producer artifactpreflight.Report) bool {
+	mandatory := producer.AcquisitionStatus == artifactpreflight.ReadSuccess && producer.DigestOK && producer.SchemaOK && producer.TypesOK
+	switch claim.Verifier {
+	case artifactpreflight.VerifierID:
+		return claim.NativeProof == nil && (mandatory || claim.Status != "pass")
+	case artifactpreflight.Int64LTEVerifierID, artifactpreflight.Int64GTEVerifierID:
+		if producer.ProducerID != artifactpreflight.NewProducerID {
+			return false
+		}
+		if !mandatory {
+			return claim.NativeProof == nil && claim.Status != "pass"
+		}
+		if claim.NativeProof == nil {
+			return false
+		}
+		value, err := strconv.ParseInt(claim.Actual, 10, 64)
+		if err != nil || strconv.FormatInt(value, 10) != claim.Actual {
+			return false
+		}
+		bound, err := strconv.ParseInt(claim.Expected, 10, 64)
+		if err != nil || strconv.FormatInt(bound, 10) != claim.Expected {
+			return false
+		}
+		operator := artifactnumeric.LTE
+		if claim.Verifier == artifactpreflight.Int64GTEVerifierID {
+			operator = artifactnumeric.GTE
+		}
+		derived, err := artifactnumeric.Evaluate(artifactnumeric.Facts{Value: value, Bound: bound, Operator: operator})
+		if err != nil || !reflect.DeepEqual(*claim.NativeProof, derived) || derived.Bindings != producer.Identity.NumericBindings || claim.Reason != derived.Decision.Reason {
+			return false
+		}
+		if derived.Decision.Matched {
+			return claim.Status == "pass"
+		}
+		return claim.Status == "fail"
 	default:
 		return false
 	}

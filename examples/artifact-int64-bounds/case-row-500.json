@@ -1,0 +1,28 @@
+{
+  "schema": "policy-studio/artifact-impact-case/v1",
+  "request": {
+    "key": "req-bounds-row-500",
+    "requester": "operator",
+    "team": "platform",
+    "amount": 0,
+    "submitted": true
+  },
+  "principal": {
+    "key": "svc-policy-engine",
+    "team": "platform",
+    "active": true,
+    "enabled": true,
+    "can_execute": true
+  },
+  "base_rules": {
+    "limit": 1000000,
+    "same_team": true,
+    "active_reviewer": true,
+    "prevent_self": true
+  },
+  "artifact": {
+    "path": "/replace-with-your-private-directory/artifact-row-500.json",
+    "expected_sha256": "sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533",
+    "deadline_unix": 4102444800
+  }
+}

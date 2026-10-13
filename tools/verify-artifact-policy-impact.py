@@ -12,6 +12,7 @@ import argparse
 import base64
 import copy
 import hashlib
+import importlib.util
 import json
 import os
 import platform
@@ -462,6 +463,14 @@ class Observer:
         self.require(identity["host_sources"] == expected and identity["host_sha256"] == sha(encoded(expected)),
                      "embedded simulation host source bytes differ")
         producer = identity["producer"]
+        self.require(producer["schema"] == "policy-studio/artifact-producer-source/v2" and producer["producer_id"] == "flat-json/v2" and producer["verifier_id"] == "artifact-verifier-registry/v2", "versioned producer registry differs")
+        spec = importlib.util.spec_from_file_location("artifact_numeric_source", Path(__file__).with_name("artifact_numeric_source.py"))
+        numeric_source = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(numeric_source)
+        names = ["source.gooo", "rules_generated.go", "generated.txt", "bridge.go", "bridge.txt", "model.go", "bindings.go", "generator.txt", "generation.json", "compiler-version.txt"]
+        numeric_sources = {"internal/artifactnumeric/" + name: (PROJECT / "internal/artifactnumeric" / name).read_bytes() for name in names}
+        numeric_sources["cmd/generate-artifact-bounds/main.go"] = (PROJECT / "cmd/generate-artifact-bounds/main.go").read_bytes()
+        self.require(producer["numeric_bindings"] == numeric_source.expected_numeric_bindings(numeric_sources, producer["json_input_sha256"]), "numeric implementation source bytes differ")
         for key, name in [("model_sha256", "model.go"), ("validation_sha256", "validation.go"),
                           ("verifier_sha256", "verifier.go"), ("reader_sha256", "reader.go"),
                           ("reader_unix_sha256", "reader_unix.go"), ("reader_other_sha256", "reader_other.go"),

@@ -60,6 +60,10 @@ func currentOperationAudit() OperationAudit {
 }
 
 func currentPreflightProvenance() (PreflightProvenance, error) {
+	producer, err := artifactpreflight.CheckedSourceIdentity()
+	if err != nil {
+		return PreflightProvenance{}, failure(Unavailable, "compiled artifact predicate bindings unavailable")
+	}
 	machine, err := machinerules.Bindings()
 	if err != nil {
 		return PreflightProvenance{}, failure(Unavailable, "compiled machine-rule bindings unavailable")
@@ -70,5 +74,5 @@ func currentPreflightProvenance() (PreflightProvenance, error) {
 	if err != nil {
 		return PreflightProvenance{}, failure(Unavailable, "compiled completion bindings unavailable")
 	}
-	return PreflightProvenance{Schema: "policy-studio/artifact-admission-code/v1", Machine: machine, Completion: probe.Bindings, Producer: artifactpreflight.SourceIdentity(), HostSHA256: hostSourceIdentity(), DecoderSHA256: jsoninput.SourceIdentity(), AuditSHA256: currentOperationAudit().Identity, GoVersion: runtime.Version(), GOOS: runtime.GOOS, GOARCH: runtime.GOARCH}, nil
+	return PreflightProvenance{Schema: "policy-studio/artifact-admission-code/v1", Machine: machine, Completion: probe.Bindings, Producer: producer, HostSHA256: hostSourceIdentity(), DecoderSHA256: jsoninput.SourceIdentity(), AuditSHA256: currentOperationAudit().Identity, GoVersion: runtime.Version(), GOOS: runtime.GOOS, GOARCH: runtime.GOARCH}, nil
 }

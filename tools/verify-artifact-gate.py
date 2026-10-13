@@ -9,6 +9,7 @@ import argparse
 import base64
 import copy
 import hashlib
+import importlib.util
 import json
 import platform
 import select
@@ -302,9 +303,16 @@ def verify_provenance(project, preflight, inventory):
                                  ["model.go", "store.go", "validate.go", "preflight.go", "preflight_provenance.go", "lock_unix.go", "lock_other.go"])
     require(implementation["host_sha256"] == host_identity, "admission host source differs")
     producer = implementation["producer"]
-    require(producer == preflight["producer"]["identity"] and producer["producer_id"] == "flat-json/v1" and
-            producer["verifier_id"] == "field_equals/v1" and producer["json_input_sha256"] == json_identity,
+    require(producer == preflight["producer"]["identity"] and producer["schema"] == "policy-studio/artifact-producer-source/v2" and producer["producer_id"] == "flat-json/v2" and
+            producer["verifier_id"] == "artifact-verifier-registry/v2" and producer["json_input_sha256"] == json_identity,
             "producer registry, decoder or context identity differs")
+    spec = importlib.util.spec_from_file_location("artifact_numeric_source", Path(__file__).with_name("artifact_numeric_source.py"))
+    numeric_source = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(numeric_source)
+    names = ["source.gooo", "rules_generated.go", "generated.txt", "bridge.go", "bridge.txt", "model.go", "bindings.go", "generator.txt", "generation.json", "compiler-version.txt"]
+    numeric_sources = {"internal/artifactnumeric/" + name: (project / "internal/artifactnumeric" / name).read_bytes() for name in names}
+    numeric_sources["cmd/generate-artifact-bounds/main.go"] = (project / "cmd/generate-artifact-bounds/main.go").read_bytes()
+    require(producer["numeric_bindings"] == numeric_source.expected_numeric_bindings(numeric_sources, json_identity), "numeric implementation bytes differ")
     for key, filename in [("model_sha256", "model.go"), ("validation_sha256", "validation.go"), ("verifier_sha256", "verifier.go"),
                           ("reader_sha256", "reader.go"), ("reader_unix_sha256", "reader_unix.go"),
                           ("reader_other_sha256", "reader_other.go"), ("identity_sha256", "identity.go")]:
@@ -327,7 +335,7 @@ def verify_outcome(project, inventory, case, command, config, http, target=True)
     preflight = outcome["preflight"]
     producer = preflight["producer"]
     require(preflight["schema"] == "policy-studio/artifact-admission-report/v1" and
-            producer["schema"] == "policy-studio/artifact-preflight/v1", "v2 report schema differs")
+            producer["schema"] == "policy-studio/artifact-preflight/v2" and producer["producer_id"] == "flat-json/v1", "v2 report schema differs")
     require([o["claim_id"] for o in producer["observations"]] == CLAIMS and
             [o["status"] for o in producer["observations"]] == case["statuses"], case["case"] + ": literal ordered claim expectations differ")
     require((producer["digest_ok"], producer["schema_ok"], producer["types_ok"]) ==

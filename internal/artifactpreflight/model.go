@@ -4,13 +4,20 @@
 // or acquisition status.
 package artifactpreflight
 
+import "github.com/kimjooyoon/gooo-policy-studio/internal/artifactnumeric"
+
 const (
-	RecipeSchema = "policy-studio/artifact-recipe/v1"
-	ReportSchema = "policy-studio/artifact-preflight/v1"
-	ProducerID   = "flat-json/v1"
-	VerifierID   = "field_equals/v1"
-	MaxBytes     = int64(65536)
-	MaxClaims    = 256
+	RecipeSchema       = "policy-studio/artifact-recipe/v1"
+	NewRecipeSchema    = "policy-studio/artifact-recipe/v2"
+	ReportSchema       = "policy-studio/artifact-preflight/v2"
+	ProducerID         = "flat-json/v1"
+	NewProducerID      = "flat-json/v2"
+	VerifierID         = "field_equals/v1"
+	Int64LTEVerifierID = "field_int64_lte/v1"
+	Int64GTEVerifierID = "field_int64_gte/v1"
+	RegistryVerifierID = "artifact-verifier-registry/v2"
+	MaxBytes           = int64(65536)
+	MaxClaims          = 256
 )
 
 type Field struct {
@@ -61,17 +68,18 @@ type Acquisition struct {
 func (a Acquisition) Status() AcquisitionStatus { return a.status }
 
 type Identity struct {
-	Schema            string `json:"schema"`
-	ProducerID        string `json:"producer_id"`
-	VerifierID        string `json:"verifier_id"`
-	ModelSHA256       string `json:"model_sha256"`
-	ValidationSHA256  string `json:"validation_sha256"`
-	VerifierSHA256    string `json:"verifier_sha256"`
-	ReaderSHA256      string `json:"reader_sha256"`
-	ReaderUnixSHA256  string `json:"reader_unix_sha256"`
-	ReaderOtherSHA256 string `json:"reader_other_sha256"`
-	IdentitySHA256    string `json:"identity_sha256"`
-	JSONInputSHA256   string `json:"json_input_sha256"`
+	Schema            string                   `json:"schema"`
+	ProducerID        string                   `json:"producer_id"`
+	VerifierID        string                   `json:"verifier_id"`
+	ModelSHA256       string                   `json:"model_sha256"`
+	ValidationSHA256  string                   `json:"validation_sha256"`
+	VerifierSHA256    string                   `json:"verifier_sha256"`
+	ReaderSHA256      string                   `json:"reader_sha256"`
+	ReaderUnixSHA256  string                   `json:"reader_unix_sha256"`
+	ReaderOtherSHA256 string                   `json:"reader_other_sha256"`
+	IdentitySHA256    string                   `json:"identity_sha256"`
+	JSONInputSHA256   string                   `json:"json_input_sha256"`
+	NumericBindings   artifactnumeric.Bindings `json:"numeric_bindings"`
 }
 
 type ClaimObservation struct {
@@ -83,6 +91,8 @@ type ClaimObservation struct {
 	Status     string `json:"status"`
 	Reason     string `json:"reason"`
 	EvidenceID string `json:"evidence_id"`
+	// Absent for equality or any mandatory acquisition/schema/type failure.
+	NativeProof *artifactnumeric.Proof `json:"native_proof,omitempty"`
 }
 
 type Report struct {

@@ -29,7 +29,16 @@ jobs:
       - name: Vet
         run: go vet ./...
       - name: Race and domain tests
-        run: go test -race ./...
+        run: |
+          mkdir -p out
+          GOOO_INT64_NATIVE_PROOF_PATH="$PWD/out/int64-native-proof.json" go test -race ./...
+      - name: Preserve independent integer bound native observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: artifact-int64-native-observations
+          path: out/int64-native-proof.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Build standalone executable
         run: go build -trimpath -o bin/policy-studio ./cmd/server
       - name: Run and replay headless policy requirements
@@ -151,6 +160,8 @@ jobs:
           retention-days: 14
       - name: Verify the artifact admission Gooo projections
         run: go run ./cmd/generate-machine --compiler "$RUNNER_TEMP/evidence-gooo" --check
+      - name: Verify the original Gooo integer bound projection
+        run: go run ./cmd/generate-artifact-bounds --compiler "$RUNNER_TEMP/evidence-gooo" --check
       - name: Execute and replay the final Gooo admission relation
         run: python3 tools/verify-machine-rules.py --compiler "$RUNNER_TEMP/evidence-gooo" --go "$(go env GOROOT)/bin/go" --out out/machine-rules-native
       - name: Preserve the final admission relation observations

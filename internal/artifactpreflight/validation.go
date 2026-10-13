@@ -18,7 +18,14 @@ func New(recipe Recipe) (*Producer, error) {
 }
 
 func ValidateRecipe(recipe Recipe) error {
-	if recipe.Schema != RecipeSchema || recipe.ProducerID != ProducerID {
+	// All current producer recipes depend on checked numeric build provenance.
+	// Callers perform this validation before reserving state or reading artifacts.
+	if _, err := CheckedSourceIdentity(); err != nil {
+		return err
+	}
+	legacy := recipe.Schema == RecipeSchema && recipe.ProducerID == ProducerID
+	current := recipe.Schema == NewRecipeSchema && recipe.ProducerID == NewProducerID
+	if !legacy && !current {
 		return fmt.Errorf("unknown artifact recipe schema or producer ID")
 	}
 	if len(recipe.ArtifactSchema) < 1 || len(recipe.ArtifactSchema) > 128 || !utf8.ValidString(recipe.ArtifactSchema) {
@@ -47,12 +54,21 @@ func ValidateRecipe(recipe Recipe) error {
 	}
 	claims := make(map[string]bool, len(recipe.Claims))
 	for i, claim := range recipe.Claims {
-		if !validID(claim.ID) || claims[claim.ID] || claim.Verifier != VerifierID {
+		if !validID(claim.ID) || claims[claim.ID] {
 			return fmt.Errorf("claims[%d]: invalid or duplicate ID or unknown verifier", i)
 		}
 		t, ok := fields[claim.Field]
 		if !ok {
 			return fmt.Errorf("claims[%d]: field is not configured", i)
+		}
+		switch claim.Verifier {
+		case VerifierID:
+		case Int64LTEVerifierID, Int64GTEVerifierID:
+			if !current || t != "int64" {
+				return fmt.Errorf("claims[%d]: numeric verifier requires v2 recipe and int64 field", i)
+			}
+		default:
+			return fmt.Errorf("claims[%d]: unknown verifier", i)
 		}
 		if !validExpected(claim.Expected, t) {
 			return fmt.Errorf("claims[%d]: expected value is invalid or not canonical for %s", i, t)
