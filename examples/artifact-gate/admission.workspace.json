@@ -1,0 +1,15 @@
+{
+  "schema": "gooo/package-workspace-manifest/v1",
+  "entry": {
+    "package_path": "gooo/artifact-gate",
+    "activity": "ArtifactGateAdmits"
+  },
+  "packages": [
+    {
+      "path": "gooo/artifact-gate",
+      "sources": [
+        "machine.gooo"
+      ]
+    }
+  ]
+}

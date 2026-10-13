@@ -1,0 +1,27 @@
+// Copyright (c) 2026 morluto.
+// Adapted from REA proofAuthoritySatisfies in
+// src/application/ReconstructionObligationAuthority.ts, lines 29..61, at
+// 8fc2043eb8bcedbf34dce064f977e455438635d6.
+// MIT license: LICENSE-REA in this directory.
+//
+// The TypeScript typed domain has eight authority labels. This Text API
+// preserves that 8 x 8 relation and explicitly extends it: an unknown actual
+// or required label returns false. TypeScript's out-of-domain exception behavior
+// is not preserved. No evidence authenticity or execution permission is implied.
+package reaauthority
+namespace gooo_rea_proof_authority
+entity Text id "gooo://std/text"
+entity Boolean id "gooo://std/boolean"
+
+activity ProofAuthoritySatisfies(Text, Text) -> Boolean id "gooo://rea/proof-authority-satisfies" computes `
+if input0 != "unit" && input0 != "integration" && input0 != "protocol" && input0 != "renderer" && input0 != "packaged-process" && input0 != "native-abi" && input0 != "live-observation" && input0 != "external" { return false }
+if input1 == "unit" { return true }
+if input1 == "integration" { return input0 == "integration" || input0 == "protocol" || input0 == "renderer" || input0 == "packaged-process" || input0 == "native-abi" || input0 == "live-observation" }
+if input1 == "protocol" { return input0 == "protocol" || input0 == "packaged-process" || input0 == "live-observation" }
+if input1 == "renderer" { return input0 == "renderer" || input0 == "packaged-process" || input0 == "live-observation" }
+if input1 == "packaged-process" { return input0 == "packaged-process" || input0 == "live-observation" }
+if input1 == "native-abi" { return input0 == "native-abi" }
+if input1 == "live-observation" { return input0 == "live-observation" }
+if input1 == "external" { return input0 == "external" }
+return false
+`

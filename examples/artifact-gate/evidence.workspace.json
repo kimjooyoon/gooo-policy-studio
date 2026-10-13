@@ -1,0 +1,21 @@
+{
+  "schema": "gooo/package-workspace-manifest/v1",
+  "entry": {
+    "package_path": "app/evidence-admission",
+    "activity": "EvidenceAdmission"
+  },
+  "packages": [
+    {
+      "path": "rea/proof-authority",
+      "sources": [
+        "proof_authority.gooo"
+      ]
+    },
+    {
+      "path": "app/evidence-admission",
+      "sources": [
+        "admission.gooo"
+      ]
+    }
+  ]
+}

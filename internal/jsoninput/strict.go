@@ -80,6 +80,9 @@ func Validate(raw []byte, t reflect.Type) error {
 		if bytes.Equal(bytes.TrimSpace(b), []byte("null")) {
 			return fmt.Errorf("%s: null is not allowed", path)
 		}
+		for t.Kind() == reflect.Pointer {
+			t = t.Elem()
+		}
 		if t.Kind() == reflect.Slice || t.Kind() == reflect.Array {
 			var items []json.RawMessage
 			if err := json.Unmarshal(b, &items); err != nil {
@@ -105,7 +108,8 @@ func Validate(raw []byte, t reflect.Type) error {
 		allowed := map[string]bool{}
 		for i := 0; i < t.NumField(); i++ {
 			field := t.Field(i)
-			key := strings.Split(field.Tag.Get("json"), ",")[0]
+			tag := strings.Split(field.Tag.Get("json"), ",")
+			key := tag[0]
 			if field.PkgPath != "" || key == "-" {
 				continue
 			}
@@ -115,6 +119,13 @@ func Validate(raw []byte, t reflect.Type) error {
 			allowed[key] = true
 			v, ok := fields[key]
 			if !ok {
+				optional := false
+				for _, option := range tag[1:] {
+					optional = optional || option == "omitempty"
+				}
+				if optional {
+					continue
+				}
 				return fmt.Errorf("%s.%s: required field missing", path, key)
 			}
 			if err := required(v, field.Type, path+"."+key); err != nil {

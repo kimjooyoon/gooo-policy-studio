@@ -1,0 +1,24 @@
+{
+  "schema": "gooo/body-composition-inputs/v1",
+  "inputs": [
+    {
+      "app/evidence-admission:EvidenceAdmission": {
+        "actual_authority": "live-observation",
+        "required_authority": "live-observation",
+        "status": "pass",
+        "confidence": "observed",
+        "provider_verified": true,
+        "observed_binding": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "required_binding": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "observed_artifact": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "required_artifact": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "observed_policy": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "required_policy": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "observed_at_unix": 100,
+        "now_unix": 100,
+        "max_age_seconds": 0,
+        "expires_at_unix": 101
+      }
+    }
+  ]
+}

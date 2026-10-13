@@ -23,6 +23,7 @@ type fileOperations struct {
 	write         func(*os.File, []byte) (int, error)
 	rename        func(string, string) error
 	syncDirectory func(string) error
+	beforeRename  func() error
 }
 
 func defaultOperations() fileOperations {
@@ -52,6 +53,8 @@ type Store struct {
 	operations fileOperations
 	closed     bool
 	failed     bool
+	now        func() time.Time
+	byteLimit  int // internal lower-limit seam; never raises the format's hard cap
 }
 
 func privateDirectory(dir string, create bool) (string, error) {
@@ -89,9 +92,18 @@ func Init(dir string, b Bootstrap) error {
 	if err := ValidateBootstrap(b); err != nil {
 		return err
 	}
+	b = cloneValue(b)
 	provenance, err := currentProvenance()
 	if err != nil {
 		return err
+	}
+	var implementation *PreflightProvenance
+	if b.Schema == BootstrapSchemaV2 {
+		current, err := currentPreflightProvenance()
+		if err != nil {
+			return err
+		}
+		implementation = &current
 	}
 	dir, err = privateDirectory(dir, true)
 	if err != nil {
@@ -110,6 +122,10 @@ func Init(dir string, b Bootstrap) error {
 	saved := snapshot{Schema: snapshotSchema, CreatedAt: time.Now().UTC().Format(time.RFC3339Nano), Policy: b.Policy,
 		PolicyVersion: version(b.Policy, provenance), Provenance: provenance, Principals: append([]Principal{}, b.Principals...),
 		Requests: make([]RequestState, 0, len(b.Requests)), Outcomes: []Outcome{}}
+	if b.Schema == BootstrapSchemaV2 {
+		saved.Schema, saved.Preflight, saved.Artifacts, saved.Implementation = snapshotSchemaV2, b.Preflight, b.Artifacts, implementation
+		saved.PolicyVersion = versionV2(saved)
+	}
 	for _, r := range b.Requests {
 		saved.Requests = append(saved.Requests, RequestState{Request: r, Status: Pending, Revision: 1})
 	}
@@ -152,7 +168,7 @@ func Open(dir string) (*Store, error) {
 		return nil, err
 	}
 	failed = false
-	return &Store{dir: dir, lock: lock, state: saved, operations: defaultOperations()}, nil
+	return &Store{dir: dir, lock: lock, state: saved, operations: defaultOperations(), now: time.Now}, nil
 }
 
 func readSnapshot(dir string) (snapshot, error) {
@@ -170,13 +186,16 @@ func readSnapshot(dir string) (snapshot, error) {
 	if err != nil || !os.SameFile(info, opened) || !opened.Mode().IsRegular() || opened.Mode().Perm() != 0600 {
 		return snapshot{}, failure(Unavailable, "snapshot changed while opening")
 	}
-	raw, err := io.ReadAll(io.LimitReader(file, maxSnapshotBytes+1))
+	raw, err := io.ReadAll(io.LimitReader(file, maxSnapshotBytesV2+1))
 	if err != nil {
 		return snapshot{}, failure(Unavailable, "snapshot cannot be read")
 	}
 	var saved snapshot
-	if err := jsoninput.Decode(raw, &saved, maxSnapshotBytes); err != nil {
+	if err := jsoninput.Decode(raw, &saved, maxSnapshotBytesV2); err != nil {
 		return snapshot{}, failure(Unavailable, "snapshot JSON is invalid or ambiguous")
+	}
+	if saved.Schema == snapshotSchema && len(raw) > maxSnapshotBytes {
+		return snapshot{}, failure(Unavailable, "v1 snapshot exceeds its byte bound")
 	}
 	return saved, nil
 }
@@ -185,7 +204,11 @@ func readSnapshot(dir string) (snapshot, error) {
 // and directory fsync after rename. A post-rename error has ambiguous durability.
 func persist(dir string, saved snapshot, operations fileOperations) error {
 	raw, err := json.Marshal(saved)
-	if err != nil || len(raw) > maxSnapshotBytes {
+	limit := maxSnapshotBytes
+	if saved.Schema == snapshotSchemaV2 {
+		limit = maxSnapshotBytesV2
+	}
+	if err != nil || len(raw) > limit {
 		return errors.New("snapshot serialization is unavailable")
 	}
 	file, err := os.CreateTemp(dir, ".snapshot-")
@@ -212,6 +235,11 @@ func persist(dir string, saved snapshot, operations fileOperations) error {
 	}
 	if err := file.Close(); err != nil {
 		return err
+	}
+	if operations.beforeRename != nil {
+		if err := operations.beforeRename(); err != nil {
+			return err
+		}
 	}
 	if err := operations.rename(name, filepath.Join(dir, snapshotName)); err != nil {
 		return err
@@ -268,7 +296,11 @@ func (s *Store) Inspect(token string) (View, error) {
 	if err != nil {
 		return View{}, err
 	}
-	return View{Schema: ViewSchema, PolicyVersion: s.state.PolicyVersion,
+	schema := ViewSchema
+	if s.state.Schema == snapshotSchemaV2 {
+		schema = ViewSchemaV2
+	}
+	return View{Schema: schema, PolicyVersion: s.state.PolicyVersion,
 		Principal: PrincipalView{Key: p.Key, Team: p.Team, Active: p.Active, Enabled: p.Enabled, CanExecute: p.CanExecute},
 		Requests:  append([]RequestState{}, s.state.Requests...)}, nil
 }
@@ -282,6 +314,9 @@ func (s *Store) Admit(token string, c Command) (Result, error) {
 	defer s.mu.Unlock()
 	if err := s.available(); err != nil {
 		return Result{}, err
+	}
+	if s.state.Schema == snapshotSchemaV2 {
+		return s.admitArtifact(token, c)
 	}
 	p, err := s.authenticate(token)
 	if err != nil {

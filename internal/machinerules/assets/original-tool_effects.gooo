@@ -1,0 +1,49 @@
+// Copyright (c) 2026 morluto.
+// Adapted from REA src/contracts/toolEffects.ts at
+// 8fc2043eb8bcedbf34dce064f977e455438635d6. MIT License: LICENSE-REA.
+// Ported pure symbols: annotationsFromEffects and toolReturnsTargetContent.
+// The full upstream tool registry is retained for attribution, not imported.
+// MCP hints describe effects; they do not authenticate or permit execution.
+package tooleffects
+namespace gooo_tool_effects
+entity Text id "gooo://std/text"
+entity Boolean id "gooo://std/boolean"
+
+// Required facts describe all supported inputs, including failure paths and
+// temporary work. A trusted host must obtain them from its version-bound audit.
+entity ToolEffects id "gooo://rea/tool-effects/v1" fields {
+ field mutatesTarget id "gooo://rea/tool-effects/mutates-target" type boolean required one
+ field mutatesSession id "gooo://rea/tool-effects/mutates-session" type boolean required one
+ field writesFilesystem id "gooo://rea/tool-effects/writes-filesystem" type boolean required one
+ field launchesProcess id "gooo://rea/tool-effects/launches-process" type boolean required one
+ field accessesNetwork id "gooo://rea/tool-effects/accesses-network" type boolean required one
+ field changesUiState id "gooo://rea/tool-effects/changes-ui-state" type boolean required one
+ field mayDiscardData id "gooo://rea/tool-effects/may-discard-data" type boolean required one
+ field executesForeignCode id "gooo://rea/tool-effects/executes-foreign-code" type boolean required one
+ field mutatesDevice id "gooo://rea/tool-effects/mutates-device" type boolean required one
+ field idempotent id "gooo://rea/tool-effects/idempotent" type boolean required one
+}
+
+entity DerivedToolAnnotations id "gooo://rea/derived-tool-annotations/v1" fields {
+ field readOnlyHint id "gooo://rea/derived-tool-annotations/read-only-hint" type boolean required one
+ field destructiveHint id "gooo://rea/derived-tool-annotations/destructive-hint" type boolean required one
+ field idempotentHint id "gooo://rea/derived-tool-annotations/idempotent-hint" type boolean required one
+ field openWorldHint id "gooo://rea/derived-tool-annotations/open-world-hint" type boolean required one
+}
+
+// Exact Boolean rules from pinned annotationsFromEffects. Session recording,
+// process launch and network access each prevent the readonly hint. Foreign
+// code or device mutation is destructive even when mayDiscardData is false.
+activity AnnotationsFromEffects(ToolEffects) -> DerivedToolAnnotations id "gooo://rea/annotations-from-effects" computes `
+let readOnly = !(input.mutatesTarget || input.mutatesSession || input.writesFilesystem || input.launchesProcess || input.accessesNetwork || input.changesUiState || input.mayDiscardData || input.executesForeignCode || input.mutatesDevice)
+let destructive = input.mayDiscardData || input.executesForeignCode || input.mutatesDevice
+let openWorld = input.launchesProcess || input.accessesNetwork
+return DerivedToolAnnotations{readOnlyHint: readOnly, destructiveHint: destructive, idempotentHint: input.idempotent, openWorldHint: openWorld}
+`
+
+// Preserve the pinned exact-name set and its conservative unknown-name result.
+// false marks only absence of target-origin text; it does not mean safe to run.
+// Tool selection still requires a separate host-owned, complete effect audit.
+activity ToolReturnsTargetContent(Text) -> Boolean id "gooo://rea/tool-returns-target-content" computes `
+return input != "export_evidence_bundle" && input != "record_unknown"
+`

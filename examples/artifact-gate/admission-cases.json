@@ -1,0 +1,842 @@
+{
+  "schema": "gooo/body-composition-cases/v1",
+  "cases": [
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 0,
+          "completion_ready": false,
+          "approval_effect_admissible": false,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "BASE_POLICY_DENIED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": false,
+          "evidence_ok": false,
+          "completion_ok": false,
+          "approval_effect_ok": false,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 0,
+          "completion_ready": false,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "BASE_POLICY_DENIED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": false,
+          "evidence_ok": false,
+          "completion_ok": false,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 0,
+          "completion_ready": true,
+          "approval_effect_admissible": false,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "BASE_POLICY_DENIED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": false,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": false,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 0,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "BASE_POLICY_DENIED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": false,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": false,
+          "approval_effect_admissible": false,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "BASE_POLICY_DENIED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": false,
+          "evidence_ok": true,
+          "completion_ok": false,
+          "approval_effect_ok": false,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": false,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "BASE_POLICY_DENIED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": false,
+          "evidence_ok": true,
+          "completion_ok": false,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": false,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "BASE_POLICY_DENIED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": false,
+          "evidence_ok": true,
+          "completion_ok": true,
+          "approval_effect_ok": false,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "BASE_POLICY_DENIED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": false,
+          "evidence_ok": true,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 0,
+          "completion_ready": false,
+          "approval_effect_admissible": false,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "EVIDENCE_REJECTED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": false,
+          "approval_effect_ok": false,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 0,
+          "completion_ready": false,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "EVIDENCE_REJECTED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": false,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 0,
+          "completion_ready": true,
+          "approval_effect_admissible": false,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "EVIDENCE_REJECTED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": false,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 0,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "EVIDENCE_REJECTED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": false,
+          "approval_effect_admissible": false,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "CLAIMS_NOT_COMPLETE",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": true,
+          "completion_ok": false,
+          "approval_effect_ok": false,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": false,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "CLAIMS_NOT_COMPLETE",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": true,
+          "completion_ok": false,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": false,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "OPERATION_EFFECT_DISALLOWED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": true,
+          "completion_ok": true,
+          "approval_effect_ok": false,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": true,
+          "reason": "ADMITTED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": true,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 0,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "INVALID_COUNTS",
+          "counts_ok": false,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": -1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "INVALID_COUNTS",
+          "counts_ok": false,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 257,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "INVALID_COUNTS",
+          "counts_ok": false,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": -1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "INVALID_COUNTS",
+          "counts_ok": false,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 257,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "INVALID_COUNTS",
+          "counts_ok": false,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": -1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "INVALID_COUNTS",
+          "counts_ok": false,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 2,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "INVALID_COUNTS",
+          "counts_ok": false,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 9223372036854775807,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "INVALID_COUNTS",
+          "counts_ok": false,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 256,
+          "observed_count": 256,
+          "admissible_evidence_count": 256,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": true,
+          "reason": "ADMITTED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": true,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 2,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "EVIDENCE_REJECTED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": false,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": true
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "PROVENANCE_MISMATCH",
+          "counts_ok": true,
+          "provenance_ok": false,
+          "base_policy_ok": true,
+          "evidence_ok": true,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": true
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": true,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": false
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "CONTROL_PLANE_EFFECT_DISALLOWED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": true,
+          "evidence_ok": true,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": false
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": false,
+          "base_policy_approved": false,
+          "required_count": 0,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": false
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "INVALID_COUNTS",
+          "counts_ok": false,
+          "provenance_ok": false,
+          "base_policy_ok": false,
+          "evidence_ok": false,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": false
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": false,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": false
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "PROVENANCE_MISMATCH",
+          "counts_ok": true,
+          "provenance_ok": false,
+          "base_policy_ok": false,
+          "evidence_ok": true,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": false
+        }
+      }
+    },
+    {
+      "inputs": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "provenance_ok": true,
+          "base_policy_approved": false,
+          "required_count": 1,
+          "observed_count": 1,
+          "admissible_evidence_count": 1,
+          "completion_ready": true,
+          "approval_effect_admissible": true,
+          "control_plane_effect_admissible": false
+        }
+      },
+      "expected": {
+        "gooo/artifact-gate:ArtifactGateAdmits": {
+          "admitted": false,
+          "reason": "CONTROL_PLANE_EFFECT_DISALLOWED",
+          "counts_ok": true,
+          "provenance_ok": true,
+          "base_policy_ok": false,
+          "evidence_ok": true,
+          "completion_ok": true,
+          "approval_effect_ok": true,
+          "control_plane_effect_ok": false
+        }
+      }
+    }
+  ]
+}
