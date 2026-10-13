@@ -9,7 +9,7 @@ The Go host handles input validation, authentication and local storage.
 The configured local machine gate makes decisions automatically under its
 server-owned policy, without a person approving each request.
 
-Choose one of the existing English walkthroughs:
+Choose an English walkthrough:
 
 1. **Download and try comparison/replay without building.** The
    [fixed `policy-impact-v0.1.0-preview.1` kit](https://github.com/kimjooyoon/gooo-policy-studio/releases/tag/policy-impact-v0.1.0-preview.1)
@@ -20,7 +20,15 @@ Choose one of the existing English walkthroughs:
    This sealed kit uses exact-equality artifact recipes and **excludes integer
    bounds and `explain`**. Read the walkthrough's build and download limits
    before running it.
-2. **Build the current source for integer bounds and private explanations.**
+2. **Try a numeric bounds preview without building.** The
+   [bounds kit walkthrough](docs/artifact-bounds-first-use.md) describes the
+   separately versioned `artifact-bounds/v1` profile: compare a limit change,
+   delete the copied inputs, replay the report and save a private HTML
+   explanation. Its three calls use the included executable and standard
+   shell tools, without Go, Python, a server, account or token. Choose a release
+   explicitly identified as a bounds-profile kit; the sealed kit above remains
+   an equality-only walkthrough.
+3. **Build the current source for integer bounds and private explanations.**
    Start with the [integer bounds example](docs/artifact-int64-bounds.md), using
    **Go 1.27.2** and **Python 3** for its copied-fixture setup. Then follow
    [the explanation walkthrough](docs/artifact-policy-explain.md) to turn the
@@ -28,7 +36,7 @@ Choose one of the existing English walkthroughs:
    is included; these examples need no compiler regeneration. The HTML keeps
    the historical judgments and needs no JavaScript or running server.
 
-Both paths use synthetic examples. A saved comparison, replay or explanation
+These paths use synthetic examples. A saved comparison, replay or explanation
 preserves unsigned historical judgments; it does not grant current API/export
 permission or change a running policy. The reports and HTML contain private
 case values.

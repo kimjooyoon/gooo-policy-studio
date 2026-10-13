@@ -10,6 +10,8 @@ verification data stays available in expandable sections.
 Use the [integer bounds example](artifact-int64-bounds.md) to prepare a private
 comparison report. Build the current source with Go 1.27.2; the generated Gooo
 code is included, so viewing an explanation needs no compiler regeneration.
+The separate [numeric bounds kit walkthrough](artifact-bounds-first-use.md)
+also prepares and explains the same synthetic comparison without Go or Python.
 
 ```sh
 go build -trimpath -o bin/policy-impact ./cmd/policy-impact

@@ -27,6 +27,8 @@ MAX_MEMBERS = 4096
 MODULE = "github.com/kimjooyoon/gooo-policy-studio"
 ROOT = "policy-impact-kit/"
 SEEDS = ("case.json", "artifact.json", "policy-internal.json", "policy-external.json")
+BOUNDS_SEEDS = ("case-row-501.json", "artifact-row-501.json", "policy-before-upper-1000.json", "policy-after-upper-500.json")
+BOUNDS_DOCS = ("artifact-bounds-first-use.md", "artifact-int64-bounds.md", "artifact-policy-explain.md", "artifact-policy-impact.md", "artifact-policy-replay.md")
 MAGIC = b"\xff Go buildinf:"
 
 
@@ -249,8 +251,72 @@ unsigned historical consistency do not authorize current execution or prove
 artifact issuer authenticity, external effects, adoption or universal safety.
 """
 
+BOUNDS_NOTICE = b"""Policy Impact numeric bounds experimental first-use kit
+
+Gooo is an independent language project; Google does not endorse this project.
+Compiled Gooo rules judge numeric bounds; Go provides host I/O and JSON.
+Project: MIT (LICENSE). Go runtime: BSD (Go-LICENSE). Rea-derived materials:
+morluto MIT (LICENSE-REA). All notices and the committed source are included.
+
+This assembly copies an existing executable and preserves actual Go/VCS/CGO
+metadata. Dirty or older binary revision is not a clean package/tag build.
+The package source commit is separate. Embedded source bytes and unsigned
+hashes check consistency, not publisher signature or instruction equivalence.
+
+macOS Developer ID signing, notarization, a minimum runtime and browser-download
+quarantine behavior have not been established. No protections are bypassed.
+Inspect actual CGO settings; this is not a static-binary claim. Linux execution
+is checked on the repository Ubuntu CI runner, not other distributions or musl.
+
+Only darwin/arm64 and linux/amd64 are defined. Historical replay requires matching
+source/runtime/platform. Compare/replay/explain are local simulations, not a
+current execution grant, authenticated history or artifact issuer proof. The
+private HTML contains selected values. No production, adoption or universal
+safety claim is made. Three CLI calls do not measure native or host-clock calls.
+"""
+
+
+def bounds_linkage(binary, source):
+    """Source-material presence only, not exact embedded-variable linkage.
+
+    Only the connected policy-impact runtime packages are in this finite roster.
+    Presence does not map binary symbols/pointers, prove compiled instructions,
+    or authenticate code. Tests, CLI handling and tool sources are outside this
+    check; the optional three-call observation checks finite behavior.
+    """
+    packages = ("internal/artifactimpact/", "internal/artifactpreflight/", "internal/artifactnumeric/",
+                "internal/jsoninput/", "internal/policy/", "internal/completion/", "internal/machinerules/")
+    selected = set()
+    for path, raw in source.items():
+        if not path.startswith(packages) or not path.endswith(".go") or path.endswith("_test.go"):
+            continue
+        parent = path.rsplit("/", 1)[0] + "/"
+        for line in raw.decode("utf-8", "strict").splitlines():
+            if line.startswith("//go:embed "):
+                for pattern in line[len("//go:embed "):].split():
+                    directory_glob = pattern.endswith("/*")
+                    selected_pattern = pattern[:-2] if directory_glob else pattern
+                    need(safe_path(selected_pattern), "EMBED_PATTERN_UNSUPPORTED")
+                    name = parent + selected_pattern
+                    if name in source:
+                        need(not directory_glob, "EMBED_PATTERN_UNSUPPORTED")
+                        selected.add(name)
+                    else:
+                        matches = {n for n in source if n.startswith(name + "/")}
+                        need(bool(matches), "EMBED_SOURCE_MISSING")
+                        selected.update(matches)
+    need(bool(selected), "EMBED_ROSTER_EMPTY")
+    rows = []
+    for name in sorted(selected):
+        raw = source[name]
+        need(bool(raw) and raw in binary, "BINARY_EMBED_SOURCE_MISMATCH")
+        rows.append({"path": name, "bytes": len(raw), "sha256": sha(raw)})
+    return {"method": "source_material_presence/v1", "authenticated": False,
+            "CLI_argument_handling_bound": False, "sources": rows}
+
 
 def assemble(args):
+    bounds = getattr(args, "profile", "equality") == "bounds"
     repo = Path(args.repo).resolve(strict=True)
     before = read_regular(args.binary, MAX_BINARY)
     build, normalized = supplied_build(read_regular(args.buildinfo, 1 << 20))
@@ -258,18 +324,19 @@ def assemble(args):
     need(build == actual, "BUILDINFO_TEXT_DOES_NOT_MATCH_BINARY")
     tree, source, source_modes = source_snapshot(repo, args.source_ref)
     payload = {"bin/policy-impact": before, "buildinfo.txt": normalized,
-               "target.txt": (args.target + "\n").encode(), "notices/NOTICE.md": NOTICE}
+               "target.txt": (args.target + "\n").encode(), "notices/NOTICE.md": BOUNDS_NOTICE if bounds else NOTICE}
     modes = {name: 0o644 for name in payload}
     modes["bin/policy-impact"] = 0o755
-    for name in SEEDS:
-        path = "examples/artifact-impact/" + name
+    for name in BOUNDS_SEEDS if bounds else SEEDS:
+        path = ("examples/artifact-int64-bounds/" if bounds else "examples/artifact-impact/") + name
         need(path in source, "SOURCE_SEED_MISSING")
         payload["seeds/" + name] = source[path]
-    for name in ("policy-impact-first-use.md", "artifact-policy-impact.md", "artifact-policy-replay.md"):
+    for name in BOUNDS_DOCS if bounds else ("policy-impact-first-use.md", "artifact-policy-impact.md", "artifact-policy-replay.md"):
         need("docs/" + name in source, "SOURCE_DOC_MISSING")
         payload["docs/" + name] = source["docs/" + name]
-    need("examples/artifact-impact/try-demo.sh" in source, "SOURCE_DEMO_MISSING")
-    payload["try-demo.sh"] = source["examples/artifact-impact/try-demo.sh"]
+    demo_path = "examples/artifact-int64-bounds/try-demo.sh" if bounds else "examples/artifact-impact/try-demo.sh"
+    need(demo_path in source, "SOURCE_DEMO_MISSING")
+    payload["try-demo.sh"] = source[demo_path]
     modes["try-demo.sh"] = 0o755
     for original, name in (("LICENSE", "LICENSE"), ("licenses/Go-LICENSE", "Go-LICENSE"), ("internal/machinerules/assets/LICENSE-REA", "LICENSE-REA")):
         need(original in source, "SOURCE_LICENSE_MISSING")
@@ -292,6 +359,10 @@ def assemble(args):
                 "limitations": {"macos_developer_id_or_notarization_claimed": False, "download_quarantine_tested": False,
                                 "minimum_macos_runtime_verified": False, "portable_historical_replay": False,
                                 "binary_was_rebuilt_during_assembly": False}}
+    if bounds:
+        manifest["schema"] = "policy-impact-kit/v2"
+        manifest["profile"] = "artifact-bounds/v1"
+        manifest["binary_source_bindings"] = bounds_linkage(before, source)
     payload["manifest.json"], modes["manifest.json"] = text_json(manifest), 0o644
     payload["SHA256SUMS"] = ("".join(sha(payload[n]) + "  " + n + "\n" for n in sorted(payload))).encode()
     modes["SHA256SUMS"] = 0o644
@@ -299,7 +370,7 @@ def assemble(args):
     out = Path(args.out_dir)
     out.mkdir(mode=0o700, parents=False, exist_ok=False)
     out.chmod(0o700)
-    filename = "policy-impact-" + args.target.replace("/", "-") + ".zip"
+    filename = ("policy-impact-bounds-" if bounds else "policy-impact-") + args.target.replace("/", "-") + ".zip"
     destination = out / filename
     with destination.open("xb") as stream:
         os.fchmod(stream.fileno(), 0o644)
@@ -318,11 +389,14 @@ def assemble(args):
     final_tree, final_source, final_modes = source_snapshot(repo, args.source_ref)
     need((tree, source, source_modes) == (final_tree, final_source, final_modes), "SOURCE_CHANGED_DURING_ASSEMBLY")
     zip_bytes = read_regular(destination, MAX_ARCHIVE)
-    observation = {"schema": "policy-impact-kit-assembly/v1", "status": "assembled", "target": args.target,
+    observation = {"schema": "policy-impact-kit-assembly/v2" if bounds else "policy-impact-kit-assembly/v1", "status": "assembled", "target": args.target,
                    "source_commit": args.source_ref, "source_tree": tree, "archive": row(filename, zip_bytes, 0o644),
                    "manifest_sha256": sha(payload["manifest.json"]), "binary_before": row("policy-impact", before, 0o755),
                    "binary_after": row("policy-impact", after, 0o755), "binary_unchanged": True,
                    "product_calls": 0, "builds": 0, "network_calls": 0, "copied_source_files": len(source)}
+    if bounds:
+        observation["profile"] = "artifact-bounds/v1"
+        observation["binary_source_bindings"] = manifest["binary_source_bindings"]
     with (out / "package-manifest.json").open("xb") as stream:
         os.fchmod(stream.fileno(), 0o644)
         stream.write(text_json(observation))
@@ -340,12 +414,13 @@ def main():
     parser.add_argument("--out-dir", required=True)
     parser.add_argument("--source-ref", required=True)
     parser.add_argument("--repo", default=str(Path(__file__).resolve().parents[1]))
+    parser.add_argument("--profile", choices=("equality", "bounds"), default="equality")
     args = parser.parse_args()
     try:
         assemble(args)
     except (Invalid, OSError, UnicodeError, ValueError, tarfile.TarError, zipfile.BadZipFile, subprocess.SubprocessError) as error:
         code = str(error) if isinstance(error, Invalid) else "ASSEMBLY_FAILED"
-        print(json.dumps({"schema": "policy-impact-kit-assembly/v1", "status": "error", "code": code,
+        print(json.dumps({"schema": "policy-impact-kit-assembly/v2" if args.profile == "bounds" else "policy-impact-kit-assembly/v1", "status": "error", "code": code,
                           "product_calls": 0}, separators=(",", ":")))
         return 2
     return 0

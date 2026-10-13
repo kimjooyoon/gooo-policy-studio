@@ -45,6 +45,10 @@ restricted to `field_equals/v1`; recipe v2 can also use that equality predicate.
 
 ## Try a limit change
 
+For a separately assembled preview that needs no Go or Python, follow the
+[numeric bounds kit walkthrough](artifact-bounds-first-use.md). The source
+instructions below remain available for building and preparing your own copies.
+
 The [synthetic fixtures](../examples/artifact-int64-bounds/) require six
 conditions: action, destination, lower bound, upper bound, dry-run and format.
 The before policy allows `0..1000`; the after policy allows `0..500`.
