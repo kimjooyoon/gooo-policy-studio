@@ -35,6 +35,9 @@ PROTECTED = {
     "files_unix.go": "fa8d93b0111a78ac7f56b11225944f3b517298a0a831aff14636ffd4af0388e5",
     "files_other.go": "71e48ad3de66a1ed9bc02892888fb3f73f6f484bc5baac51b6677824e13a0bf3",
 }
+# This source-first registry-v2 unit changes only the checked identity wrapper.
+# Keep the earlier profile intact; require the explicitly frozen current bytes.
+CURRENT_PROTECTED = {**PROTECTED, "identity.go": "a4b2c6bdd18ff171d9eb39fb1bf20dd6851a2579ed6ddbaa7b964c1568956201"}
 DOC_ARTIFACT = b'{\n  "schema": "gooo/export-plan/v1",\n  "action": "prepare_export",\n  "destination": "internal",\n  "row_limit": 500,\n  "dry_run": true,\n  "format": "jsonl"\n}\n'
 SIMPLE_ARTIFACT = b'{"schema":"replay.test/v1","destination":"internal"}'
 COUNT_KEYS = ("total", "pass", "fail", "unsupported", "truncated", "unknown")
@@ -377,10 +380,10 @@ class Observer:
 
     def bind_verifier(self, report):
         host = report["implementation"]["host_sources"]
-        require({x["path"]: x["sha256"][7:] for x in host} == PROTECTED, "OLD_PRODUCER_SOURCE_CHANGED")
+        require({x["path"]: x["sha256"][7:] for x in host} == CURRENT_PROTECTED, "CURRENT_PRODUCER_SOURCE_CHANGED")
         current = {p["path"]: p["sha256"] for p in self.proof["source_inventory_before"]}
-        for name, digest in PROTECTED.items():
-            require(current["internal/artifactimpact/" + name] == "sha256:" + digest, "OLD_SOURCE_BYTES_CHANGED")
+        for name, digest in CURRENT_PROTECTED.items():
+            require(current["internal/artifactimpact/" + name] == "sha256:" + digest, "CURRENT_SOURCE_BYTES_CHANGED")
         identity = {
             "schema": "policy-studio/artifact-impact-replay-source/v1",
             "sources": [{"path": name, "sha256": current["internal/artifactimpact/" + name]}
