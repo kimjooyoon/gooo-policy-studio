@@ -102,6 +102,11 @@ mkdir -m 700 -p "$HOME/.local/state/gooo-policy-studio"
 승인 `200`, Gooo 거절과 영속 결과 `403 policy_denied`, 같은 키의 변경 명령이나
 오래된 상태 `409`, 불확실한 저장·상한·실행 오류 `503`의 의미는 기존과 같습니다.
 
+[`policy-client` 실행 안내](policy-client.md)는 토큰을 출력하지 않고 실제 상태의
+version·revision을 새 명령 파일로 준비하며, 제출과 재시도에 원문을 그대로
+사용하는 방법을 제공합니다. [두 요청 예제](../examples/gate-client/README.md)는
+별도의 새 상태로 승인과 산출물 변경에 따른 거절을 확인합니다.
+
 ## 범위와 검증 근거
 
 파일 최대 64 KiB, 스키마 외 필드 최대 255개, 필수 검증 최대 256개, 초기 요청

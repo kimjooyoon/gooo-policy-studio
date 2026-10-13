@@ -57,6 +57,17 @@ jobs:
           path: out/artifact-gate-proof.json
           if-no-files-found: error
           retention-days: 14
+      - name: Verify private client preparation and exact saved-command retries
+        run: |
+          go build -trimpath -o bin/policy-client ./cmd/policy-client
+          python3 tools/verify-policy-client.py --client-binary bin/policy-client --gate-binary bin/policy-gate --out out/policy-client-proof.json
+      - name: Preserve the private client process observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: policy-client-proof
+          path: out/policy-client-proof.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Check JavaScript syntax
         run: node --check web/app.js
       - name: Check import and pending-operation behavior

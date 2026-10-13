@@ -1,0 +1,8 @@
+{
+  "schema": "gooo/export-plan/v1",
+  "action": "prepare_export",
+  "destination": "internal",
+  "row_limit": 500,
+  "dry_run": true,
+  "format": "jsonl"
+}
