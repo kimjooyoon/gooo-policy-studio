@@ -13,10 +13,9 @@ locally without JavaScript or remote resources.
 
 ## Choose the bounds-profile download
 
-On the [repository Releases page](https://github.com/kimjooyoon/gooo-policy-studio/releases),
-select a release explicitly identified as an **integer bounds and explanation
-kit** with manifest schema `policy-impact-kit/v2` and profile `artifact-bounds/v1`.
-These instructions alone do not establish that a release has been published.
+The [published `policy-impact-bounds-v0.1.0-preview.1` preview](https://github.com/kimjooyoon/gooo-policy-studio/releases/tag/policy-impact-bounds-v0.1.0-preview.1)
+is an **integer bounds and explanation kit** with manifest schema
+`policy-impact-kit/v2` and profile `artifact-bounds/v1`.
 Choose `policy-impact-bounds-darwin-arm64.zip` for macOS arm64 or
 `policy-impact-bounds-linux-amd64.zip` for Linux amd64. Other targets are not
 defined for this kit.
