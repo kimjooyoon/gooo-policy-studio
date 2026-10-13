@@ -2,7 +2,7 @@ name: Verify
 on:
   push:
     branches: [main]
-    tags: ['**', '!v*']
+    tags: ['**', '!v*', '!policy-impact-*']
   pull_request:
   workflow_call:
     inputs:
@@ -86,6 +86,18 @@ jobs:
         with:
           name: artifact-policy-replay-proof
           path: out/artifact-policy-replay-proof.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Package and check the existing policy-impact executable
+        run: |
+          go version -m bin/policy-impact > out/policy-impact-buildinfo.txt
+          python3 -I tools/package-policy-impact-kit.py --binary bin/policy-impact --buildinfo out/policy-impact-buildinfo.txt --target linux/amd64 --source-ref "$GITHUB_SHA" --out-dir out/policy-impact-kit
+          python3 -I tools/verify-policy-impact-kit.py --archive out/policy-impact-kit/policy-impact-linux-amd64.zip --source-ref "$GITHUB_SHA" --output out/policy-impact-kit/verification.json --run-demo
+      - name: Preserve the checked policy-impact first-use kit
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: policy-impact-first-use-kit
+          path: out/policy-impact-kit/*
           if-no-files-found: error
           retention-days: 14
       - name: Check JavaScript syntax
