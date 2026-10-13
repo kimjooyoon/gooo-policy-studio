@@ -192,6 +192,11 @@ go build -trimpath -o bin/policy-check ./cmd/policy-check
 구현이 일치해야 하며, 원본 입력 JSON의 바이트는 보존되지 않아 그 해시의 원문을
 확인할 수는 없습니다.
 
+[`policy-impact explain`](docs/artifact-policy-explain.md)은 저장된 비교 전체를
+검증한 뒤 비공개 HTML로 판단 이유를 보여줍니다. 양쪽의 필수 조건·증거 유효기간·
+완료 상태·효과 예산을 함께 확인하며, 기존 정책이나 현재 실행 권한을 변경하지
+않습니다. 이 기능은 현재 소스에서 빌드해 사용합니다.
+
 [빌드 없이 실행하는 체험 패키지](docs/policy-impact-first-use.md)는 macOS ARM64와
 Linux AMD64용 비교·재현 명령, 공개 합성 입력, 출처와 라이선스를 묶습니다.
 별도 Go 설치 없이 같은 산출물의 목적지 정책을 양방향으로 비교하고, 복사한 입력을

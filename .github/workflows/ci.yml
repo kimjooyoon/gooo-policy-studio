@@ -31,12 +31,19 @@ jobs:
       - name: Race and domain tests
         run: |
           mkdir -p out
-          GOOO_INT64_NATIVE_PROOF_PATH="$PWD/out/int64-native-proof.json" go test -race ./...
+          GOOO_INT64_NATIVE_PROOF_PATH="$PWD/out/int64-native-proof.json" GOOO_EXPLAIN_OBSERVATIONS_PATH="$PWD/out/explain-observations.json" go test -race ./...
       - name: Preserve independent integer bound native observations
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: artifact-int64-native-observations
           path: out/int64-native-proof.json
+          if-no-files-found: error
+          retention-days: 14
+      - name: Preserve verified private explanation observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: artifact-policy-explain-observations
+          path: out/explain-observations.json
           if-no-files-found: error
           retention-days: 14
       - name: Build standalone executable

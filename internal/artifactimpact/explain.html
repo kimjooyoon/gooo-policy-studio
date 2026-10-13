@@ -1,0 +1,112 @@
+{{define "side"}}
+<h3>Final judgment</h3>
+<dl><dt>Would admit</dt><dd>{{.WouldAdmit}}</dd><dt>Reason</dt><dd>{{.Reason}}</dd></dl>
+<details><summary>Compiled admission decision and facts</summary>
+<h4>Admission decision</h4><pre><code>{{.AdmissionDecisionJSON}}</code></pre>
+<h4>Admission facts</h4><pre><code>{{.AdmissionFactsJSON}}</code></pre>
+</details>
+
+<h3>Acquisition and producer outcome</h3>
+<dl><dt>Acquisition status</dt><dd>{{.AcquisitionStatus}}</dd></dl>
+<details><summary>Producer outcome</summary><pre><code>{{.ProducerJSON}}</code></pre></details>
+
+<h3>Required claim completion</h3>
+<details><summary>Completion decision, coverage and ordered compiled steps</summary>
+<h4>Completion decision</h4><pre><code>{{.CompletionSummaryJSON}}</code></pre>
+<h4>Required claim coverage</h4><pre><code>{{.CoverageJSON}}</code></pre>
+<h4>Readiness</h4><pre><code>{{.ReadinessJSON}}</code></pre>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Ordered completion results">
+<table><caption>Ordered completion results</caption><thead><tr><th scope="col">Claim</th><th scope="col">Status</th><th scope="col">Compiled step</th></tr></thead>
+<tbody>{{range .OrderedResults}}<tr><th scope="row">{{.Claim}}</th><td>{{.Status}}</td><td><pre><code>{{.StepJSON}}</code></pre></td></tr>{{end}}</tbody></table>
+</div>
+</details>
+
+<h3>Claim results</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Required claim results">
+<table><caption>Claims in configured required order</caption><thead><tr><th scope="col">Claim</th><th scope="col">Required</th><th scope="col">Verifier</th><th scope="col">Field</th><th scope="col">Expected</th><th scope="col">Status</th><th scope="col">Actual</th><th scope="col">Reason</th><th scope="col">Evidence admissible</th><th scope="col">Evidence reason</th></tr></thead>
+<tbody>{{range .Claims}}<tr><th scope="row">{{.Claim}}</th><td>{{.Required}}</td><td>{{.Verifier}}</td><td><bdi>{{.Field}}</bdi></td><td><bdi>{{.Expected}}</bdi></td><td>{{.Status}}</td><td><bdi>{{.Actual}}</bdi></td><td>{{.Reason}}</td><td>{{.EvidenceAdmissible}}</td><td>{{.EvidenceReason}}</td></tr>{{end}}</tbody></table>
+</div>
+{{range .Claims}}
+<article class="claim-detail">
+<details><summary>Evidence and native proof: {{.Claim}}</summary>
+<h4>Claim evidence: {{.Claim}}</h4>
+<h5>Evidence facts</h5><pre><code>{{.EvidenceFactsJSON}}</code></pre>
+<h5>Evidence decision</h5><pre><code>{{.EvidenceDecisionJSON}}</code></pre>
+<h5>Native proof</h5>
+{{if .NativeExecuted}}<pre><code>{{.NativeProofJSON}}</code></pre>{{else}}<p>Not executed</p>{{end}}
+</details>
+</article>
+{{end}}
+
+<h3>Proposed approval effects</h3>
+<details><summary>Approval effect facts, budget and compiled decision</summary>
+<p>Modeled facts, budget and compiled decision; no target effects are executed.</p>
+<pre><code>{{.ApprovalJSON}}</code></pre>
+</details>
+<h3>Proposed control-plane effects</h3>
+<details><summary>Control-plane effect facts, budget and compiled decision</summary>
+<p>Historical comparison proposal; this is separate from the current local explanation write.</p>
+<pre><code>{{.ControlPlaneJSON}}</code></pre>
+</details>
+{{end}}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Historical policy comparison</title>
+<style>
+:root{color-scheme:light;--ink:#182535;--muted:#41546b;--line:#c7d1df;--paper:#fff;--wash:#f3f6fa;--accent:#165683}
+*{box-sizing:border-box}body{margin:0;background:var(--wash);color:var(--ink);font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header,main,footer{max-width:1120px;margin:auto;padding:24px}header{padding-top:40px}h1{font-size:clamp(1.8rem,5vw,2.7rem);line-height:1.2;margin:0 0 16px}h2{font-size:1.6rem;margin-top:0}h3{margin-top:32px;color:var(--accent)}h4,h5{font-size:1rem;margin:18px 0 8px}
+section{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:24px;min-width:0}.disclosure{border-left:5px solid var(--accent);padding:14px 18px;background:#e8f1f9}.muted{color:var(--muted)}
+.judgment-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:16px 0 24px}.judgment-card{padding:16px;background:var(--wash);border:1px solid var(--line);border-radius:8px}.judgment-card h3{margin:0 0 12px}.judgment-card dl{grid-template-columns:minmax(110px,1fr) minmax(0,2fr);margin:0}.counts{font-size:14px;color:var(--muted);margin-bottom:0}.counts span{display:inline-block;margin-right:12px}details{border:1px solid var(--line);border-radius:6px;padding:12px;margin:10px 0 18px}summary{font-weight:650;cursor:pointer;color:var(--accent)}summary:focus-visible{outline:3px solid var(--accent);outline-offset:4px}details[open] summary{margin-bottom:14px}.changed-values{display:block;margin:0;font-size:13px}.changed-values dt{font-weight:650}.changed-values dd{margin:0 0 8px}
+dl{display:grid;grid-template-columns:minmax(140px,1fr) minmax(0,3fr);gap:8px 16px}dt{font-weight:650}dd{margin:0;overflow-wrap:anywhere}pre{margin:8px 0 18px;padding:14px;border:1px solid var(--line);background:var(--wash);border-radius:6px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;margin:12px 0 24px}.table-scroll:focus{outline:3px solid var(--accent);outline-offset:3px}table{border-collapse:collapse;width:100%;font-size:14px}caption{text-align:left;font-weight:650;padding:12px;background:var(--wash)}th,td{padding:12px;vertical-align:top;text-align:left;border-top:1px solid var(--line);min-width:105px;overflow-wrap:anywhere}thead th{background:var(--wash)}tbody th{font-weight:650}td pre{min-width:250px;margin:0}td,dd,pre,bdi{unicode-bidi:isolate}.claim-detail{border-top:1px solid var(--line);padding-top:10px}footer{font-size:14px;color:var(--muted)}
+@media(max-width:640px){header,main,footer{padding:16px}header{padding-top:26px}section{padding:16px;border-radius:8px}.judgment-cards{grid-template-columns:1fr}.judgment-card dl{grid-template-columns:1fr}dl{grid-template-columns:1fr;gap:2px}dd{margin-bottom:8px}th,td{padding:10px}pre{padding:10px}}
+@media print{body{background:#fff}header,main,footer{max-width:none;padding:10px}section{break-inside:auto}.table-scroll{overflow:visible}table{font-size:10px}th,td{min-width:0;padding:4px}td pre{min-width:0}}
+</style>
+</head>
+<body>
+<header>
+<h1>Historical policy comparison</h1>
+<p class="disclosure">Private historical simulation; not current authorization. Coherently rewritten unsigned history can remain internally consistent.</p>
+<p class="muted">The complete saved report was replay-verified before rendering. The original evidence time is retained. Replay and source consistency probes execute compiled rules and may read the host clock; they do not acquire the current artifact or issue current authorization.</p>
+</header>
+<main>
+<section id="comparison" aria-labelledby="comparison-heading">
+<h2 id="comparison-heading">Comparison</h2>
+<div class="judgment-cards">
+<article class="judgment-card"><h3>Before final judgment</h3><dl><dt>Would admit</dt><dd>{{.BeforeSummary.WouldAdmit}}</dd><dt>Reason</dt><dd>{{.BeforeSummary.Reason}}</dd></dl><p class="counts"><span>Total: {{.BeforeSummary.Counts.Total}}</span><span>Pass: {{.BeforeSummary.Counts.Pass}}</span><span>Fail: {{.BeforeSummary.Counts.Fail}}</span><span>Unsupported: {{.BeforeSummary.Counts.Unsupported}}</span><span>Truncated: {{.BeforeSummary.Counts.Truncated}}</span><span>Unknown: {{.BeforeSummary.Counts.Unknown}}</span></p></article>
+<article class="judgment-card"><h3>After final judgment</h3><dl><dt>Would admit</dt><dd>{{.AfterSummary.WouldAdmit}}</dd><dt>Reason</dt><dd>{{.AfterSummary.Reason}}</dd></dl><p class="counts"><span>Total: {{.AfterSummary.Counts.Total}}</span><span>Pass: {{.AfterSummary.Counts.Pass}}</span><span>Fail: {{.AfterSummary.Counts.Fail}}</span><span>Unsupported: {{.AfterSummary.Counts.Unsupported}}</span><span>Truncated: {{.AfterSummary.Counts.Truncated}}</span><span>Unknown: {{.AfterSummary.Counts.Unknown}}</span></p></article>
+</div>
+<dl><dt>Observation Unix</dt><dd>{{.ObservationUnix}}</dd><dt>Direction</dt><dd>{{.Direction}}</dd><dt>Permission eligible</dt><dd>{{.Permission.Eligible}}</dd><dt>Permission reason</dt><dd>{{.Permission.Reason}}</dd><dt>Modeled HTTP status</dt><dd>{{.Permission.ModeledHTTPStatus}}</dd></dl>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Changed claim results">
+<table><caption>Changed claim results</caption><thead><tr><th scope="col">Claim</th><th scope="col">Before expected / status</th><th scope="col">After expected / status</th><th scope="col">Actual</th><th scope="col">Reason</th><th scope="col">Evidence reason</th></tr></thead><tbody>
+{{range .ChangedClaims}}<tr><th scope="row">{{.Claim}}</th><td><bdi>{{.BeforeExpected}}</bdi><br>{{.BeforeStatus}}</td><td><bdi>{{.AfterExpected}}</bdi><br>{{.AfterStatus}}</td><td><dl class="changed-values"><dt>Before</dt><dd><bdi>{{.BeforeActual}}</bdi></dd><dt>After</dt><dd><bdi>{{.AfterActual}}</bdi></dd></dl></td><td><dl class="changed-values"><dt>Before</dt><dd>{{.BeforeReason}}</dd><dt>After</dt><dd>{{.AfterReason}}</dd></dl></td><td><dl class="changed-values"><dt>Before</dt><dd>{{.BeforeEvidenceReason}}</dd><dt>After</dt><dd>{{.AfterEvidenceReason}}</dd></dl></td></tr>{{else}}<tr><td colspan="6">No changed claims.</td></tr>{{end}}
+</tbody></table></div>
+<details><summary>Compiled base policy judgments</summary>
+<h3>Base before decision</h3><pre><code>{{.BaseBeforeJSON}}</code></pre>
+<h3>Base after decision</h3><pre><code>{{.BaseAfterJSON}}</code></pre>
+<h3>Base change</h3><pre><code>{{.BaseChangeJSON}}</code></pre>
+</details>
+<details><summary>Complete policy and claim delta, including additions and removals</summary>
+<h3>Claim and policy delta</h3><pre><code>{{.DeltaJSON}}</code></pre>
+</details>
+</section>
+<section id="side-before" aria-labelledby="before-heading"><h2 id="before-heading">Before policy</h2>{{template "side" .Before}}</section>
+<section id="side-after" aria-labelledby="after-heading"><h2 id="after-heading">After policy</h2>{{template "side" .After}}</section>
+<section id="provenance" aria-labelledby="provenance-heading">
+<h2 id="provenance-heading">Source provenance</h2>
+<details><summary>Renderer and verifier source bindings</summary>
+<dl><dt>Renderer schema</dt><dd>{{.RendererSchema}}</dd><dt>Renderer identity SHA</dt><dd>{{.RendererSHA256}}</dd><dt>Replay verifier SHA</dt><dd>{{.ReplaySHA256}}</dd><dt>Comparison identity SHA</dt><dd>{{.ComparisonSHA256}}</dd></dl>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Renderer source hashes"><table><caption>Exact renderer source roster</caption><thead><tr><th scope="col">Source</th><th scope="col">SHA256</th></tr></thead><tbody>{{range .Sources}}<tr><th scope="row">{{.Path}}</th><td>{{.SHA256}}</td></tr>{{end}}</tbody></table></div>
+</details>
+<p>This renderer identity includes the current replay identity. CLI argument handling is outside the renderer source roster and is not bound by the renderer hash.</p>
+<p>Every executed numeric proof above retains its own complete checked native bindings. An absent proof is labeled Not executed. Source hashes establish current implementation consistency, not issuer authenticity or current permission.</p>
+</section>
+</main>
+<footer>Private local explanation. No network request, admission commit or external target action is performed. Creating this file is a declared local filesystem write.</footer>
+</body>
+</html>
