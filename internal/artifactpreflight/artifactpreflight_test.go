@@ -278,7 +278,7 @@ func TestExactByteLimitAndContentContextBinding(t *testing.T) {
 
 func TestSourceIdentityBindsActualImplementationBytes(t *testing.T) {
 	identity := SourceIdentity()
-	if identity.ProducerID != ProducerID || identity.VerifierID != VerifierID || !validDigest(identity.JSONInputSHA256) {
+	if identity.Schema != "policy-studio/artifact-producer-source/v2" || identity.ProducerID != NewProducerID || identity.VerifierID != RegistryVerifierID || !validDigest(identity.JSONInputSHA256) {
 		t.Fatal("source identity omitted registry or shared JSON binding")
 	}
 	for name, expected := range map[string]string{

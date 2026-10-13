@@ -102,8 +102,10 @@ original file still exists.
 The artifact bytes have the explicit expected digest
 `sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533`.
 The deadline `4102444800` is a demo value in 2100, not a recommended production
-validity period. The checked conditions are exact equalities, not row-limit
-inequalities or a complete export-security policy.
+validity period. This original example uses exact equalities. For inclusive
+integer limits, use the separate [recipe-v2 bounds example](artifact-int64-bounds.md),
+which requires both a lower and an upper bound. Neither is a complete
+export-security policy.
 
 ## Inputs and limits
 

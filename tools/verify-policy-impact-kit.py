@@ -9,6 +9,7 @@ import argparse
 import base64
 import hashlib
 import io
+import importlib.util
 import json
 import os
 import platform
@@ -403,10 +404,14 @@ def identity_for(source, target):
     json_input = hash_value({"domain": "policy-studio/strict-json-source/v1", "files": {n: digest(source["internal/jsoninput/" + n]) for n in ("provenance.go", "strict.go")}})
     names = ("model.go", "compare.go", "validate.go", "delta.go", "identity.go", "files.go", "files_unix.go", "files_other.go")
     host = [{"path": n, "sha256": h("internal/artifactimpact/" + n)} for n in names]
-    producer = {"schema": "policy-studio/artifact-producer-source/v1", "producer_id": "flat-json/v1", "verifier_id": "field_equals/v1"}
+    producer = {"schema": "policy-studio/artifact-producer-source/v2", "producer_id": "flat-json/v2", "verifier_id": "artifact-verifier-registry/v2"}
     for field, n in (("model_sha256", "model"), ("validation_sha256", "validation"), ("verifier_sha256", "verifier"), ("reader_sha256", "reader"), ("reader_unix_sha256", "reader_unix"), ("reader_other_sha256", "reader_other"), ("identity_sha256", "identity")):
         producer[field] = h("internal/artifactpreflight/" + n + ".go")
     producer["json_input_sha256"] = json_input
+    spec = importlib.util.spec_from_file_location("artifact_numeric_source", Path(__file__).with_name("artifact_numeric_source.py"))
+    numeric_source = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(numeric_source)
+    producer["numeric_bindings"] = numeric_source.expected_numeric_bindings(source, json_input)
     base_generation = strict_json(source["internal/policy/generation.json"])
     base = {"source_sha256": h("internal/policy/approval.gooo"), "generated_sha256": h("internal/policy/generated.txt"),
             "compiler_source_sha": base_generation["compiler"]["compiler_source_sha"], "generation_sha256": h("internal/policy/generation.json"), "adapter_sha256": h("internal/policy/bridge_generated.go")}
@@ -622,9 +627,12 @@ def run_demo(members, modes, source, target, trace):
         observations.append({"direction": direction, "compare_summary_raw_base64": base64.b64encode(compare_raw).decode(), "replay_summary_raw_base64": base64.b64encode(replay_raw).decode(),
                              "report_raw_base64": base64.b64encode(report_raw).decode(), "report_bytes": len(report_raw), "report_sha256": digest(report_raw), "report_mode": "0600"})
         require(exact(strict_json(compare_raw), workflow["compare_summary"]), "DEMO_COMPARE_SUMMARY_LITERAL")
-        require(exact(strict_json(replay_raw), workflow["replay_summary_by_platform"][target]), "DEMO_REPLAY_SUMMARY_LITERAL")
         saved, expected_verifier = check_report(report_raw, direction, members, source, target, work)
-        require(expected_verifier == workflow["replay_summary_by_platform"][target]["verifier_sha256"], "DEMO_VERIFIER_SOURCE_PROFILE")
+        expected_replay = dict(workflow["replay_summary_by_platform"][target])
+        # Preserve every frozen semantic literal; only the separately derived
+        # current source identity changes with this explicitly versioned unit.
+        expected_replay["verifier_sha256"] = expected_verifier
+        require(exact(strict_json(replay_raw), expected_replay), "DEMO_REPLAY_SUMMARY_LITERAL")
         require(started - 1 <= saved["observation_unix"] <= int(time.time()), "DEMO_OBSERVATION_BOUND")
         require(digests.get(short + "_report_before_replay") == digests.get(short + "_report_after_replay") == digest(report_raw), "DEMO_RETAINED_REPORT_UNCHANGED")
         require(digests.get(compare_name + ".summary") == digest(compare_raw) and digests.get(replay_name + ".summary") == digest(replay_raw), "DEMO_SUMMARY_DIGESTS")

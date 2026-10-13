@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"reflect"
 
+	"github.com/kimjooyoon/gooo-policy-studio/internal/artifactnumeric"
 	"github.com/kimjooyoon/gooo-policy-studio/internal/jsoninput"
 )
 
@@ -29,8 +30,12 @@ func (p *Producer) Observe(a Acquisition, expectedSHA256, contextDigest string, 
 		return Report{}, err
 	}
 	owned := append([]byte{}, a.raw...)
+	identity, err := CheckedSourceIdentity()
+	if err != nil {
+		return Report{}, err
+	}
 	r := Report{
-		Schema: ReportSchema, ProducerID: ProducerID, Identity: SourceIdentity(),
+		Schema: ReportSchema, ProducerID: p.recipe.ProducerID, Identity: identity,
 		RecipeSHA256: encodedDigest(p.recipe), ExpectedSHA256: expectedSHA256,
 		ContextDigest: contextDigest, ObservationUnix: observationUnix,
 		AcquisitionStatus: a.status, ArtifactBase64: base64.StdEncoding.EncodeToString(owned),
@@ -66,10 +71,34 @@ func (p *Producer) Observe(a Acquisition, expectedSHA256, contextDigest string, 
 	for _, claim := range p.recipe.Claims {
 		o := ClaimObservation{ClaimID: claim.ID, Verifier: claim.Verifier, Field: claim.Field, Expected: claim.Expected, Actual: values[claim.Field], Status: status, Reason: r.ArtifactReason}
 		if r.DigestOK && r.SchemaOK && r.TypesOK && a.status == ReadSuccess {
-			if o.Actual == claim.Expected {
-				o.Status, o.Reason = "pass", "FIELD_EQUALS"
-			} else {
-				o.Status, o.Reason = "fail", "FIELD_MISMATCH"
+			switch claim.Verifier {
+			case VerifierID:
+				if o.Actual == claim.Expected {
+					o.Status, o.Reason = "pass", "FIELD_EQUALS"
+				} else {
+					o.Status, o.Reason = "fail", "FIELD_MISMATCH"
+				}
+			case Int64LTEVerifierID, Int64GTEVerifierID:
+				actual, okActual := canonicalInteger(o.Actual)
+				bound, okBound := canonicalInteger(claim.Expected)
+				if !okActual || !okBound {
+					return Report{}, fmt.Errorf("numeric predicate facts are not canonical int64")
+				}
+				operator := artifactnumeric.LTE
+				if claim.Verifier == Int64GTEVerifierID {
+					operator = artifactnumeric.GTE
+				}
+				proof, err := artifactnumeric.Evaluate(artifactnumeric.Facts{Value: actual, Bound: bound, Operator: operator})
+				if err != nil {
+					return Report{}, err
+				}
+				o.NativeProof = &proof
+				o.Status, o.Reason = "fail", proof.Decision.Reason
+				if proof.Decision.OperatorOK && proof.Decision.Matched {
+					o.Status = "pass"
+				}
+			default:
+				return Report{}, fmt.Errorf("unknown configured predicate")
 			}
 		}
 		claimDigest := encodedDigest(struct {

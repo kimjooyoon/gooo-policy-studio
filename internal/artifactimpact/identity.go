@@ -44,7 +44,11 @@ func canonicalDigest(value any) string { raw, _ := json.Marshal(value); return d
 // SourceIdentity binds actual embedded host and compiled rule sources. This
 // consistency record does not authenticate the operator or an artifact issuer.
 func SourceIdentity() (Identity, error) {
-	identity := Identity{Schema: "policy-studio/artifact-impact-source/v1", HostSources: make([]HostBinding, 0, 8), JSONInputSHA256: jsoninput.SourceIdentity(), Producer: artifactpreflight.SourceIdentity(), GoVersion: runtime.Version(), GOOS: runtime.GOOS, GOARCH: runtime.GOARCH}
+	producer, err := artifactpreflight.CheckedSourceIdentity()
+	if err != nil {
+		return Identity{}, err
+	}
+	identity := Identity{Schema: "policy-studio/artifact-impact-source/v1", HostSources: make([]HostBinding, 0, 8), JSONInputSHA256: jsoninput.SourceIdentity(), Producer: producer, GoVersion: runtime.Version(), GOOS: runtime.GOOS, GOARCH: runtime.GOARCH}
 	for _, name := range []string{"model.go", "compare.go", "validate.go", "delta.go", "identity.go", "files.go", "files_unix.go", "files_other.go"} {
 		raw, err := hostSource.ReadFile(name)
 		if err != nil {

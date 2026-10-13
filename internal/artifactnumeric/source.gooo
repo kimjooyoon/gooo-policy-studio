@@ -1,0 +1,31 @@
+// Original Gooo predicates for operator-selected signed int64 artifact bounds.
+// This pure activity observes both relations even for an unsupported operator.
+// It performs no acquisition, authentication, permission grant or target effect.
+package artifactnumeric
+namespace gooo_artifact_numeric
+entity Integer id "gooo://std/integer"
+entity Text id "gooo://std/text"
+entity Boolean id "gooo://std/boolean"
+
+entity BoundDecision id "gooo://artifact/int64-bound-decision/v1" fields {
+ field at_most id "gooo://artifact/int64-bound-decision/at-most" type boolean required one
+ field at_least id "gooo://artifact/int64-bound-decision/at-least" type boolean required one
+ field operator_ok id "gooo://artifact/int64-bound-decision/operator-ok" type boolean required one
+ field matched id "gooo://artifact/int64-bound-decision/matched" type boolean required one
+ field reason id "gooo://artifact/int64-bound-decision/reason" type string required one
+}
+
+activity Int64BoundDecision(Integer, Integer, Text) -> BoundDecision id "gooo://artifact/int64-bound-decision" computes `
+let atMost = input0 <= input1
+let atLeast = input0 >= input1
+let operatorOK = input2 == "lte" || input2 == "gte"
+let matched = false
+if input2 == "lte" { matched = atMost }
+if input2 == "gte" { matched = atLeast }
+let reason = "UNSUPPORTED_OPERATOR"
+if operatorOK {
+ reason = "BOUND_MISMATCH"
+ if matched { reason = "BOUND_MATCH" }
+}
+return BoundDecision{at_most: atMost, at_least: atLeast, operator_ok: operatorOK, matched: matched, reason: reason}
+`

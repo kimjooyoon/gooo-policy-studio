@@ -63,6 +63,11 @@ cp examples/gate-client/*.json "$HOME/.local/state/gooo-policy-studio/client-dem
 명령 파일에는 `request_id`, `expected_revision`, `policy_version`, `idempotency_key`
 네 필드만 있습니다. 토큰·파일 경로·검증 결과·예산을 명령에 넣을 수 없습니다.
 
+새 recipe v2의 숫자 관측은 같은 소스의 클라이언트가 순수 Gooo 정수 조건으로
+전체 입력·다섯 결과·생성 근거의 일관성을 확인합니다. 서버 정책을 가져오거나
+파일을 다시 읽거나 실행 허용 여부를 별도로 결정하지 않습니다. 숫자 기능의
+입력·버전 조건은 [정수 범위 안내](artifact-int64-bounds.md)를 확인하세요.
+
 ## 파일이 변경된 요청의 거절
 
 데모의 두 요청은 처음에는 동일한 유효 산출물과 예상 SHA-256을 가집니다.

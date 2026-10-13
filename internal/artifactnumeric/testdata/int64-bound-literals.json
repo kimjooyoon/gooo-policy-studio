@@ -1,0 +1,297 @@
+{
+  "schema": "policy-studio/int64-bound-independent-literals/v1",
+  "status": "FROZEN_BEFORE_COMPILER_GENERATOR_BUILD_OR_PRODUCT_EXECUTION",
+  "created_at_utc": "2026-10-13T04:18:43.793962+00:00",
+  "author": "artifact_contract_review",
+  "root_accepted_contract": {
+    "activity": "Int64BoundDecision",
+    "input_fields": [
+      "value",
+      "bound",
+      "operator"
+    ],
+    "output_fields": [
+      "at_most",
+      "at_least",
+      "operator_ok",
+      "matched",
+      "reason"
+    ],
+    "operators": [
+      "lte",
+      "gte"
+    ],
+    "reason_labels": [
+      "BOUND_MATCH",
+      "BOUND_MISMATCH",
+      "UNSUPPORTED_OPERATOR"
+    ],
+    "semantic_note": "Both observed relations are independently computed for every native call, including an unsupported operator. Unknown operator yields operator_ok=false,matched=false,UNSUPPORTED_OPERATOR."
+  },
+  "literal_case_count": 17,
+  "cases": [
+    {
+      "id": "lte_below_500",
+      "input": {
+        "value": 499,
+        "bound": 500,
+        "operator": "lte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": false,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "lte_equal_500",
+      "input": {
+        "value": 500,
+        "bound": 500,
+        "operator": "lte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "lte_above_500",
+      "input": {
+        "value": 501,
+        "bound": 500,
+        "operator": "lte"
+      },
+      "expected": {
+        "at_most": false,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": false,
+        "reason": "BOUND_MISMATCH"
+      }
+    },
+    {
+      "id": "gte_below_500",
+      "input": {
+        "value": 499,
+        "bound": 500,
+        "operator": "gte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": false,
+        "operator_ok": true,
+        "matched": false,
+        "reason": "BOUND_MISMATCH"
+      }
+    },
+    {
+      "id": "gte_equal_500",
+      "input": {
+        "value": 500,
+        "bound": 500,
+        "operator": "gte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "gte_above_500",
+      "input": {
+        "value": 501,
+        "bound": 500,
+        "operator": "gte"
+      },
+      "expected": {
+        "at_most": false,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "lte_negative_one_to_zero",
+      "input": {
+        "value": -1,
+        "bound": 0,
+        "operator": "lte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": false,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "gte_negative_one_to_zero",
+      "input": {
+        "value": -1,
+        "bound": 0,
+        "operator": "gte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": false,
+        "operator_ok": true,
+        "matched": false,
+        "reason": "BOUND_MISMATCH"
+      }
+    },
+    {
+      "id": "lte_zero_equal",
+      "input": {
+        "value": 0,
+        "bound": 0,
+        "operator": "lte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "gte_zero_equal",
+      "input": {
+        "value": 0,
+        "bound": 0,
+        "operator": "gte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "lte_minimum_equal",
+      "input": {
+        "value": -9223372036854775808,
+        "bound": -9223372036854775808,
+        "operator": "lte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "gte_maximum_equal",
+      "input": {
+        "value": 9223372036854775807,
+        "bound": 9223372036854775807,
+        "operator": "gte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "lte_minimum_to_maximum",
+      "input": {
+        "value": -9223372036854775808,
+        "bound": 9223372036854775807,
+        "operator": "lte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": false,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "lte_maximum_to_minimum",
+      "input": {
+        "value": 9223372036854775807,
+        "bound": -9223372036854775808,
+        "operator": "lte"
+      },
+      "expected": {
+        "at_most": false,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": false,
+        "reason": "BOUND_MISMATCH"
+      }
+    },
+    {
+      "id": "gte_minimum_to_maximum",
+      "input": {
+        "value": -9223372036854775808,
+        "bound": 9223372036854775807,
+        "operator": "gte"
+      },
+      "expected": {
+        "at_most": true,
+        "at_least": false,
+        "operator_ok": true,
+        "matched": false,
+        "reason": "BOUND_MISMATCH"
+      }
+    },
+    {
+      "id": "gte_maximum_to_minimum",
+      "input": {
+        "value": 9223372036854775807,
+        "bound": -9223372036854775808,
+        "operator": "gte"
+      },
+      "expected": {
+        "at_most": false,
+        "at_least": true,
+        "operator_ok": true,
+        "matched": true,
+        "reason": "BOUND_MATCH"
+      }
+    },
+    {
+      "id": "unknown_operator_preserves_both_relations",
+      "input": {
+        "value": 1,
+        "bound": 0,
+        "operator": "unknown"
+      },
+      "expected": {
+        "at_most": false,
+        "at_least": true,
+        "operator_ok": false,
+        "matched": false,
+        "reason": "UNSUPPORTED_OPERATOR"
+      }
+    }
+  ],
+  "oracle_boundary": "Whole typed input/output rows were manually fixed from the accepted mathematical contract and source-supported signed-int64 relational semantics, without candidate evaluation, generated code import, proof inspection, numeric predicate helper, test execution or compiler. Assembly code only copies literal columns; expected values are not calculated with <=/>= or selected from candidate output.",
+  "new_scope_only": "Finite original Gooo numeric activity cases. No recreation of prior128-case or946005-assertion native/oracle corpus. Later new targeted tests may use these rows only after authorization.",
+  "effects": {
+    "compiler_generator_build_product_test_or_helper_executions": 0,
+    "network_API_downloads": 0,
+    "existing_source_or_proof_mutations": 0,
+    "new_literal_JSON_files_written": 1
+  }
+}
