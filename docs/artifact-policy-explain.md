@@ -84,7 +84,10 @@ host checks; there is no automatic migration.
 The published `policy-impact-v0.1.0-preview.1` download kit is sealed at
 `0f17df330fe4f3648f6e1d1c7b1e26ca28de9d46`. It contains equality comparisons
 and replay, but does not contain integer bounds or this explanation command.
-Use the current source instructions for these features.
+For these features, use the
+[published `policy-impact-bounds-v0.1.0-preview.1` preview](https://github.com/kimjooyoon/gooo-policy-studio/releases/tag/policy-impact-bounds-v0.1.0-preview.1)
+with the [bounds kit walkthrough](artifact-bounds-first-use.md), or the current
+source instructions above.
 
 An explanation is a historical simulation, not current authorization,
 authenticated server state or execution of an API/export. Machine admission

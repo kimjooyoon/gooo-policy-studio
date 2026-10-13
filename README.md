@@ -20,14 +20,15 @@ Choose an English walkthrough:
    This sealed kit uses exact-equality artifact recipes and **excludes integer
    bounds and `explain`**. Read the walkthrough's build and download limits
    before running it.
-2. **Try a numeric bounds preview without building.** The
+2. **Try a numeric bounds preview without building.** Download the
+   [fixed `policy-impact-bounds-v0.1.0-preview.1` kit](https://github.com/kimjooyoon/gooo-policy-studio/releases/tag/policy-impact-bounds-v0.1.0-preview.1)
+   for **macOS arm64** or **Linux amd64**. The
    [bounds kit walkthrough](docs/artifact-bounds-first-use.md) describes the
    separately versioned `artifact-bounds/v1` profile: compare a limit change,
    delete the copied inputs, replay the report and save a private HTML
    explanation. Its three calls use the included executable and standard
-   shell tools, without Go, Python, a server, account or token. Choose a release
-   explicitly identified as a bounds-profile kit; the sealed kit above remains
-   an equality-only walkthrough.
+   shell tools, without Go, Python, a server, account or token. The sealed kit
+   above remains an equality-only walkthrough.
 3. **Build the current source for integer bounds and private explanations.**
    Start with the [integer bounds example](docs/artifact-int64-bounds.md), using
    **Go 1.27.2** and **Python 3** for its copied-fixture setup. Then follow
