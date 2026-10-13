@@ -28,11 +28,11 @@ func TestInt64BoundsActualAcquisitionMixedClaims(t *testing.T) {
 		Statuses     []string
 		Lower, Upper artifactnumeric.Decision
 	}{
-		{"499", []string{"pass", "pass", "pass", "pass"}, artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}},
-		{"500", []string{"pass", "pass", "pass", "pass"}, artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{true, true, true, true, "BOUND_MATCH"}},
-		{"501", []string{"pass", "fail", "pass", "pass"}, artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{false, true, true, false, "BOUND_MISMATCH"}},
-		{"-1", []string{"fail", "pass", "pass", "pass"}, artifactnumeric.Decision{true, false, true, false, "BOUND_MISMATCH"}, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}},
-		{"0", []string{"pass", "pass", "pass", "pass"}, artifactnumeric.Decision{true, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}},
+		{"499", []string{"pass", "pass", "pass", "pass"}, artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}},
+		{"500", []string{"pass", "pass", "pass", "pass"}, artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}},
+		{"501", []string{"pass", "fail", "pass", "pass"}, artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: false, Reason: "BOUND_MISMATCH"}},
+		{"-1", []string{"fail", "pass", "pass", "pass"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: false, Reason: "BOUND_MISMATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}},
+		{"0", []string{"pass", "pass", "pass", "pass"}, artifactnumeric.Decision{AtMost: true, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}},
 	}
 	for _, row := range rows {
 		t.Run(row.Value, func(t *testing.T) {

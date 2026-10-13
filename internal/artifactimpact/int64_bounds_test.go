@@ -28,12 +28,12 @@ type int64ImpactExpectation struct {
 }
 
 var int64ImpactRows = []int64ImpactExpectation{
-	{-1, "sha256:d60f6fc796ff7caede85febd0adda153ef18417b892d8fe97386db1f7356739e", artifactnumeric.Decision{true, false, true, false, "BOUND_MISMATCH"}, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}, false, false, completion.Counts{Total: 6, Pass: 5, Fail: 1}, completion.Counts{Total: 6, Pass: 5, Fail: 1}, 2, 2, "unchanged"},
-	{0, "sha256:40b8270ab3e1a7c8d2a20cce209c8051b1666a8fe983ef10391802d2cf7d6ac6", artifactnumeric.Decision{true, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}, true, true, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 6}, -1, -1, "unchanged"},
-	{100, "sha256:429b281f3f90562129e2365366b31afccf104610d67463a0aa02938e0c8a6fc3", artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}, true, true, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 6}, -1, -1, "unchanged"},
-	{499, "sha256:ecddf9e6ec96e10d815c0a7d9a9cea1040f124c22dfe8e43b393a9dc4568d981", artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}, true, true, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 6}, -1, -1, "unchanged"},
-	{500, "sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533", artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{true, true, true, true, "BOUND_MATCH"}, true, true, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 6}, -1, -1, "unchanged"},
-	{501, "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653", artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{false, true, true, false, "BOUND_MISMATCH"}, true, false, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 5, Fail: 1}, -1, 3, "newly_denied"},
+	{-1, "sha256:d60f6fc796ff7caede85febd0adda153ef18417b892d8fe97386db1f7356739e", artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: false, Reason: "BOUND_MISMATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, false, false, completion.Counts{Total: 6, Pass: 5, Fail: 1}, completion.Counts{Total: 6, Pass: 5, Fail: 1}, 2, 2, "unchanged"},
+	{0, "sha256:40b8270ab3e1a7c8d2a20cce209c8051b1666a8fe983ef10391802d2cf7d6ac6", artifactnumeric.Decision{AtMost: true, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, true, true, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 6}, -1, -1, "unchanged"},
+	{100, "sha256:429b281f3f90562129e2365366b31afccf104610d67463a0aa02938e0c8a6fc3", artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, true, true, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 6}, -1, -1, "unchanged"},
+	{499, "sha256:ecddf9e6ec96e10d815c0a7d9a9cea1040f124c22dfe8e43b393a9dc4568d981", artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, true, true, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 6}, -1, -1, "unchanged"},
+	{500, "sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533", artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, true, true, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 6}, -1, -1, "unchanged"},
+	{501, "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653", artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: false, Reason: "BOUND_MISMATCH"}, true, false, completion.Counts{Total: 6, Pass: 6}, completion.Counts{Total: 6, Pass: 5, Fail: 1}, -1, 3, "newly_denied"},
 }
 
 func int64ImpactRecipe(upper string) artifactpreflight.Recipe {
@@ -124,7 +124,7 @@ func TestInt64BoundsComparisonSixClaimsAndReverse(t *testing.T) {
 		t.Run(fmt.Sprint(tc.row), func(t *testing.T) {
 			paths, c := int64ImpactFixture(t, fmt.Sprint(tc.row), tc.sha)
 			r := assertComparison(t, paths, tc.before, tc.after, tc.direction)
-			assertInt64ImpactSide(t, r.Before, tc.row, 1000, tc.lower, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}, tc.beforeCounts, tc.beforeFailure, tc.before, tc.sha)
+			assertInt64ImpactSide(t, r.Before, tc.row, 1000, tc.lower, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, tc.beforeCounts, tc.beforeFailure, tc.before, tc.sha)
 			assertInt64ImpactSide(t, r.After, tc.row, 500, tc.lower, tc.upper, tc.afterCounts, tc.afterFailure, tc.after, tc.sha)
 			if len(r.Delta.Changed) != 1 || r.Delta.Changed[0].ClaimID != "row_limit_at_most" || !r.Delta.Changed[0].PredicateChanged || len(r.Delta.Added) != 0 || len(r.Delta.Removed) != 0 || r.Delta.ClaimOrderChanged || r.Audit.ArtifactReadAttempts != 1 {
 				t.Fatal("rollout delta or one-capture boundary changed")
@@ -141,7 +141,7 @@ func TestInt64BoundsComparisonSixClaimsAndReverse(t *testing.T) {
 		paths.Before, paths.After = paths.After, paths.Before
 		r := assertComparison(t, paths, false, true, "newly_allowed")
 		assertInt64ImpactSide(t, r.Before, 501, 500, tc.lower, tc.upper, tc.afterCounts, 3, false, tc.sha)
-		assertInt64ImpactSide(t, r.After, 501, 1000, tc.lower, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}, tc.beforeCounts, -1, true, tc.sha)
+		assertInt64ImpactSide(t, r.After, 501, 1000, tc.lower, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, tc.beforeCounts, -1, true, tc.sha)
 	})
 }
 

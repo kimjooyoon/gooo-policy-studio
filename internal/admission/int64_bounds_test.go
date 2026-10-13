@@ -88,9 +88,9 @@ func TestInt64BoundsTrustedGateTransitionsAndDurableRetry(t *testing.T) {
 		failed       int
 		admitted     bool
 	}{
-		{-1, "sha256:d60f6fc796ff7caede85febd0adda153ef18417b892d8fe97386db1f7356739e", artifactnumeric.Decision{true, false, true, false, "BOUND_MISMATCH"}, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}, 5, 1, 2, false},
-		{500, "sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533", artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{true, true, true, true, "BOUND_MATCH"}, 6, 0, -1, true},
-		{501, "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653", artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{false, true, true, false, "BOUND_MISMATCH"}, 5, 1, 3, false},
+		{-1, "sha256:d60f6fc796ff7caede85febd0adda153ef18417b892d8fe97386db1f7356739e", artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: false, Reason: "BOUND_MISMATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, 5, 1, 2, false},
+		{500, "sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533", artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, 6, 0, -1, true},
+		{501, "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653", artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: false, Reason: "BOUND_MISMATCH"}, 5, 1, 3, false},
 	}
 	for _, tc := range cases {
 		t.Run(fmt.Sprint(tc.row), func(t *testing.T) {

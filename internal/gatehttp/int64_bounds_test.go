@@ -52,9 +52,9 @@ func TestInt64BoundsAuthenticatedHTTPUsesTrustedRecipeAndLiteralNativeProof(t *t
 		state        string
 		revision     int64
 	}{
-		{-1, "sha256:d60f6fc796ff7caede85febd0adda153ef18417b892d8fe97386db1f7356739e", http.StatusForbidden, completion.Counts{Total: 6, Pass: 5, Fail: 1}, artifactnumeric.Decision{true, false, true, false, "BOUND_MISMATCH"}, artifactnumeric.Decision{true, false, true, true, "BOUND_MATCH"}, admission.Pending, 1},
-		{500, "sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533", http.StatusOK, completion.Counts{Total: 6, Pass: 6}, artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{true, true, true, true, "BOUND_MATCH"}, admission.Approved, 2},
-		{501, "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653", http.StatusForbidden, completion.Counts{Total: 6, Pass: 5, Fail: 1}, artifactnumeric.Decision{false, true, true, true, "BOUND_MATCH"}, artifactnumeric.Decision{false, true, true, false, "BOUND_MISMATCH"}, admission.Pending, 1},
+		{-1, "sha256:d60f6fc796ff7caede85febd0adda153ef18417b892d8fe97386db1f7356739e", http.StatusForbidden, completion.Counts{Total: 6, Pass: 5, Fail: 1}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: false, Reason: "BOUND_MISMATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: false, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, admission.Pending, 1},
+		{500, "sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533", http.StatusOK, completion.Counts{Total: 6, Pass: 6}, artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: true, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, admission.Approved, 2},
+		{501, "sha256:e6766b36e840581b461fb698048e71622c1f22dc2184460f1431fe42f0171653", http.StatusForbidden, completion.Counts{Total: 6, Pass: 5, Fail: 1}, artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: true, Reason: "BOUND_MATCH"}, artifactnumeric.Decision{AtMost: false, AtLeast: true, OperatorOK: true, Matched: false, Reason: "BOUND_MISMATCH"}, admission.Pending, 1},
 	}
 	for _, tc := range cases {
 		t.Run(fmt.Sprint(tc.row), func(t *testing.T) {
