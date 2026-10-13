@@ -68,6 +68,17 @@ jobs:
           path: out/policy-client-proof.json
           if-no-files-found: error
           retention-days: 14
+      - name: Compare one retained artifact under two operator policies
+        run: |
+          go build -trimpath -o bin/policy-impact ./cmd/policy-impact
+          python3 tools/verify-artifact-policy-impact.py --impact-binary bin/policy-impact --gate-binary bin/policy-gate --out out/artifact-policy-impact-proof.json
+      - name: Preserve the artifact policy comparison and gate parity observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: artifact-policy-impact-proof
+          path: out/artifact-policy-impact-proof.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Check JavaScript syntax
         run: node --check web/app.js
       - name: Check import and pending-operation behavior

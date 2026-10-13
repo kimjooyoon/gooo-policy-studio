@@ -1,0 +1,91 @@
+{
+  "schema": "policy-studio/artifact-admission-policy/v1",
+  "id": "artifact-impact-destination",
+  "revision": 1,
+  "recipe": {
+    "schema": "policy-studio/artifact-recipe/v1",
+    "producer_id": "flat-json/v1",
+    "artifact_schema": "gooo/export-plan/v1",
+    "max_bytes": 65536,
+    "fields": [
+      {
+        "name": "action",
+        "type": "text"
+      },
+      {
+        "name": "destination",
+        "type": "text"
+      },
+      {
+        "name": "row_limit",
+        "type": "int64"
+      },
+      {
+        "name": "dry_run",
+        "type": "bool"
+      },
+      {
+        "name": "format",
+        "type": "text"
+      }
+    ],
+    "claims": [
+      {
+        "id": "action_equal",
+        "verifier": "field_equals/v1",
+        "field": "action",
+        "expected": "prepare_export"
+      },
+      {
+        "id": "destination_equal",
+        "verifier": "field_equals/v1",
+        "field": "destination",
+        "expected": "internal"
+      },
+      {
+        "id": "row_limit_equal",
+        "verifier": "field_equals/v1",
+        "field": "row_limit",
+        "expected": "500"
+      },
+      {
+        "id": "dry_run_equal",
+        "verifier": "field_equals/v1",
+        "field": "dry_run",
+        "expected": "true"
+      },
+      {
+        "id": "format_equal",
+        "verifier": "field_equals/v1",
+        "field": "format",
+        "expected": "jsonl"
+      }
+    ]
+  },
+  "required_authority": "live-observation",
+  "max_age_seconds": 60,
+  "approval_budget": {
+    "allow_target": true,
+    "allow_session": true,
+    "allow_filesystem": true,
+    "allow_process": false,
+    "allow_network": false,
+    "allow_ui": false,
+    "allow_discard": false,
+    "allow_foreign_code": false,
+    "allow_device": false,
+    "require_idempotent": true
+  },
+  "control_plane_budget": {
+    "allow_target": false,
+    "allow_session": true,
+    "allow_filesystem": true,
+    "allow_process": false,
+    "allow_network": false,
+    "allow_ui": false,
+    "allow_discard": false,
+    "allow_foreign_code": false,
+    "allow_device": false,
+    "require_idempotent": true
+  }
+}
