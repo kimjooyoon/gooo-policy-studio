@@ -1,5 +1,46 @@
 # Gooo Policy Studio
 
+## English quick start
+
+Compare an automation policy change with the same inputs, then inspect why its
+judgment changed. The core policy decisions use compiled rules from
+[Gooo, an experimental language with a Go compiler](https://github.com/kimjooyoon/meta-ontology-go).
+The Go host handles input validation, authentication and local storage.
+The configured local machine gate makes decisions automatically under its
+server-owned policy, without a person approving each request.
+
+Choose one of the existing English walkthroughs:
+
+1. **Download and try comparison/replay without building.** The
+   [fixed `policy-impact-v0.1.0-preview.1` kit](https://github.com/kimjooyoon/gooo-policy-studio/releases/tag/policy-impact-v0.1.0-preview.1)
+   has archives for **macOS arm64** and **Linux amd64**. Follow the
+   [kit walkthrough](docs/policy-impact-first-use.md) to verify the archive and
+   run its four synthetic comparison/replay calls. It needs ZIP extraction,
+   a POSIX shell and the listed standard tools; no Go, server, account or token.
+   This sealed kit uses exact-equality artifact recipes and **excludes integer
+   bounds and `explain`**. Read the walkthrough's build and download limits
+   before running it.
+2. **Build the current source for integer bounds and private explanations.**
+   Start with the [integer bounds example](docs/artifact-int64-bounds.md), using
+   **Go 1.27.2** and **Python 3** for its copied-fixture setup. Then follow
+   [the explanation walkthrough](docs/artifact-policy-explain.md) to turn the
+   saved comparison into a private, local HTML explanation. Generated Gooo code
+   is included; these examples need no compiler regeneration. The HTML keeps
+   the historical judgments and needs no JavaScript or running server.
+
+Both paths use synthetic examples. A saved comparison, replay or explanation
+preserves unsigned historical judgments; it does not grant current API/export
+permission or change a running policy. The reports and HTML contain private
+case values.
+
+If your first run gets stuck, [report the problem](https://github.com/kimjooyoon/gooo-policy-studio/issues/new)
+with the chosen walkthrough, OS/architecture, release or commit, and the command
+and error you observed. Use minimal synthetic examples; omit tokens and complete
+private reports. To explore or contribute to the language itself, start at
+[meta-ontology-go](https://github.com/kimjooyoon/meta-ontology-go).
+
+---
+
 **Gooo 정책의 변경 영향을 재현하고, 인증된 자동화 요청을 서버 정책으로 판단하는 도구.**
 
 같은 입력으로 현재/변경 정책을 비교하고 기대 결과를 자동 검사합니다. 별도의 기계 실행 게이트는 서버가 보관한 정책과 요청으로 로컬 상태 변경을 판단·저장하며 사람이 요청마다 승인하는 절차를 요구하지 않습니다. 기본 예제는 금액 한도·팀·활성 상태·자기 검증·제출 상태의 다섯 규칙이며, 실제 실행의 입력·결과·소스 해시를 JSON으로 확인할 수 있습니다.
