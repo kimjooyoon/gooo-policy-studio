@@ -57,6 +57,12 @@ func validKey(key string) bool {
 // ValidateBootstrap is the same validation used by Init. Root-owned credential
 // provisioning must fill the token digest before calling this function.
 func ValidateBootstrap(b Bootstrap) error {
+	if b.Schema == BootstrapSchemaV2 {
+		return validateArtifactBootstrap(b)
+	}
+	if b.Preflight != nil || b.Artifacts != nil {
+		return failure(InvalidInput, "v1 bootstrap cannot carry v2 artifact policy")
+	}
 	if b.Schema != BootstrapSchema || len(b.Principals) == 0 || len(b.Principals) > MaxPrincipals || len(b.Requests) == 0 || len(b.Requests) > MaxRequests {
 		return failure(InvalidInput, "invalid bootstrap schema or inventory bounds")
 	}
@@ -118,6 +124,12 @@ type operationKey struct{ Principal, Idempotency string }
 // outcome order and replays every receipt against current compiled Gooo. These
 // consistency checks do not authenticate a trusted administrator's rewrite.
 func validateSnapshot(saved snapshot, current policy.BatchProvenance) error {
+	if saved.Schema == snapshotSchemaV2 {
+		return validateArtifactSnapshot(saved, current)
+	}
+	if saved.Preflight != nil || saved.Artifacts != nil || saved.Implementation != nil {
+		return failure(Unavailable, "v1 snapshot cannot carry v2 bindings")
+	}
 	if saved.Schema != snapshotSchema || saved.ID != snapshotID(saved) || saved.Provenance != current || saved.PolicyVersion != version(saved.Policy, current) || len(saved.Outcomes) > MaxOutcomes {
 		return failure(Unavailable, "snapshot identity, code binding, or bounds do not match")
 	}
@@ -150,6 +162,9 @@ func validateSnapshot(saved snapshot, current policy.BatchProvenance) error {
 		if !exists || !requestExists || seen[key] || validateCommand(out.Command) != nil || out.Schema != OutcomeSchema || out.Scope != OutcomeScope || out.ID != outcomeID(out) ||
 			out.PolicyVersion != saved.PolicyVersion || out.Command.PolicyVersion != saved.PolicyVersion || out.PriorRevision != r.Revision || out.Command.ExpectedRevision != r.Revision || r.Status != Pending ||
 			out.CreatedAt != out.Receipt.CreatedAt {
+			return bad()
+		}
+		if out.Preflight != nil {
 			return bad()
 		}
 		if _, err := time.Parse(time.RFC3339Nano, out.CreatedAt); err != nil {

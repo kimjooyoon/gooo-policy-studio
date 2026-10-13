@@ -1,0 +1,31 @@
+{
+  "schema": "gooo/body-composition-inputs/v1",
+  "inputs": [
+    {
+      "gooo/tool-effects:EffectBudgetAccepts.input0": {
+        "mutatesTarget": true,
+        "mutatesSession": true,
+        "writesFilesystem": true,
+        "launchesProcess": false,
+        "accessesNetwork": false,
+        "changesUiState": false,
+        "mayDiscardData": false,
+        "executesForeignCode": false,
+        "mutatesDevice": false,
+        "idempotent": true
+      },
+      "gooo/tool-effects:EffectBudgetAccepts.input1": {
+        "allow_target": true,
+        "allow_session": true,
+        "allow_filesystem": true,
+        "allow_process": false,
+        "allow_network": false,
+        "allow_ui": false,
+        "allow_discard": false,
+        "allow_foreign_code": false,
+        "allow_device": false,
+        "require_idempotent": true
+      }
+    }
+  ]
+}

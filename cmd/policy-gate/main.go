@@ -96,6 +96,28 @@ func initialize(dir, source, tokenFile string, stdout io.Writer) error {
 	if err := jsoninput.Decode(raw, &bootstrap, 1<<20); err != nil {
 		return err
 	}
+	// Artifact locations are administrative init-file paths, never API input.
+	// Persist their absolute identity so working-directory changes do not select
+	// a different artifact during later admissions.
+	if bootstrap.Schema == admission.BootstrapSchemaV2 {
+		sourcePath, err := filepath.Abs(source)
+		if err != nil {
+			return err
+		}
+		for i := range bootstrap.Artifacts {
+			if !filepath.IsAbs(bootstrap.Artifacts[i].Path) {
+				bootstrap.Artifacts[i].Path = filepath.Join(filepath.Dir(sourcePath), bootstrap.Artifacts[i].Path)
+			}
+			// Resolve administrative directory aliases once at initialization;
+			// the final artifact itself must never be a symlink. The reader later
+			// traverses this persisted physical path without following symlinks.
+			parent, err := filepath.EvalSymlinks(filepath.Dir(bootstrap.Artifacts[i].Path))
+			if err != nil {
+				return errors.New("artifact parent directory must exist at initialization")
+			}
+			bootstrap.Artifacts[i].Path = filepath.Join(parent, filepath.Base(bootstrap.Artifacts[i].Path))
+		}
+	}
 	if len(bootstrap.Principals) != 1 || bootstrap.Principals[0].TokenSHA256 != "" || tokenFile == "" {
 		return errors.New("CLI initialization requires one principal with an empty token_sha256 and a new -token-file")
 	}

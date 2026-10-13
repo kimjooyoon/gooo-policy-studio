@@ -1,0 +1,127 @@
+{
+  "schema": "policy-studio/admission-bootstrap/v2",
+  "policy": {
+    "limit": 1000000,
+    "same_team": true,
+    "active_reviewer": true,
+    "prevent_self": true
+  },
+  "principals": [
+    {
+      "key": "svc-policy-engine",
+      "team": "platform",
+      "active": true,
+      "enabled": true,
+      "can_execute": true,
+      "token_sha256": ""
+    }
+  ],
+  "requests": [
+    {
+      "key": "req-export-plan",
+      "requester": "operator",
+      "team": "platform",
+      "amount": 0,
+      "submitted": true
+    }
+  ],
+  "preflight": {
+    "schema": "policy-studio/artifact-admission-policy/v1",
+    "id": "export-plan-checks",
+    "revision": 1,
+    "recipe": {
+      "schema": "policy-studio/artifact-recipe/v1",
+      "producer_id": "flat-json/v1",
+      "artifact_schema": "gooo/export-plan/v1",
+      "max_bytes": 65536,
+      "fields": [
+        {
+          "name": "action",
+          "type": "text"
+        },
+        {
+          "name": "destination",
+          "type": "text"
+        },
+        {
+          "name": "row_limit",
+          "type": "int64"
+        },
+        {
+          "name": "dry_run",
+          "type": "bool"
+        },
+        {
+          "name": "format",
+          "type": "text"
+        }
+      ],
+      "claims": [
+        {
+          "id": "action_equal",
+          "verifier": "field_equals/v1",
+          "field": "action",
+          "expected": "prepare_export"
+        },
+        {
+          "id": "destination_equal",
+          "verifier": "field_equals/v1",
+          "field": "destination",
+          "expected": "internal"
+        },
+        {
+          "id": "row_limit_equal",
+          "verifier": "field_equals/v1",
+          "field": "row_limit",
+          "expected": "500"
+        },
+        {
+          "id": "dry_run_equal",
+          "verifier": "field_equals/v1",
+          "field": "dry_run",
+          "expected": "true"
+        },
+        {
+          "id": "format_equal",
+          "verifier": "field_equals/v1",
+          "field": "format",
+          "expected": "jsonl"
+        }
+      ]
+    },
+    "required_authority": "live-observation",
+    "max_age_seconds": 60,
+    "approval_budget": {
+      "allow_target": true,
+      "allow_session": true,
+      "allow_filesystem": true,
+      "allow_process": false,
+      "allow_network": false,
+      "allow_ui": false,
+      "allow_discard": false,
+      "allow_foreign_code": false,
+      "allow_device": false,
+      "require_idempotent": true
+    },
+    "control_plane_budget": {
+      "allow_target": false,
+      "allow_session": true,
+      "allow_filesystem": true,
+      "allow_process": false,
+      "allow_network": false,
+      "allow_ui": false,
+      "allow_discard": false,
+      "allow_foreign_code": false,
+      "allow_device": false,
+      "require_idempotent": true
+    }
+  },
+  "artifacts": [
+    {
+      "request_id": "req-export-plan",
+      "path": "artifact.json",
+      "expected_sha256": "sha256:462147ef4a0025b680de1337e78fd91e04a0fa3bd8aae3d438024000839db533",
+      "deadline_unix": 4102444800
+    }
+  ]
+}

@@ -48,6 +48,15 @@ jobs:
           path: out/machine-gate-proof.json
           if-no-files-found: error
           retention-days: 14
+      - name: Verify actual artifact admission and retained-byte retries
+        run: python3 tools/verify-artifact-gate.py --binary bin/policy-gate --out out/artifact-gate-proof.json
+      - name: Preserve the artifact admission observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: artifact-gate-proof
+          path: out/artifact-gate-proof.json
+          if-no-files-found: error
+          retention-days: 14
       - name: Check JavaScript syntax
         run: node --check web/app.js
       - name: Check import and pending-operation behavior
@@ -95,6 +104,17 @@ jobs:
         with:
           name: completion-ledger-observations
           path: out/completion-ledger/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Verify the artifact admission Gooo projections
+        run: go run ./cmd/generate-machine --compiler "$RUNNER_TEMP/evidence-gooo" --check
+      - name: Execute and replay the final Gooo admission relation
+        run: python3 tools/verify-machine-rules.py --compiler "$RUNNER_TEMP/evidence-gooo" --go "$(go env GOROOT)/bin/go" --out out/machine-rules-native
+      - name: Preserve the final admission relation observations
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: machine-rules-native-observations
+          path: out/machine-rules-native/*
           if-no-files-found: error
           retention-days: 14
       - name: Build and observe the exact portable release assets

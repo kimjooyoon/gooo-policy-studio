@@ -58,10 +58,12 @@ type PrincipalView struct {
 }
 
 type Bootstrap struct {
-	Schema     string           `json:"schema"`
-	Policy     policy.Rules     `json:"policy"`
-	Principals []Principal      `json:"principals"`
-	Requests   []policy.Request `json:"requests"`
+	Schema     string                `json:"schema"`
+	Policy     policy.Rules          `json:"policy"`
+	Principals []Principal           `json:"principals"`
+	Requests   []policy.Request      `json:"requests"`
+	Preflight  *ArtifactPolicy       `json:"preflight,omitempty"`
+	Artifacts  []ArtifactRequirement `json:"artifacts,omitempty"`
 }
 
 type Command struct {
@@ -85,17 +87,18 @@ type View struct {
 }
 
 type Outcome struct {
-	Schema        string         `json:"schema"`
-	ID            string         `json:"id"`
-	Command       Command        `json:"command"`
-	PrincipalKey  string         `json:"principal_key"`
-	PriorRevision int64          `json:"prior_revision"`
-	NewRevision   int64          `json:"new_revision"`
-	PolicyVersion string         `json:"policy_version"`
-	Receipt       policy.Receipt `json:"receipt"`
-	Committed     bool           `json:"committed"`
-	CreatedAt     string         `json:"created_at"`
-	Scope         string         `json:"scope"`
+	Schema        string           `json:"schema"`
+	ID            string           `json:"id"`
+	Command       Command          `json:"command"`
+	PrincipalKey  string           `json:"principal_key"`
+	PriorRevision int64            `json:"prior_revision"`
+	NewRevision   int64            `json:"new_revision"`
+	PolicyVersion string           `json:"policy_version"`
+	Receipt       policy.Receipt   `json:"receipt"`
+	Committed     bool             `json:"committed"`
+	CreatedAt     string           `json:"created_at"`
+	Scope         string           `json:"scope"`
+	Preflight     *PreflightReport `json:"preflight,omitempty"`
 }
 
 type Result struct {
@@ -104,15 +107,18 @@ type Result struct {
 }
 
 type snapshot struct {
-	Schema        string                 `json:"schema"`
-	ID            string                 `json:"id"`
-	CreatedAt     string                 `json:"created_at"`
-	Policy        policy.Rules           `json:"policy"`
-	PolicyVersion string                 `json:"policy_version"`
-	Provenance    policy.BatchProvenance `json:"provenance"`
-	Principals    []Principal            `json:"principals"`
-	Requests      []RequestState         `json:"requests"`
-	Outcomes      []Outcome              `json:"outcomes"`
+	Schema         string                 `json:"schema"`
+	ID             string                 `json:"id"`
+	CreatedAt      string                 `json:"created_at"`
+	Policy         policy.Rules           `json:"policy"`
+	PolicyVersion  string                 `json:"policy_version"`
+	Provenance     policy.BatchProvenance `json:"provenance"`
+	Principals     []Principal            `json:"principals"`
+	Requests       []RequestState         `json:"requests"`
+	Outcomes       []Outcome              `json:"outcomes"`
+	Preflight      *ArtifactPolicy        `json:"preflight,omitempty"`
+	Artifacts      []ArtifactRequirement  `json:"artifacts,omitempty"`
+	Implementation *PreflightProvenance   `json:"implementation,omitempty"`
 }
 
 func digest(raw []byte) string {
@@ -148,8 +154,19 @@ func snapshotID(saved snapshot) string {
 }
 
 func cloneSnapshot(saved snapshot) snapshot {
-	saved.Principals = append([]Principal{}, saved.Principals...)
-	saved.Requests = append([]RequestState{}, saved.Requests...)
-	saved.Outcomes = append([]Outcome{}, saved.Outcomes...)
-	return saved
+	return cloneValue(saved)
+}
+
+// Every nested value crossing the trusted state boundary has owned storage.
+// These types contain only JSON-representable scalars and bounded slices.
+func cloneValue[T any](value T) T {
+	raw, err := json.Marshal(value)
+	if err != nil {
+		panic("internal state serialization invariant")
+	}
+	var result T
+	if err := json.Unmarshal(raw, &result); err != nil {
+		panic("internal state clone invariant")
+	}
+	return result
 }

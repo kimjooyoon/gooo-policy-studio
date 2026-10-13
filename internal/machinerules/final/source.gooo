@@ -1,0 +1,49 @@
+// Copyright (c) 2026 kimjooyoon. MIT License.
+// Final relation over trusted host observations and compiled Gooo results.
+// This relation does not authenticate callers, read files, or commit effects.
+package artifactgate
+namespace gooo_artifact_gate
+entity Boolean id "gooo://std/boolean"
+
+entity AdmissionFacts id "gooo://artifact-gate/admission-facts/v1" fields {
+ field provenance_ok id "gooo://artifact-gate/facts/provenance-ok" type boolean required one
+ field base_policy_approved id "gooo://artifact-gate/facts/base-policy-approved" type boolean required one
+ field required_count id "gooo://artifact-gate/facts/required-count" type integer required one
+ field observed_count id "gooo://artifact-gate/facts/observed-count" type integer required one
+ field admissible_evidence_count id "gooo://artifact-gate/facts/admissible-evidence-count" type integer required one
+ field completion_ready id "gooo://artifact-gate/facts/completion-ready" type boolean required one
+ field approval_effect_admissible id "gooo://artifact-gate/facts/approval-effect-admissible" type boolean required one
+ field control_plane_effect_admissible id "gooo://artifact-gate/facts/control-plane-effect-admissible" type boolean required one
+}
+entity AdmissionDecision id "gooo://artifact-gate/admission-decision/v1" fields {
+ field admitted id "gooo://artifact-gate/decision/admitted" type boolean required one
+ field reason id "gooo://artifact-gate/decision/reason" type string required one
+ field counts_ok id "gooo://artifact-gate/decision/counts-ok" type boolean required one
+ field provenance_ok id "gooo://artifact-gate/decision/provenance-ok" type boolean required one
+ field base_policy_ok id "gooo://artifact-gate/decision/base-policy-ok" type boolean required one
+ field evidence_ok id "gooo://artifact-gate/decision/evidence-ok" type boolean required one
+ field completion_ok id "gooo://artifact-gate/decision/completion-ok" type boolean required one
+ field approval_effect_ok id "gooo://artifact-gate/decision/approval-effect-ok" type boolean required one
+ field control_plane_effect_ok id "gooo://artifact-gate/decision/control-plane-effect-ok" type boolean required one
+}
+
+activity ArtifactGateAdmits(AdmissionFacts) -> AdmissionDecision id "gooo://artifact-gate/admits/v1" computes `
+let countsOK = input.required_count >= 1 && input.required_count <= 256 && input.observed_count >= 0 && input.observed_count <= 256 && input.admissible_evidence_count >= 0 && input.admissible_evidence_count <= input.observed_count
+let evidenceOK = countsOK && input.observed_count == input.required_count && input.admissible_evidence_count == input.observed_count
+let admitted = countsOK && input.provenance_ok && input.base_policy_approved && evidenceOK && input.completion_ready && input.approval_effect_admissible && input.control_plane_effect_admissible
+let reason = "ADMITTED"
+if !countsOK { reason = "INVALID_COUNTS" } else {
+ if !input.provenance_ok { reason = "PROVENANCE_MISMATCH" } else {
+  if !input.control_plane_effect_admissible { reason = "CONTROL_PLANE_EFFECT_DISALLOWED" } else {
+   if !input.base_policy_approved { reason = "BASE_POLICY_DENIED" } else {
+    if !evidenceOK { reason = "EVIDENCE_REJECTED" } else {
+     if !input.completion_ready { reason = "CLAIMS_NOT_COMPLETE" } else {
+      if !input.approval_effect_admissible { reason = "OPERATION_EFFECT_DISALLOWED" }
+     }
+    }
+   }
+  }
+ }
+}
+return AdmissionDecision{admitted: admitted, reason: reason, counts_ok: countsOK, provenance_ok: input.provenance_ok, base_policy_ok: input.base_policy_approved, evidence_ok: evidenceOK, completion_ok: input.completion_ready, approval_effect_ok: input.approval_effect_admissible, control_plane_effect_ok: input.control_plane_effect_admissible}
+`

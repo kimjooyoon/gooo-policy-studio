@@ -1,0 +1,38 @@
+package gooo_workspace
+namespace gooo_workspace
+
+entity Text id "gooo://std/text"
+entity Boolean id "gooo://std/boolean"
+entity Integer id "gooo://std/integer"
+entity ObservationFacts id "gooo://evidence/admission-facts/v1" fields {
+    field actual_authority id "gooo://evidence/admission-facts/actual-authority" type string required one
+    field required_authority id "gooo://evidence/admission-facts/required-authority" type string required one
+    field status id "gooo://evidence/admission-facts/status" type string required one
+    field confidence id "gooo://evidence/admission-facts/confidence" type string required one
+    field provider_verified id "gooo://evidence/admission-facts/provider-verified" type boolean required one
+    field observed_binding id "gooo://evidence/admission-facts/observed-binding" type string required one
+    field required_binding id "gooo://evidence/admission-facts/required-binding" type string required one
+    field observed_artifact id "gooo://evidence/admission-facts/observed-artifact" type string required one
+    field required_artifact id "gooo://evidence/admission-facts/required-artifact" type string required one
+    field observed_policy id "gooo://evidence/admission-facts/observed-policy" type string required one
+    field required_policy id "gooo://evidence/admission-facts/required-policy" type string required one
+    field observed_at_unix id "gooo://evidence/admission-facts/observed-at-unix" type integer required one
+    field now_unix id "gooo://evidence/admission-facts/now-unix" type integer required one
+    field max_age_seconds id "gooo://evidence/admission-facts/max-age-seconds" type integer required one
+    field expires_at_unix id "gooo://evidence/admission-facts/expires-at-unix" type integer required one
+}
+entity EvidenceDecision id "gooo://evidence/admission-decision/v1" fields {
+    field admissible id "gooo://evidence/admission-decision/admissible" type boolean required one
+    field reason id "gooo://evidence/admission-decision/reason" type string required one
+    field provider_ok id "gooo://evidence/admission-decision/provider-ok" type boolean required one
+    field evidence_ok id "gooo://evidence/admission-decision/evidence-ok" type boolean required one
+    field authority_ok id "gooo://evidence/admission-decision/authority-ok" type boolean required one
+    field binding_ok id "gooo://evidence/admission-decision/binding-ok" type boolean required one
+    field artifact_ok id "gooo://evidence/admission-decision/artifact-ok" type boolean required one
+    field policy_ok id "gooo://evidence/admission-decision/policy-ok" type boolean required one
+    field freshness_ok id "gooo://evidence/admission-decision/freshness-ok" type boolean required one
+    field deadline_ok id "gooo://evidence/admission-decision/deadline-ok" type boolean required one
+}
+activity GoooPackage0ActivityProofAuthoritySatisfies(Text, Text) -> Boolean id "gooo://rea/proof-authority-satisfies" computes "\nif input0 != \"unit\" && input0 != \"integration\" && input0 != \"protocol\" && input0 != \"renderer\" && input0 != \"packaged-process\" && input0 != \"native-abi\" && input0 != \"live-observation\" && input0 != \"external\" { return false }\nif input1 == \"unit\" { return true }\nif input1 == \"integration\" { return input0 == \"integration\" || input0 == \"protocol\" || input0 == \"renderer\" || input0 == \"packaged-process\" || input0 == \"native-abi\" || input0 == \"live-observation\" }\nif input1 == \"protocol\" { return input0 == \"protocol\" || input0 == \"packaged-process\" || input0 == \"live-observation\" }\nif input1 == \"renderer\" { return input0 == \"renderer\" || input0 == \"packaged-process\" || input0 == \"live-observation\" }\nif input1 == \"packaged-process\" { return input0 == \"packaged-process\" || input0 == \"live-observation\" }\nif input1 == \"native-abi\" { return input0 == \"native-abi\" }\nif input1 == \"live-observation\" { return input0 == \"live-observation\" }\nif input1 == \"external\" { return input0 == \"external\" }\nreturn false\n"
+activity GoooPackage1ActivityValidDigest(Text) -> Boolean id "gooo://evidence/canonical-sha256-text" computes "\nif int64(len(input)) != 71 { return false }\nif input[0:7] != \"sha256:\" { return false }\nlet offset = 0\nfor offset = 0; offset < 64; offset = offset + 1 {\n let digit = int64(input[7 + offset])\n if !((digit >= 48 && digit <= 57) || (digit >= 97 && digit <= 102)) { return false }\n}\nreturn true\n"
+activity GoooPackage2ActivityEvidenceAdmission(ObservationFacts) -> EvidenceDecision id "gooo://evidence/admission" computes "\nlet providerOK = input.provider_verified\nlet evidenceOK = input.confidence == \"observed\" && input.status == \"pass\"\nlet authorityOK = GoooPackage0ActivityProofAuthoritySatisfies(input.actual_authority, input.required_authority)\nlet bindingOK = GoooPackage1ActivityValidDigest(input.observed_binding) && GoooPackage1ActivityValidDigest(input.required_binding) && input.observed_binding == input.required_binding\nlet artifactOK = GoooPackage1ActivityValidDigest(input.observed_artifact) && GoooPackage1ActivityValidDigest(input.required_artifact) && input.observed_artifact == input.required_artifact\nlet policyOK = GoooPackage1ActivityValidDigest(input.observed_policy) && GoooPackage1ActivityValidDigest(input.required_policy) && input.observed_policy == input.required_policy\nlet freshnessOK = false\n// Guard before subtraction: 0 <= observed <= now <= MaxInt64 makes the\n// difference nonnegative and representable without signed integer overflow.\nif input.observed_at_unix >= 0 && input.now_unix >= 0 && input.max_age_seconds >= 0 && input.observed_at_unix <= input.now_unix {\n freshnessOK = input.now_unix - input.observed_at_unix <= input.max_age_seconds\n}\nlet deadlineOK = input.now_unix >= 0 && input.expires_at_unix >= 0 && input.now_unix < input.expires_at_unix\nlet admissible = providerOK && evidenceOK && authorityOK && bindingOK && artifactOK && policyOK && freshnessOK && deadlineOK\nlet reason = \"ADMISSIBLE\"\nif !providerOK { reason = \"PROVIDER_UNVERIFIED\" } else {\n if !evidenceOK { reason = \"EVIDENCE_INCOMPLETE\" } else {\n  if !authorityOK { reason = \"AUTHORITY_INSUFFICIENT\" } else {\n   if !bindingOK { reason = \"BINDING_MISMATCH\" } else {\n    if !artifactOK { reason = \"ARTIFACT_MISMATCH\" } else {\n     if !policyOK { reason = \"POLICY_MISMATCH\" } else {\n      if !freshnessOK { reason = \"EVIDENCE_STALE\" } else {\n       if !deadlineOK { reason = \"DEADLINE_EXPIRED\" }\n      }\n     }\n    }\n   }\n  }\n }\n}\nreturn EvidenceDecision{admissible: admissible, reason: reason, provider_ok: providerOK, evidence_ok: evidenceOK, authority_ok: authorityOK, binding_ok: bindingOK, artifact_ok: artifactOK, policy_ok: policyOK, freshness_ok: freshnessOK, deadline_ok: deadlineOK}\n"
