@@ -30,3 +30,12 @@ a policy is safer. Exit `0` only means the complete private comparison was
 saved. The result is unsigned, uses proposed facts, and cannot serve as a live
 admission command or approval. Keep full reports private and use a new report
 path for each invocation.
+
+After saving the reports, follow the
+[historical replay workflow](../../docs/artifact-policy-replay.md) to remove
+only your copied inputs and recheck each private report with
+`policy-impact replay --report FILE`. Replay uses retained report data and the
+original observation time; it does not read the original artifact or grant
+current permission. Matching comparison sources, Go runtime, and platform are
+required. Keep the reports `0600`; unsigned historical consistency does not
+authenticate an issuer or establish that an original file still exists.
