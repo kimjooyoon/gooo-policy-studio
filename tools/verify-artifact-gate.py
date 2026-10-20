@@ -28,7 +28,7 @@ from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_ope
 
 
 PIN = "83928fa4538245abe33b08549da47f8cbdc50ed2"
-BASE_PIN = "be4ef88cca4bc3df1e78ae91c8fe8388413f05c9"
+BASE_PIN = "205896a413e5dea92366309c35ae85e542d055f6"
 CLAIMS = ["service_verified", "enabled_verified", "revision_verified",
           "region_verified", "replicas_verified"]
 GOOD = {"schema": "deployment-artifact/v1", "service": "payments",
