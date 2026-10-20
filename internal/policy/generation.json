@@ -6,25 +6,42 @@
   "compiler": {
     "schema": "gooo/build-identity/v1",
     "language": "gooo",
-    "version": "0.6.17-dev",
+    "version": "0.6.37-dev",
     "status": "development",
     "build_info_observed": true,
-    "go_version": "go1.27.2",
-    "module_version": "v0.6.14-dev.0.20261008234221-be4ef88cca4b",
+    "go_version": "go1.27.3",
+    "module_version": "v0.6.37-dev.0.20261020180505-205896a413e5",
     "module": {
       "path": "github.com/kimjooyoon/meta-ontology-go",
-      "version": "v0.6.14-dev.0.20261008234221-be4ef88cca4b"
+      "version": "v0.6.37-dev.0.20261020180505-205896a413e5"
     },
-    "compiler_source_sha": "be4ef88cca4bc3df1e78ae91c8fe8388413f05c9",
+    "compiler_source_sha": "205896a413e5dea92366309c35ae85e542d055f6",
     "source_status": "CLEAN_VCS",
-    "vcs_revision": "be4ef88cca4bc3df1e78ae91c8fe8388413f05c9",
+    "vcs_revision": "205896a413e5dea92366309c35ae85e542d055f6",
     "vcs_modified": "false",
     "decision_runtime": {
       "module_path": "github.com/kimjooyoon/gooo-decision-runtime",
-      "version": "v0.2.26-experimental",
+      "version": "v0.2.51-experimental",
       "replaced": false
     },
-    "native_go_required": "go1.27.2"
+    "native_go_required": "go1.27.3",
+    "pure_body_limits": {
+      "max_record_types": 16,
+      "max_fields_per_record": 32,
+      "max_elements_per_collection": 256,
+      "max_activity_calls_per_invocation": 4096,
+      "max_activities_per_call_closure": 32,
+      "max_activity_call_depth": 16,
+      "max_iterations_per_counted_loop": 1024,
+      "max_syntactic_collection_iteration_product": 65536
+    },
+    "package_receipt_transport": {
+      "compression": "gzip",
+      "requires_json": true,
+      "max_compressed_bytes": 2097152,
+      "max_json_bytes": 33554432,
+      "receipt_identity": "original_json_bytes"
+    }
   },
   "activities": {
     "Compare": {
@@ -122,7 +139,7 @@
         ],
         "output_type": "Change",
         "plan_sha256": "sha256:ce738df4379e72e9769ebccc0fe255fcca35bdb7aeb4073429f1649dc98a74cb",
-        "compiler_source_sha": "be4ef88cca4bc3df1e78ae91c8fe8388413f05c9",
+        "compiler_source_sha": "205896a413e5dea92366309c35ae85e542d055f6",
         "source_digest": "sha256:938384a2a428beb07ec689065d9e0896c1a4da3a08f3cffd201cff2d70a6d070",
         "program_digest": "sha256:3d2040bd30e78ebbf5d69604f24c8d3d8e74e05eef2efc5008eee685c814ff09",
         "generated_digest": "sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7",
@@ -142,6 +159,307 @@
           "final_route": "preserve"
         },
         "route_decision_latency_ms": 0,
+        "body_conditions": [
+          {
+            "activity_id": "policy://activity/compare",
+            "native_ordinal": 0,
+            "source_ordinal": 0,
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "decoded_start": 81,
+            "decoded_end": 88,
+            "expression": "changed",
+            "relation": "retained_condition_node"
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "native_ordinal": 1,
+            "source_ordinal": 1,
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "decoded_start": 95,
+            "decoded_end": 110,
+            "expression": "input1.approved",
+            "relation": "retained_condition_node",
+            "fields": [
+              {
+                "entity_id": "policy://decision/v1",
+                "field_id": "policy://decision/approved",
+                "name": "approved"
+              }
+            ]
+          }
+        ],
+        "body_locals": [
+          {
+            "activity_id": "policy://activity/compare",
+            "native_ordinal": 0,
+            "variable_ordinal": 0,
+            "name": "changed",
+            "kind": "declaration",
+            "operation": "var",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "decoded_start": 15,
+            "decoded_end": 49,
+            "expression": "input0.approved != input1.approved",
+            "declaration": {
+              "decoded_start": 5,
+              "decoded_end": 12,
+              "expression": "changed"
+            },
+            "uses": [
+              {
+                "native_ordinal": 0,
+                "decoded_start": 81,
+                "decoded_end": 88,
+                "expression": "changed"
+              },
+              {
+                "native_ordinal": 1,
+                "decoded_start": 196,
+                "decoded_end": 203,
+                "expression": "changed"
+              },
+              {
+                "native_ordinal": 2,
+                "decoded_start": 205,
+                "decoded_end": 212,
+                "expression": "changed"
+              }
+            ]
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "native_ordinal": 1,
+            "variable_ordinal": 1,
+            "name": "direction",
+            "kind": "declaration",
+            "operation": "var",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "decoded_start": 66,
+            "decoded_end": 77,
+            "expression": "\"UNCHANGED\"",
+            "declaration": {
+              "decoded_start": 54,
+              "decoded_end": 63,
+              "expression": "direction"
+            },
+            "uses": [
+              {
+                "native_ordinal": 0,
+                "decoded_start": 214,
+                "decoded_end": 223,
+                "expression": "direction"
+              },
+              {
+                "native_ordinal": 1,
+                "decoded_start": 225,
+                "decoded_end": 234,
+                "expression": "direction"
+              }
+            ]
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "native_ordinal": 2,
+            "variable_ordinal": 1,
+            "name": "direction",
+            "kind": "assignment",
+            "operation": "=",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "decoded_start": 125,
+            "decoded_end": 141,
+            "expression": "\"NEWLY_APPROVED\"",
+            "declaration": {
+              "decoded_start": 54,
+              "decoded_end": 63,
+              "expression": "direction"
+            }
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "native_ordinal": 3,
+            "variable_ordinal": 1,
+            "name": "direction",
+            "kind": "assignment",
+            "operation": "=",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "decoded_start": 163,
+            "decoded_end": 177,
+            "expression": "\"NEWLY_DENIED\"",
+            "declaration": {
+              "decoded_start": 54,
+              "decoded_end": 63,
+              "expression": "direction"
+            }
+          }
+        ],
+        "body_fields": [
+          {
+            "activity_id": "policy://activity/compare",
+            "kind": "field_read",
+            "native_ordinal": 0,
+            "native_population": 5,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/approved",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "value": {
+              "decoded_start": 15,
+              "decoded_end": 30,
+              "expression": "input0.approved"
+            },
+            "target": {
+              "decoded_start": 15,
+              "decoded_end": 30,
+              "expression": "input0.approved"
+            }
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "kind": "field_read",
+            "native_ordinal": 1,
+            "native_population": 5,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/approved",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "value": {
+              "decoded_start": 34,
+              "decoded_end": 49,
+              "expression": "input1.approved"
+            },
+            "target": {
+              "decoded_start": 34,
+              "decoded_end": 49,
+              "expression": "input1.approved"
+            }
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "kind": "field_read",
+            "native_ordinal": 2,
+            "native_population": 5,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/approved",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "value": {
+              "decoded_start": 95,
+              "decoded_end": 110,
+              "expression": "input1.approved"
+            },
+            "target": {
+              "decoded_start": 95,
+              "decoded_end": 110,
+              "expression": "input1.approved"
+            }
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "kind": "record_constructor",
+            "native_ordinal": 0,
+            "native_population": 3,
+            "record_id": "policy://change/v1",
+            "field_id": "policy://change/changed",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "value": {
+              "decoded_start": 205,
+              "decoded_end": 212,
+              "expression": "changed"
+            },
+            "target": {
+              "decoded_start": 196,
+              "decoded_end": 203,
+              "expression": "changed"
+            }
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "kind": "record_constructor",
+            "native_ordinal": 1,
+            "native_population": 3,
+            "record_id": "policy://change/v1",
+            "field_id": "policy://change/direction",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "value": {
+              "decoded_start": 225,
+              "decoded_end": 234,
+              "expression": "direction"
+            },
+            "target": {
+              "decoded_start": 214,
+              "decoded_end": 223,
+              "expression": "direction"
+            }
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "kind": "record_constructor",
+            "native_ordinal": 2,
+            "native_population": 3,
+            "record_id": "policy://change/v1",
+            "field_id": "policy://change/reason-changed",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "value": {
+              "decoded_start": 252,
+              "decoded_end": 282,
+              "expression": "input0.reason != input1.reason"
+            },
+            "target": {
+              "decoded_start": 236,
+              "decoded_end": 250,
+              "expression": "reason_changed"
+            }
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "kind": "field_read",
+            "native_ordinal": 3,
+            "native_population": 5,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/reason",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "value": {
+              "decoded_start": 252,
+              "decoded_end": 265,
+              "expression": "input0.reason"
+            },
+            "target": {
+              "decoded_start": 252,
+              "decoded_end": 265,
+              "expression": "input0.reason"
+            }
+          },
+          {
+            "activity_id": "policy://activity/compare",
+            "kind": "field_read",
+            "native_ordinal": 4,
+            "native_population": 5,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/reason",
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "value": {
+              "decoded_start": 269,
+              "decoded_end": 282,
+              "expression": "input1.reason"
+            },
+            "target": {
+              "decoded_start": 269,
+              "decoded_end": 282,
+              "expression": "input1.reason"
+            }
+          }
+        ],
+        "body_returns": [
+          {
+            "activity_id": "policy://activity/compare",
+            "record_id": "policy://change/v1",
+            "native_ordinal": 0,
+            "native_population": 1,
+            "body_sha256": "sha256:01c91f2d8012ae61aecd1694fa28fc2b558b76d496b632e0fe5d4c4c8efebabe",
+            "value": {
+              "decoded_start": 189,
+              "decoded_end": 283,
+              "expression": "Change{changed: changed, direction: direction, reason_changed: input0.reason != input1.reason}"
+            }
+          }
+        ],
         "candidate_routes": [
           "preserve"
         ],
@@ -181,7 +499,7 @@
               "non_authorizing": true,
               "non_executing": true
             },
-            "compiler_source_sha": "be4ef88cca4bc3df1e78ae91c8fe8388413f05c9",
+            "compiler_source_sha": "205896a413e5dea92366309c35ae85e542d055f6",
             "decision_mode": "deterministic_fallback",
             "decision_provider": "deterministic",
             "domain_scope": "one pure typed Gooo activity body in the closed scalar or declared-record body-codegen profile",
@@ -288,7 +606,7 @@
               "maximum_human_actions": 0,
               "maximum_repository_writes": 0
             },
-            "toolchain": "go1.27.2"
+            "toolchain": "go1.27.3"
           },
           "core_dimensions": [
             "declaration_coverage",
@@ -401,7 +719,7 @@
                 "generated_digest:sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7",
                 "replay_digest:sha256:c60b85b689775e8f05b526cd9db05f4feec473a86165a2a95f0cb3ccb567a6a7",
                 "activity_id:policy://activity/compare",
-                "compiler_source_sha:be4ef88cca4bc3df1e78ae91c8fe8388413f05c9",
+                "compiler_source_sha:205896a413e5dea92366309c35ae85e542d055f6",
                 "route_equivalence semantic digests"
               ]
             },
@@ -811,7 +1129,7 @@
         ],
         "output_type": "Decision",
         "plan_sha256": "sha256:c0f0f71679ea2f6aeeee7e7be1d0419e55b23e7c31b80ab9325d70e0bb02cb69",
-        "compiler_source_sha": "be4ef88cca4bc3df1e78ae91c8fe8388413f05c9",
+        "compiler_source_sha": "205896a413e5dea92366309c35ae85e542d055f6",
         "source_digest": "sha256:938384a2a428beb07ec689065d9e0896c1a4da3a08f3cffd201cff2d70a6d070",
         "program_digest": "sha256:7a7fd1d1be060befd810405845f87a1a9c3d57a63ad61c7d3a764265dcf08415",
         "generated_digest": "sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd",
@@ -831,6 +1149,750 @@
           "final_route": "preserve"
         },
         "route_decision_latency_ms": 0,
+        "body_conditions": [
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 0,
+            "source_ordinal": 0,
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 368,
+            "decoded_end": 380,
+            "expression": "!submittedOK",
+            "relation": "retained_condition_node"
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 1,
+            "source_ordinal": 1,
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 421,
+            "decoded_end": 432,
+            "expression": "!reviewerOK",
+            "relation": "retained_condition_node"
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 2,
+            "source_ordinal": 2,
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 478,
+            "decoded_end": 485,
+            "expression": "!selfOK",
+            "relation": "retained_condition_node"
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 3,
+            "source_ordinal": 3,
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 528,
+            "decoded_end": 535,
+            "expression": "!teamOK",
+            "relation": "retained_condition_node"
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 4,
+            "source_ordinal": 4,
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 579,
+            "decoded_end": 588,
+            "expression": "!amountOK",
+            "relation": "retained_condition_node"
+          }
+        ],
+        "body_locals": [
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 0,
+            "variable_ordinal": 0,
+            "name": "amountOK",
+            "kind": "declaration",
+            "operation": "var",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 16,
+            "decoded_end": 45,
+            "expression": "input0.amount \u003c= input2.limit",
+            "declaration": {
+              "decoded_start": 5,
+              "decoded_end": 13,
+              "expression": "amountOK"
+            },
+            "uses": [
+              {
+                "native_ordinal": 0,
+                "decoded_start": 332,
+                "decoded_end": 340,
+                "expression": "amountOK"
+              },
+              {
+                "native_ordinal": 1,
+                "decoded_start": 580,
+                "decoded_end": 588,
+                "expression": "amountOK"
+              },
+              {
+                "native_ordinal": 2,
+                "decoded_start": 692,
+                "decoded_end": 700,
+                "expression": "amountOK"
+              }
+            ]
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 1,
+            "variable_ordinal": 1,
+            "name": "teamOK",
+            "kind": "declaration",
+            "operation": "var",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 59,
+            "decoded_end": 106,
+            "expression": "!input2.same_team || input0.team == input1.team",
+            "declaration": {
+              "decoded_start": 50,
+              "decoded_end": 56,
+              "expression": "teamOK"
+            },
+            "uses": [
+              {
+                "native_ordinal": 0,
+                "decoded_start": 322,
+                "decoded_end": 328,
+                "expression": "teamOK"
+              },
+              {
+                "native_ordinal": 1,
+                "decoded_start": 529,
+                "decoded_end": 535,
+                "expression": "teamOK"
+              },
+              {
+                "native_ordinal": 2,
+                "decoded_start": 711,
+                "decoded_end": 717,
+                "expression": "teamOK"
+              }
+            ]
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 2,
+            "variable_ordinal": 2,
+            "name": "reviewerOK",
+            "kind": "declaration",
+            "operation": "var",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 124,
+            "decoded_end": 164,
+            "expression": "!input2.active_reviewer || input1.active",
+            "declaration": {
+              "decoded_start": 111,
+              "decoded_end": 121,
+              "expression": "reviewerOK"
+            },
+            "uses": [
+              {
+                "native_ordinal": 0,
+                "decoded_start": 298,
+                "decoded_end": 308,
+                "expression": "reviewerOK"
+              },
+              {
+                "native_ordinal": 1,
+                "decoded_start": 422,
+                "decoded_end": 432,
+                "expression": "reviewerOK"
+              },
+              {
+                "native_ordinal": 2,
+                "decoded_start": 732,
+                "decoded_end": 742,
+                "expression": "reviewerOK"
+              }
+            ]
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 3,
+            "variable_ordinal": 3,
+            "name": "selfOK",
+            "kind": "declaration",
+            "operation": "var",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 178,
+            "decoded_end": 232,
+            "expression": "!input2.prevent_self || input0.requester != input1.key",
+            "declaration": {
+              "decoded_start": 169,
+              "decoded_end": 175,
+              "expression": "selfOK"
+            },
+            "uses": [
+              {
+                "native_ordinal": 0,
+                "decoded_start": 312,
+                "decoded_end": 318,
+                "expression": "selfOK"
+              },
+              {
+                "native_ordinal": 1,
+                "decoded_start": 479,
+                "decoded_end": 485,
+                "expression": "selfOK"
+              },
+              {
+                "native_ordinal": 2,
+                "decoded_start": 753,
+                "decoded_end": 759,
+                "expression": "selfOK"
+              }
+            ]
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 4,
+            "variable_ordinal": 4,
+            "name": "submittedOK",
+            "kind": "declaration",
+            "operation": "var",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 251,
+            "decoded_end": 267,
+            "expression": "input0.submitted",
+            "declaration": {
+              "decoded_start": 237,
+              "decoded_end": 248,
+              "expression": "submittedOK"
+            },
+            "uses": [
+              {
+                "native_ordinal": 0,
+                "decoded_start": 283,
+                "decoded_end": 294,
+                "expression": "submittedOK"
+              },
+              {
+                "native_ordinal": 1,
+                "decoded_start": 369,
+                "decoded_end": 380,
+                "expression": "submittedOK"
+              },
+              {
+                "native_ordinal": 2,
+                "decoded_start": 775,
+                "decoded_end": 786,
+                "expression": "submittedOK"
+              }
+            ]
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 5,
+            "variable_ordinal": 5,
+            "name": "approved",
+            "kind": "declaration",
+            "operation": "var",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 283,
+            "decoded_end": 340,
+            "expression": "submittedOK \u0026\u0026 reviewerOK \u0026\u0026 selfOK \u0026\u0026 teamOK \u0026\u0026 amountOK",
+            "declaration": {
+              "decoded_start": 272,
+              "decoded_end": 280,
+              "expression": "approved"
+            },
+            "uses": [
+              {
+                "native_ordinal": 0,
+                "decoded_start": 645,
+                "decoded_end": 653,
+                "expression": "approved"
+              },
+              {
+                "native_ordinal": 1,
+                "decoded_start": 655,
+                "decoded_end": 663,
+                "expression": "approved"
+              }
+            ]
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 6,
+            "variable_ordinal": 6,
+            "name": "reason",
+            "kind": "declaration",
+            "operation": "var",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 354,
+            "decoded_end": 364,
+            "expression": "\"APPROVED\"",
+            "declaration": {
+              "decoded_start": 345,
+              "decoded_end": 351,
+              "expression": "reason"
+            },
+            "uses": [
+              {
+                "native_ordinal": 0,
+                "decoded_start": 665,
+                "decoded_end": 671,
+                "expression": "reason"
+              },
+              {
+                "native_ordinal": 1,
+                "decoded_start": 673,
+                "decoded_end": 679,
+                "expression": "reason"
+              }
+            ]
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 7,
+            "variable_ordinal": 6,
+            "name": "reason",
+            "kind": "assignment",
+            "operation": "=",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 392,
+            "decoded_end": 407,
+            "expression": "\"NOT_SUBMITTED\"",
+            "declaration": {
+              "decoded_start": 345,
+              "decoded_end": 351,
+              "expression": "reason"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 8,
+            "variable_ordinal": 6,
+            "name": "reason",
+            "kind": "assignment",
+            "operation": "=",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 444,
+            "decoded_end": 463,
+            "expression": "\"REVIEWER_INACTIVE\"",
+            "declaration": {
+              "decoded_start": 345,
+              "decoded_end": 351,
+              "expression": "reason"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 9,
+            "variable_ordinal": 6,
+            "name": "reason",
+            "kind": "assignment",
+            "operation": "=",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 497,
+            "decoded_end": 512,
+            "expression": "\"SELF_APPROVAL\"",
+            "declaration": {
+              "decoded_start": 345,
+              "decoded_end": 351,
+              "expression": "reason"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 10,
+            "variable_ordinal": 6,
+            "name": "reason",
+            "kind": "assignment",
+            "operation": "=",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 547,
+            "decoded_end": 562,
+            "expression": "\"TEAM_MISMATCH\"",
+            "declaration": {
+              "decoded_start": 345,
+              "decoded_end": 351,
+              "expression": "reason"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "native_ordinal": 11,
+            "variable_ordinal": 6,
+            "name": "reason",
+            "kind": "assignment",
+            "operation": "=",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "decoded_start": 600,
+            "decoded_end": 612,
+            "expression": "\"OVER_LIMIT\"",
+            "declaration": {
+              "decoded_start": 345,
+              "decoded_end": 351,
+              "expression": "reason"
+            }
+          }
+        ],
+        "body_fields": [
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 0,
+            "native_population": 11,
+            "record_id": "policy://request/v1",
+            "field_id": "policy://request/amount",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 16,
+              "decoded_end": 29,
+              "expression": "input0.amount"
+            },
+            "target": {
+              "decoded_start": 16,
+              "decoded_end": 29,
+              "expression": "input0.amount"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 1,
+            "native_population": 11,
+            "record_id": "policy://rules/v1",
+            "field_id": "policy://rules/limit",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 33,
+              "decoded_end": 45,
+              "expression": "input2.limit"
+            },
+            "target": {
+              "decoded_start": 33,
+              "decoded_end": 45,
+              "expression": "input2.limit"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 2,
+            "native_population": 11,
+            "record_id": "policy://rules/v1",
+            "field_id": "policy://rules/same-team",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 60,
+              "decoded_end": 76,
+              "expression": "input2.same_team"
+            },
+            "target": {
+              "decoded_start": 60,
+              "decoded_end": 76,
+              "expression": "input2.same_team"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 3,
+            "native_population": 11,
+            "record_id": "policy://request/v1",
+            "field_id": "policy://request/team",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 80,
+              "decoded_end": 91,
+              "expression": "input0.team"
+            },
+            "target": {
+              "decoded_start": 80,
+              "decoded_end": 91,
+              "expression": "input0.team"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 4,
+            "native_population": 11,
+            "record_id": "policy://reviewer/v1",
+            "field_id": "policy://reviewer/team",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 95,
+              "decoded_end": 106,
+              "expression": "input1.team"
+            },
+            "target": {
+              "decoded_start": 95,
+              "decoded_end": 106,
+              "expression": "input1.team"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 5,
+            "native_population": 11,
+            "record_id": "policy://rules/v1",
+            "field_id": "policy://rules/active-reviewer",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 125,
+              "decoded_end": 147,
+              "expression": "input2.active_reviewer"
+            },
+            "target": {
+              "decoded_start": 125,
+              "decoded_end": 147,
+              "expression": "input2.active_reviewer"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 6,
+            "native_population": 11,
+            "record_id": "policy://reviewer/v1",
+            "field_id": "policy://reviewer/active",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 151,
+              "decoded_end": 164,
+              "expression": "input1.active"
+            },
+            "target": {
+              "decoded_start": 151,
+              "decoded_end": 164,
+              "expression": "input1.active"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 7,
+            "native_population": 11,
+            "record_id": "policy://rules/v1",
+            "field_id": "policy://rules/prevent-self",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 179,
+              "decoded_end": 198,
+              "expression": "input2.prevent_self"
+            },
+            "target": {
+              "decoded_start": 179,
+              "decoded_end": 198,
+              "expression": "input2.prevent_self"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 8,
+            "native_population": 11,
+            "record_id": "policy://request/v1",
+            "field_id": "policy://request/requester",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 202,
+              "decoded_end": 218,
+              "expression": "input0.requester"
+            },
+            "target": {
+              "decoded_start": 202,
+              "decoded_end": 218,
+              "expression": "input0.requester"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 9,
+            "native_population": 11,
+            "record_id": "policy://reviewer/v1",
+            "field_id": "policy://reviewer/id",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 222,
+              "decoded_end": 232,
+              "expression": "input1.key"
+            },
+            "target": {
+              "decoded_start": 222,
+              "decoded_end": 232,
+              "expression": "input1.key"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "field_read",
+            "native_ordinal": 10,
+            "native_population": 11,
+            "record_id": "policy://request/v1",
+            "field_id": "policy://request/submitted",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 251,
+              "decoded_end": 267,
+              "expression": "input0.submitted"
+            },
+            "target": {
+              "decoded_start": 251,
+              "decoded_end": 267,
+              "expression": "input0.submitted"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "record_constructor",
+            "native_ordinal": 0,
+            "native_population": 7,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/approved",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 655,
+              "decoded_end": 663,
+              "expression": "approved"
+            },
+            "target": {
+              "decoded_start": 645,
+              "decoded_end": 653,
+              "expression": "approved"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "record_constructor",
+            "native_ordinal": 1,
+            "native_population": 7,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/reason",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 673,
+              "decoded_end": 679,
+              "expression": "reason"
+            },
+            "target": {
+              "decoded_start": 665,
+              "decoded_end": 671,
+              "expression": "reason"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "record_constructor",
+            "native_ordinal": 2,
+            "native_population": 7,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/amount-ok",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 692,
+              "decoded_end": 700,
+              "expression": "amountOK"
+            },
+            "target": {
+              "decoded_start": 681,
+              "decoded_end": 690,
+              "expression": "amount_ok"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "record_constructor",
+            "native_ordinal": 3,
+            "native_population": 7,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/team-ok",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 711,
+              "decoded_end": 717,
+              "expression": "teamOK"
+            },
+            "target": {
+              "decoded_start": 702,
+              "decoded_end": 709,
+              "expression": "team_ok"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "record_constructor",
+            "native_ordinal": 4,
+            "native_population": 7,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/reviewer-ok",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 732,
+              "decoded_end": 742,
+              "expression": "reviewerOK"
+            },
+            "target": {
+              "decoded_start": 719,
+              "decoded_end": 730,
+              "expression": "reviewer_ok"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "record_constructor",
+            "native_ordinal": 5,
+            "native_population": 7,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/self-ok",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 753,
+              "decoded_end": 759,
+              "expression": "selfOK"
+            },
+            "target": {
+              "decoded_start": 744,
+              "decoded_end": 751,
+              "expression": "self_ok"
+            }
+          },
+          {
+            "activity_id": "policy://activity/evaluate",
+            "kind": "record_constructor",
+            "native_ordinal": 6,
+            "native_population": 7,
+            "record_id": "policy://decision/v1",
+            "field_id": "policy://decision/submitted-ok",
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 775,
+              "decoded_end": 786,
+              "expression": "submittedOK"
+            },
+            "target": {
+              "decoded_start": 761,
+              "decoded_end": 773,
+              "expression": "submitted_ok"
+            }
+          }
+        ],
+        "body_returns": [
+          {
+            "activity_id": "policy://activity/evaluate",
+            "record_id": "policy://decision/v1",
+            "native_ordinal": 0,
+            "native_population": 1,
+            "body_sha256": "sha256:51132231dc7b894185a9bb40a23c544be0690ec663576a6bc235b1f2c4721b28",
+            "value": {
+              "decoded_start": 636,
+              "decoded_end": 787,
+              "expression": "Decision{approved: approved, reason: reason, amount_ok: amountOK, team_ok: teamOK, reviewer_ok: reviewerOK, self_ok: selfOK, submitted_ok: submittedOK}"
+            }
+          }
+        ],
         "candidate_routes": [
           "preserve"
         ],
@@ -870,7 +1932,7 @@
               "non_authorizing": true,
               "non_executing": true
             },
-            "compiler_source_sha": "be4ef88cca4bc3df1e78ae91c8fe8388413f05c9",
+            "compiler_source_sha": "205896a413e5dea92366309c35ae85e542d055f6",
             "decision_mode": "deterministic_fallback",
             "decision_provider": "deterministic",
             "domain_scope": "one pure typed Gooo activity body in the closed scalar or declared-record body-codegen profile",
@@ -1045,7 +2107,7 @@
               "maximum_human_actions": 0,
               "maximum_repository_writes": 0
             },
-            "toolchain": "go1.27.2"
+            "toolchain": "go1.27.3"
           },
           "core_dimensions": [
             "declaration_coverage",
@@ -1158,7 +2220,7 @@
                 "generated_digest:sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd",
                 "replay_digest:sha256:6cc34f19f5c707751543913159337918fcc03c01981c6f8820e390a57e51cbfd",
                 "activity_id:policy://activity/evaluate",
-                "compiler_source_sha:be4ef88cca4bc3df1e78ae91c8fe8388413f05c9",
+                "compiler_source_sha:205896a413e5dea92366309c35ae85e542d055f6",
                 "route_equivalence semantic digests"
               ]
             },
