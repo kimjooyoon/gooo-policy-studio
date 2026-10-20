@@ -31,7 +31,7 @@ Choose an English walkthrough:
    above remains an equality-only walkthrough.
 3. **Build the current source for integer bounds and private explanations.**
    Start with the [integer bounds example](docs/artifact-int64-bounds.md), using
-   **Go 1.27.2** and **Python 3** for its copied-fixture setup. Then follow
+   **Go 1.27.3** and **Python 3** for its copied-fixture setup. Then follow
    [the explanation walkthrough](docs/artifact-policy-explain.md) to turn the
    saved comparison into a private, local HTML explanation. Generated Gooo code
    is included; these examples need no compiler regeneration. The HTML keeps
@@ -60,7 +60,7 @@ private reports. To explore or contribute to the language itself, start at
 
 ## 바로 실행하기
 
-Go **1.27.2 이상**이 있으면 Gooo 설치 없이 실행됩니다. 생성된 코드와 웹 파일을 저장소에 포함했습니다.
+Go **1.27.3 이상**이 있으면 Gooo 설치 없이 실행됩니다. 생성된 코드와 웹 파일을 저장소에 포함했습니다.
 
 ```sh
 git clone https://github.com/kimjooyoon/gooo-policy-studio.git
