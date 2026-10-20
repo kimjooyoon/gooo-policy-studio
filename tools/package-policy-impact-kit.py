@@ -113,7 +113,7 @@ def parse_rows(go_version, rows):
             parsed["settings"][key] = value
         else:
             raise Invalid("BUILDINFO_UNEXPECTED_ROW")
-    need(parsed["go_version"] == "go1.27.2" and parsed["path"] == MODULE + "/cmd/policy-impact"
+    need(parsed["go_version"] == "go1.27.3" and parsed["path"] == MODULE + "/cmd/policy-impact"
          and parsed["module"] == MODULE, "BUILDINFO_WRONG_PROGRAM_OR_GO")
     s = parsed["settings"]
     need(s.get("-buildmode") == "exe" and s.get("-compiler") == "gc"
@@ -124,7 +124,7 @@ def parse_rows(go_version, rows):
 
 
 def embedded_build(raw, target):
-    """Go1.18+ inline buildinfo; structure from debug/buildinfo in Go1.27.2.
+    """Go1.18+ inline buildinfo; structure from debug/buildinfo in Go1.27.3.
 
     This checks the bytes themselves rather than trusting supplied go-version-m
     text. It deliberately supports just the two frozen 64-bit little-endian
@@ -163,12 +163,12 @@ def embedded_build(raw, target):
 def supplied_build(raw):
     text = raw.decode("utf-8", "strict")
     lines = text.splitlines()
-    need(lines and re.fullmatch(r"[^\r\n]+: go1\.27\.2", lines[0]), "BUILDINFO_TEXT_INVALID")
+    need(lines and re.fullmatch(r"[^\r\n]+: go1\.27\.3", lines[0]), "BUILDINFO_TEXT_INVALID")
     need(all(line.startswith("\t") for line in lines[1:]), "BUILDINFO_TEXT_INVALID")
     rows = "\n".join(line[1:] for line in lines[1:]) + "\n"
-    parsed = parse_rows("go1.27.2", rows)
+    parsed = parse_rows("go1.27.3", rows)
     # Only the executable label is normalized: actual module/build rows survive.
-    normalized = ("policy-impact: go1.27.2\n" + "\n".join(lines[1:]) + "\n").encode()
+    normalized = ("policy-impact: go1.27.3\n" + "\n".join(lines[1:]) + "\n").encode()
     return parsed, normalized
 
 
@@ -223,7 +223,7 @@ def source_snapshot(repo, ref):
             total += len(raw)
             need(total <= MAX_SOURCE and len(result) < MAX_MEMBERS, "SOURCE_TOO_LARGE")
             result[name], modes[name] = raw, 0o755 if entry.mode & 0o111 else 0o644
-    need(result and "go.mod" in result and result["go.mod"] == ("module " + MODULE + "\n\ngo 1.27.2\n").encode(), "SOURCE_MODULE_INVALID")
+    need(result and "go.mod" in result and result["go.mod"] == ("module " + MODULE + "\n\ngo 1.27.3\n").encode(), "SOURCE_MODULE_INVALID")
     return tree, result, modes
 
 

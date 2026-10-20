@@ -485,13 +485,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--compiler", required=True)
     parser.add_argument("--go", help="Go1.27.2 executable; defaults to the executable on PATH")
+    parser.add_argument("--host-go", help="Go1.27.3 executable for the current Policy Studio host CLI")
     parser.add_argument("--output", "--out", dest="output", required=True)
     args = parser.parse_args()
     out = Path(args.output).resolve()
     require(not out.exists(), "use a fresh completion output directory")
     compiler = str(Path(args.compiler).resolve())
     go = str(Path(args.go or shutil.which("go") or "").resolve())
-    require(Path(compiler).is_file() and Path(go).is_file(), "select existing compiler and Go executables")
+    host_go = str(Path(args.host_go or shutil.which("go") or "").resolve())
+    require(Path(compiler).is_file() and Path(go).is_file() and Path(host_go).is_file(),
+            "select existing compiler and Go executables")
     books, integrity = fixture_integrity()
     source_bindings()
     env = dict(os.environ)
@@ -506,12 +509,16 @@ def main():
     go_digest = sha(Path(go).read_bytes())
     go_version = command([go, "version"], env, 15).decode().strip()
     require(go_version.startswith("go version go1.27.2 "), "selected Go version differs")
+    host_go_version = command([host_go, "version"], env, 15).decode().strip()
+    require(host_go_version.startswith("go version go1.27.3 "), "selected host Go version differs")
     out.mkdir(parents=True)
     report = {"schema": "policy-studio/completion-ledger-observation/v1", "compiler": identity,
-              "go_version": go_version, "go_tool_sha256": go_digest, "fixture_integrity": integrity}
+              "go_version": go_version, "go_tool_sha256": go_digest,
+              "host_go_version": host_go_version, "host_go_tool_sha256": sha(Path(host_go).read_bytes()),
+              "fixture_integrity": integrity}
     report["original_reference"] = original_reference(books, env, out)
     report["runs"] = observe_native(books, compiler, go, out, env, go_digest)
-    report["host"] = observe_host(books, go, out, env)
+    report["host"] = observe_host(books, host_go, out, env)
     report["source_files"] = {str(p.relative_to(PROJECT)): sha(p.read_bytes()) for p in sorted(EXAMPLE.rglob("*")) if p.is_file()}
     report["helper_files"] = {str(Path(__file__).relative_to(PROJECT)): sha(Path(__file__).read_bytes()),
                               "tools/verify-evidence-admission.py": sha((PROJECT / "tools/verify-evidence-admission.py").read_bytes())}

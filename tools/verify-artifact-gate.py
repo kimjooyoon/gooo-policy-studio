@@ -280,7 +280,7 @@ def source_group(project, domain, package, names):
 def verify_provenance(project, preflight, inventory):
     implementation = preflight["context"]["implementation"]
     require(implementation["schema"] == "policy-studio/artifact-admission-code/v1" and
-            implementation["go_version"] == "go1.27.2", "runtime provenance identity differs")
+            implementation["go_version"] == "go1.27.3", "runtime provenance identity differs")
     machine = implementation["machine"]
     generation = json.loads((project / "internal/machinerules/generation.json").read_bytes())
     require(machine["compiler_source_sha"] == PIN and generation["compiler"]["compiler_source_sha"] == PIN,
