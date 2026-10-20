@@ -16,6 +16,7 @@ from pathlib import Path, PurePosixPath
 
 SCHEMA = "policy-studio/portable-release/v1"
 GO_VERSION = "go1.27.3"
+GENERATION_GO_VERSION = "go1.27.2"
 TARGETS = [("linux", "amd64"), ("linux", "arm64"),
            ("darwin", "amd64"), ("darwin", "arm64"), ("windows", "amd64")]
 DATA_SOURCES = {
@@ -141,7 +142,7 @@ def policy_provenance(sources, generation):
     compiler = generation["compiler"]["compiler_source_sha"]
     require(isinstance(compiler, str) and COMMIT.fullmatch(compiler), "compiler source identity is invalid")
     require(generation["schema"] == "policy-studio/generation/v1" and
-            generation["compiler"]["go_version"] == GO_VERSION, "generation identity differs")
+            generation["compiler"]["go_version"] == GENERATION_GO_VERSION, "generation identity differs")
     require(sources["tools/compiler-version.txt"] == sha256((compiler + "\n").encode()), "compiler pin differs from generation")
     result = {"source_sha256": "sha256:" + sources["internal/policy/approval.gooo"],
               "generated_sha256": "sha256:" + sources["internal/policy/generated.txt"],
@@ -287,7 +288,7 @@ def self_test():
                 raw[name] = bytes(header) + name.encode()
             sources = {name: sha256(name.encode()) for name in REQUIRED_SOURCES}
             sources["tools/compiler-version.txt"] = sha256(("b" * 40 + "\n").encode())
-            generation = {"schema": "policy-studio/generation/v1", "compiler": {"compiler_source_sha": "b" * 40, "go_version": GO_VERSION},
+            generation = {"schema": "policy-studio/generation/v1", "compiler": {"compiler_source_sha": "b" * 40, "go_version": GENERATION_GO_VERSION},
                           "source_sha256": "sha256:" + sources["internal/policy/approval.gooo"],
                           "generated_sha256": "sha256:" + sources["internal/policy/generated.txt"],
                           "adapter_sha256": "sha256:" + sources["internal/policy/bridge_generated.go"]}
