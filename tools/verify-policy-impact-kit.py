@@ -194,7 +194,7 @@ def zip_members(raw):
 
 
 def build_record(binary, supplied, target):
-    # Independent parsing of the supported Go1.27.2 inline buildinfo format.
+    # Independent parsing of the supported Go1.27.3 inline buildinfo format.
     if target == "darwin/arm64":
         require(len(binary) >= 32 and binary[:4] == b"\xcf\xfa\xed\xfe" and
                 struct.unpack_from("<II", binary, 4)[0] == 0x0100000C and struct.unpack_from("<I", binary, 12)[0] == 2, "BINARY_TARGET")
@@ -232,7 +232,7 @@ def build_record(binary, supplied, target):
             else:
                 raise Rejected("BINARY_BUILDINFO_ROW")
         settings = out["settings"]
-        require(version == "go1.27.2" and out["path"] == MODULE + "/cmd/policy-impact" and out["module"] == MODULE,
+        require(version == "go1.27.3" and out["path"] == MODULE + "/cmd/policy-impact" and out["module"] == MODULE,
                 "BINARY_PROGRAM_OR_GO")
         require(settings.get("GOOS", "") + "/" + settings.get("GOARCH", "") == target
                 and settings.get("CGO_ENABLED") in ("0", "1") and settings.get("-trimpath") == "true"
@@ -255,8 +255,8 @@ def build_record(binary, supplied, target):
         start = binary.find(b"\xff Go buildinf:", start + 1)
     require(len(matches) == 1, "BINARY_BUILDINFO_UNIQUE")
     lines = supplied.decode().splitlines()
-    require(lines and lines[0] == "policy-impact: go1.27.2" and all(x.startswith("\t") for x in lines[1:]), "BUILDINFO_TEXT")
-    require(exact(matches[0], rows("go1.27.2", "\n".join(x[1:] for x in lines[1:]))), "BUILDINFO_TEXT_MISMATCH")
+    require(lines and lines[0] == "policy-impact: go1.27.3" and all(x.startswith("\t") for x in lines[1:]), "BUILDINFO_TEXT")
+    require(exact(matches[0], rows("go1.27.3", "\n".join(x[1:] for x in lines[1:]))), "BUILDINFO_TEXT_MISMATCH")
     return matches[0]
 
 
@@ -309,7 +309,7 @@ def failure_checks(members, modes, ref, tree, source, source_modes):
         ("changed_binary", "bin/policy-impact", members["bin/policy-impact"] + b"changed"),
         ("changed_seed", "seeds/artifact.json", b"{}\n"),
         ("changed_demo", "try-demo.sh", b"#!/bin/sh\nexit 0\n"),
-        ("changed_metadata", "buildinfo.txt", members["buildinfo.txt"].replace(b"go1.27.2", b"go1.27.1")),
+        ("changed_metadata", "buildinfo.txt", members["buildinfo.txt"].replace(b"go1.27.3", b"go1.27.2")),
         ("changed_target", "target.txt", b"linux/arm64\n"),
         ("changed_source", "source/go.mod", b"module invalid\n"),
         ("unknown_member", "extra.json", b"{}"),
@@ -433,7 +433,7 @@ def identity_for(source, target):
     machine = {"schema": "policy-studio/machine-provenance/v1", "compiler_source_sha": mg["compiler"]["compiler_source_sha"], "generation_sha256": h("internal/machinerules/generation.json"), "sources": machine_sources, "projections": projections}
     goos, goarch = target.split("/")
     identity = {"schema": "policy-studio/artifact-impact-source/v1", "host_sources": host, "host_sha256": hash_value(host), "json_input_sha256": json_input,
-                "producer": producer, "base": base, "completion": completion, "machine_rules": machine, "go_version": "go1.27.2", "goos": goos, "goarch": goarch}
+                "producer": producer, "base": base, "completion": completion, "machine_rules": machine, "go_version": "go1.27.3", "goos": goos, "goarch": goarch}
     replay = {"schema": "policy-studio/artifact-impact-replay-source/v1", "sources": [{"path": n, "sha256": h("internal/artifactimpact/" + n)} for n in ("replay.go", "replay_identity.go", "replay_files.go")], "comparison": identity, "verifier_sha256": ""}
     return identity, hash_value(replay)
 

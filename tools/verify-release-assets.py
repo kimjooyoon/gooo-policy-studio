@@ -15,7 +15,7 @@ import unittest
 from pathlib import Path, PurePosixPath
 
 SCHEMA = "policy-studio/portable-release/v1"
-GO_VERSION = "go1.27.2"
+GO_VERSION = "go1.27.3"
 TARGETS = [("linux", "amd64"), ("linux", "arm64"),
            ("darwin", "amd64"), ("darwin", "arm64"), ("windows", "amd64")]
 DATA_SOURCES = {
