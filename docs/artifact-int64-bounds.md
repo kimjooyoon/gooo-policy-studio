@@ -55,7 +55,7 @@ The before policy allows `0..1000`; the after policy allows `0..500`.
 Row 501 becomes newly denied, and reversing the policies makes it newly allowed.
 Rows 0, 100, 499 and 500 satisfy both; row -1 fails both lower bounds.
 
-Build this source version with Go 1.27.2. Generated Gooo code is included;
+Build this source version with Go 1.27.3. Generated Gooo code is included;
 the Gooo compiler is needed only to regenerate that code.
 
 ```sh

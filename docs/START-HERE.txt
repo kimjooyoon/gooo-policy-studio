@@ -3,7 +3,7 @@ Source commit: @COMMIT@
 
 Download the binary matching your operating system and CPU, START-HERE.txt,
 provenance.json, SHA256SUMS, LICENSE, Go-LICENSE and the example JSON files. Running the binaries needs
-no Go/Gooo installation or model service. Source builds require Go 1.27.2.
+no Go/Gooo installation or model service. Source builds require Go 1.27.3.
 
 Three programs:
   policy-studio-{os}-{arch}[.exe]  Policy comparison UI at localhost:8080.
