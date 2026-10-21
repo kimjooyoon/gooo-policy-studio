@@ -8,7 +8,7 @@ The before/after summary and changed claim results appear first. Detailed
 verification data stays available in expandable sections.
 
 Use the [integer bounds example](artifact-int64-bounds.md) to prepare a private
-comparison report. Build the current source with Go 1.27.2; the generated Gooo
+comparison report. Build the current source with Go 1.27.3; the generated Gooo
 code is included, so viewing an explanation needs no compiler regeneration.
 The separate [numeric bounds kit walkthrough](artifact-bounds-first-use.md)
 also prepares and explains the same synthetic comparison without Go or Python.
